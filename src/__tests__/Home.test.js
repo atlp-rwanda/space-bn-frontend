@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Title from '../Title';
+import Home from '../views/Home';
 
 it('renders welcome message', () => {
-    render(<Title />);
+    render(<Home/>);
     expect(screen.getByText('Welcome to Barefoot Nomad')).toBeInTheDocument();
 });
