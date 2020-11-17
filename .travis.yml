@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - '12.19.0'
+  
+cache:
+  directories:
+    - node modules
+
+script:
+  - npm run build
+  - npm test
