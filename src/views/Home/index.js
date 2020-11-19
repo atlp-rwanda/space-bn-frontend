@@ -1,8 +1,9 @@
 import React from 'react';
+import { Heading } from '../../shared/styles/HomeStyles'
 
 const Home = () => {
     return ( 
-        <h1 className="home-page">Welcome to Barefoot Nomad</h1>
+        <Heading>Welcome to Barefoot Nomad with styled component</Heading>
      );
 }
  
