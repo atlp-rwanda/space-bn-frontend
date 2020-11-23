@@ -1,9 +1,9 @@
 # Barefoot Nomad
 
-[![Build Status](https://travis-ci.com/atlp-rwanda/space-bn-frontend.svg?branch=develop)](https://travis-ci.com/atlp-rwanda/space-bn-frontend)
-<a href="https://codeclimate.com/github/atlp-rwanda/space-bn-frontend/maintainability"><img src="https://api.codeclimate.com/v1/badges/3e75b6bbdd43289b59ec/maintainability" /></a>
-<a href="https://codeclimate.com/github/atlp-rwanda/space-bn-frontend/test_coverage"><img src="https://api.codeclimate.com/v1/badges/3e75b6bbdd43289b59ec/test_coverage" /></a>
-[![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/space-bn-frontend/badge.svg?branch=develop)](https://coveralls.io/github/atlp-rwanda/space-bn-frontend?branch=develop)
+[![Build Status](https://travis-ci.com/atlp-rwanda/space-bn-frontend.svg?token=4Sgyehp7cTzjJk1VXM9q&branch=develop)](https://travis-ci.com/atlp-rwanda/space-bn-frontend)
+[![Maintainability](https://api.codeclimate.com/v1/badges/247e7f9b84e190d7c584/maintainability)](https://codeclimate.com/github/atlp-rwanda/space-bn-frontend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/247e7f9b84e190d7c584/test_coverage)](https://codeclimate.com/github/atlp-rwanda/space-bn-frontend/test_coverage)
+
 
 Barefoot Nomad is an application that will enable its “Company Nomads” book their international
 travel and accommodation globally; easily and conveniently across all the locations/centers
