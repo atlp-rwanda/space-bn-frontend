@@ -4,5 +4,5 @@ import Home from '../views/Home';
 
 it('renders welcome message', () => {
     render(<Home/>);
-    expect(screen.getByText('Welcome to Barefoot Nomad')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to Barefoot Nomad with styled component')).toBeInTheDocument();
 });
