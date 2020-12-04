@@ -23,6 +23,10 @@ width: 100%;
     width: 100%;
     
   }
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+    width: 100%;
+   }
 `
 
 export const Header = Styled.header`
@@ -32,6 +36,7 @@ export const Header = Styled.header`
   @media only screen and (max-width: 600px){
     display: none;
   }
+  
   @media only screen
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
@@ -40,13 +45,18 @@ export const Header = Styled.header`
    display: none;
     
   }
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+     display:none;
+   }
 `
 export const BodyContainer = Styled.div`
  width: 100%;
  display: flex;
  flex-direction: row;
  @media only screen and (max-width: 600px){
-   width: 90%;
+         
+   width: 100%;
    display: flex;
    flex-direction: column;
  }
@@ -59,19 +69,18 @@ export const BodyContainer = Styled.div`
     display: flex;
    flex-direction: column;
   }
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+   }
 `
 
 export const HighrightWrapper = Styled.div `
   width: 50%;
   padding: 50px;
-
-  h1{
-    font-size: 4em;
-    font-weight: lighter;
-    width: 100%;
-    /* font-family: 'Poppins, sans-serif' !importatn; */
-   
-  }
+  
   @media only screen and (max-width: 600px){
    padding: 0px; 
    width: 100%;
@@ -87,28 +96,45 @@ export const HighrightWrapper = Styled.div `
     width: 100%;
     margin-left: 5%;
   }
- 
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+    width: 100%;
+    margin-left: 5%;
+   }
 
 `
 
 export const HeadingWrapper = Styled.section `
   margin-top: 6em;
   width: 100%;
-  h1:nth-child(2){
-     margin-top: 0.3em;
+  h1{
+      font-size: 3.5em;
+      font-weight: lighter;
+      width: 100%;
+     span{
+       display: block;
+     }
   }
+  h1:nth-child(1){
+    height: 80px;
+  }
+  
   ul{
-    width: 40%;
+    margin-top: 1em;
+    width: 70%;
     display: flex;
     justify-content: space-between;
+    font-size: 1.5em;
   }
   ul li{
     list-style-type:none;
     font-weight: lighter;
 
-    /* font-family:'Poppins, sans-serif'; */
   }
   @media only screen and (max-width: 600px){
+    h1:nth-child(1){
+    height: 50px;
+  }
     h1{
       font-size: 2em;
       width: 100%;
@@ -120,11 +146,17 @@ export const HeadingWrapper = Styled.section `
 `
 
 export const ButtonsWrapper = Styled.section `
-  width: 50%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
   margin-top: 3em;
   text-transform: lowercase !important;
+  Button{
+    background: #2196F3;
+    width: 190px;
+    text-transform: capitalize;
+    font-weight: lighter;
+  }
   @media only screen and (max-width: 600px){
     width: 100%;
     display:flex;
@@ -152,6 +184,11 @@ min-height: 300px;
     margin-left: 5%;
     
   }
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+    width: 100%;
+    margin-left: 5%;
+   }
 `
 
 export const SubImagesWrapper = Styled.div`
@@ -183,4 +220,13 @@ export const SubImagesWrapper = Styled.div`
       height: 300px;
     }
   }
+  @media screen and (orientation: landscape)
+   and  (max-width: 1281px){
+    margin-left: 5%;
+
+    img{
+      width: 95%;
+      height: 300px;
+    }
+   }
 `
