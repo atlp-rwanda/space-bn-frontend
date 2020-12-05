@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Button, Hidden, IconButton, makeStyles } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/Logo.png';
 
 const links = [
     {
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         background: theme.palette.common.white,
-        color: theme.palette.common.black
+        color: theme.palette.common.black,
     },
     list: {
         color: theme.palette.common.black,
@@ -73,10 +73,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         marginTop: 80,
-        background: theme.palette.primary.dark,
+        background: '#2196F3',
         height: 200,
         paddingLeft: theme.spacing(4),
-        color: 'white',
+        color: 'black',
         right: 0,
         top: 0,
         position: 'fixed'
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     /**End of mobile view nav */
     logo: {
         width: 60,
-        height: 30,
+        height: 60,
         margin: `10px, 0px`
     },
     container: {
@@ -93,17 +93,17 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Poppins, sans-serif',
     },
     activeLink: {
-        background: '#2196F3', 
+        background: '#2196F3',
+        color: theme.palette.common.white,
         width: 90, 
         textAlign: 'center',
-        color: theme.palette.common.white
     },
     menuIcon: {
-        color: theme.palette.common.black,
+        color: '#2196F3',
         alignSelf: 'center',
         paddingRight: 10,
-        height: 40,
-        width: 40,
+        height: 60,
+        width: 60
     }
 }))
 const Header = () => {
@@ -113,7 +113,7 @@ const Header = () => {
         setHideNow(!hideNav)
     }
     return ( 
-        <AppBar  component="nav" className={classes.root}>
+        <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>
             <Button style={{borderRadius: '20%'}}>
                 <img src={logo} alt="Barefoot normad logo" className={classes.logo}/>
             </Button>
