@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Button, Hidden, IconButton, makeStyles } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
-import logo from '../../assets/images/Logo.png';
+import logo from '../../assets/images/logo.png';
 
 const links = [
     {
