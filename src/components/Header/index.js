@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     mobileContainer: {
         display: 'flex',
         flexDirection: 'column',
-        marginTop: 80,
+        marginTop: 70,
         background: '#2196F3',
         height: 200,
         paddingLeft: theme.spacing(4),
@@ -131,7 +131,7 @@ const Header = () => {
                 <List className={classes.mobileContainer} >
                 {links.map((link, index) => (
                 <Link to={link.url} key={index} className={classes.mobileNav}>
-                    <ListItemText className={link.isActive && classes.activeLink}>{link.text}</ListItemText>
+                    <ListItemText>{link.text}</ListItemText>
                 </Link>
                 ))}
                 </List> 
