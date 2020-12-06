@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export default  styled.div`
-    width: 400px;
-    height: 120px;
+    width: 394px;
+    height: 132px;
     --bg: #DADADA;
-    background-color:#ffff;
+    background-color:#fafafa;
     background-image: radial-gradient(var(--bg) 50%, transparent 16%),
     radial-gradient(var(--bg) 50%, transparent 16%);
-    background-size: 30px 30px;
-    background-position: 1px;
-    margin-top: 120px;
+    background-size: 28px 28px;
+    background-position: 0px;
+    margin-top: 100px;
     padding: 40px;
     margin-right: -150px;
     display: flex;

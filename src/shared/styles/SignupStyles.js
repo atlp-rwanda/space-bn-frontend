@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export const useStyles = makeStyles((theme) => ({
     root: {
       margin: 'auto',
-      width: '80%',
+      width: '90%',
       marginTop: 20,
       fontFamily: 'Poppins, sans-serif',
       fontWeight: 'regular',
@@ -15,13 +15,14 @@ export const useStyles = makeStyles((theme) => ({
       },
       '@media (max-width:935px)': {
         width: '80%',
+        marginTop: 18
       },
       '@media (max-width:650px)': {
         width: '100%',
       },
     },
     pos:{
-      marginTop: 150,
+      marginTop: 122,
       width: 500,
       height: 600,
       background:'#FFFFFF',
@@ -29,8 +30,8 @@ export const useStyles = makeStyles((theme) => ({
       borderRadius: 5,
       margin: 'auto',
       [theme.breakpoints.up('md')]: {
-        padding: '10px 20px 30px 130px',
-        marginRight: -210,
+        padding: '10px 20px 30px 57px',
+        marginRight: -195,
       },
       [theme.breakpoints.between('sm', 'md')]: {
         padding: '20px 20px 20px 50px',
