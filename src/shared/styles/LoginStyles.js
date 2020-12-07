@@ -15,8 +15,7 @@ export const Patten = Styled(Pattern)({
     width: 420,
      position: 'absolute',
       margin: 'auto',
-       right: 200,
-        height: 200,
+       right: 205,
          backgroundColor: '#fafafa',
         
 })
@@ -119,7 +118,7 @@ export const styles = Material.makeStyles((theme) => ({
       color: "#2EFF22"
     },
     signupContainer: {
-      marginTop: '50px',
+      marginTop: '100px',
       display: 'flex',
       flexDirection: 'row-reverse',
       justifyContent: 'center',
