@@ -14,7 +14,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { styles, Heading, InputText, SocialButton, SocialText, Patten } from '../../shared/styles/LoginStyles'
-
+import Footer from '../../components/Footer/index';
 export default function SignIn() {
     const classes = styles();
  
@@ -35,7 +35,9 @@ export default function SignIn() {
       };
 
   return (
-      <div className={classes.signupContainer}>
+    <>
+    <div className={classes.mainContainer}>
+    <div className={classes.signupContainer}>
     <Patten className={classes.patternMedia} />
     <Card className={classes.card}>
     <Container component="main" maxWidth="xs">
@@ -120,7 +122,9 @@ export default function SignIn() {
       </div>
         </Container>
     </Card>
-    
     </div>
+    </div>
+    <Footer/>
+    </>
   );
 }

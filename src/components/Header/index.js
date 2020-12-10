@@ -82,11 +82,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed'
     },
     /**End of mobile view nav */
-    logo: {
-        width: 60,
-        height: 60,
-        margin: `10px, 0px`
-    },
+   
     container: {
         marginRight: 20,
         alignItems: 'center',
@@ -114,9 +110,26 @@ const Header = () => {
     }
     return ( 
         <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>
-            <Button style={{borderRadius: '20%'}}>
-                <img src={logo} alt="Barefoot normad logo" className={classes.logo}/>
-            </Button>
+          
+            <div style=
+            {{
+                width: '10%',
+                margin: 0,
+                padding: 2
+                }}>
+               <Link to="/">
+                <img  
+                style=
+                {{
+                    margin: 0,
+                    padding: 0,
+                    width: '88px',
+                    height: '98%',
+                    cursor: 'pointer'
+                }}
+                src={logo} alt="Barefoot Loog" />
+                </Link>
+            </div>
             <Hidden only={['sm', 'xl', 'xs']}>
                 <List className={classes.container} >
                     {links.map((link, index) => (

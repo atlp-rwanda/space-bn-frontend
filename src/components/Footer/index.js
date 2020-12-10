@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
         height: 70,
         background: '#FFFFFF',
         alignItems: 'center',
-        position: 'fixed',
-        bottom: 0,
+        // position: 'fixed',
+        // bottom: 0,
         borderTop: '1px solid #333',
         '@media(max-width: 610px)': {
             flexDirection: 'column',

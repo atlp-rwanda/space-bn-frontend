@@ -12,7 +12,9 @@ import { createMuiTheme } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pattern from '../../shared/styles/Pattern';
 import socialAuthBtns from '../../helpers/socialAuthBtns';
-import {useStyles} from '../../shared/styles/SignupStyles';
+import {useStyles, mainContainer} from '../../shared/styles/SignupStyles';
+import Footer from '../../components/Footer/index';
+// import {MainContainer} from '../../shared/styles/HomeStyles';
 
 const Signup = () => {
   const classes = useStyles();
@@ -42,6 +44,8 @@ const Signup = () => {
     e.preventDefault()
   }
   return ( 
+      <div className = {classes.mainContainer}>
+
       <div className={classes.signupContainer}>
         {(matches && <Pattern />)}       
       <Card className={classes.pos}>
@@ -104,8 +108,13 @@ const Signup = () => {
             ))
           }
         </FormControl>
+     
       </Card>
       </div>
+       <Footer/>
+
+      </div>
+
     );
 }
  

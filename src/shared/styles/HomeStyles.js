@@ -6,10 +6,16 @@ export const Heading =Styled.h1`
    text-align: center;
    margin-top: 200px;
 `
-
+export const MainContainer = Styled.div `
+ width: 100%;
+ height: 100vh;
+`
 export const ContainerFluid  = Styled.div`
 width: 100%;
- min-height: 100vh;
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
  background-image: url(${waveImage});
  background-repeat: no-repeat;
  @media only screen and (max-width: 600px){
@@ -105,7 +111,7 @@ export const HighrightWrapper = Styled.div `
 `
 
 export const HeadingWrapper = Styled.section `
-  margin-top: 6em;
+  /* margin-top: 6em; */
   width: 100%;
   h1{
       font-size: 3.5em;
@@ -195,7 +201,7 @@ export const SubImagesWrapper = Styled.div`
   width: 90%;
   display: grid;
   grid-template-columns: auto auto;
-  margin-top: 5em;
+  /* margin-top: 5em; */
    img{
      width: 300px;
      height: 200px;

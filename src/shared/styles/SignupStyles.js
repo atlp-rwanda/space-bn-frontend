@@ -1,15 +1,18 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
+   
     root: {
       margin: 'auto',
       width: '90%',
       marginTop: 20,
       fontFamily: 'Poppins, sans-serif',
       fontWeight: 'regular',
+    
       [theme.breakpoints.down('sm')]: {
         width: '90%'
       },
+    
       [theme.breakpoints.down('xs')]: {
         width: '100%'
       },
@@ -21,10 +24,15 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
       },
     },
+    mainContainer: {
+      // backgroundColor: 'red',
+      width: '100%'
+    },
     pos:{
       marginTop: 122,
       width: 500,
       height: 600,
+      marginBottom: 10,
       background:'#FFFFFF',
       boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
       borderRadius: 5,
@@ -96,6 +104,9 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row-reverse',
       justifyContent: 'space-between',
+      width: '70%',
+      // backgroundColor:'green'
     },
   }));
+  
   

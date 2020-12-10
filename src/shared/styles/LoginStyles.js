@@ -16,7 +16,7 @@ export const Patten = Styled(Pattern)({
      position: 'absolute',
       margin: 'auto',
        right: 205,
-         backgroundColor: '#fafafa',
+         backgroundColor: 'white',
         
 })
 
@@ -39,6 +39,11 @@ export const SocialText = Styled.span`
 
 
 export const styles = Material.makeStyles((theme) => ({
+    mainContainer: {
+      //  background: 'red',
+       width: '100%',
+       height: '110vh'
+    },
     card: {
         width: 500,
         position: 'absolute',
@@ -95,6 +100,7 @@ export const styles = Material.makeStyles((theme) => ({
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
+      
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -122,6 +128,7 @@ export const styles = Material.makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row-reverse',
       justifyContent: 'center',
+      background: 'red !important'
       
     },
   }));
