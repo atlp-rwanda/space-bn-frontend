@@ -8,7 +8,7 @@ export const Heading = Styled.h1`
 `
 export const InputText = Styled(Material.FormControl)({
     marginTop: '15px',
-    marginBottom: '15px',
+    marginBottom: '15px'
 })
 
 export const Patten = Styled(Pattern)({
@@ -40,7 +40,6 @@ export const SocialText = Styled.span`
 
 export const styles = Material.makeStyles((theme) => ({
     mainContainer: {
-      //  background: 'red',
        width: '100%',
        height: '110vh'
     },
@@ -121,14 +120,14 @@ export const styles = Material.makeStyles((theme) => ({
         
     },
     input: {
-      color: "#2EFF22"
+      color: "#2EFF22",
+      marginTop: '100em !important',
     },
     signupContainer: {
       marginTop: '100px',
       display: 'flex',
       flexDirection: 'row-reverse',
       justifyContent: 'center',
-      background: 'red !important'
       
     },
   }));

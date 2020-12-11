@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%'
       },
       '@media (max-width:935px)': {
-        width: '80%',
+        width: '90%',
         marginTop: 18
       },
       '@media (max-width:650px)': {
@@ -25,8 +25,7 @@ export const useStyles = makeStyles((theme) => ({
       },
     },
     mainContainer: {
-      // backgroundColor: 'red',
-      width: '100%'
+      width: '100%',
     },
     pos:{
       marginTop: 122,
@@ -37,6 +36,7 @@ export const useStyles = makeStyles((theme) => ({
       boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
       borderRadius: 5,
       margin: 'auto',
+
       [theme.breakpoints.up('md')]: {
         padding: '10px 20px 30px 57px',
         marginRight: -195,
@@ -45,8 +45,9 @@ export const useStyles = makeStyles((theme) => ({
         padding: '20px 20px 20px 50px',
       },
       '@media (max-width:935px)': {
-        width: 700,
+        width: '90% !important',
         padding: '10px 0px 30px 130px',
+
       },
       '@media (max-width:850px)': {
         width: 500,
@@ -105,7 +106,10 @@ export const useStyles = makeStyles((theme) => ({
       flexDirection: 'row-reverse',
       justifyContent: 'space-between',
       width: '70%',
-      // backgroundColor:'green'
+      '@media (max-width:935px)': {
+       width: '100%'
+
+      },
     },
   }));
   

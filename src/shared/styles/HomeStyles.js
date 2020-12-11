@@ -18,9 +18,15 @@ width: 100%;
  align-items: center;
  background-image: url(${waveImage});
  background-repeat: no-repeat;
- @media only screen and (max-width: 600px){
+ @media only screen and (max-width: 664px){
+   margin-left: 5%;
    width: 90%;
- }
+   height: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top:30%;
+  }
  @media only screen
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
@@ -31,7 +37,14 @@ width: 100%;
   }
   @media screen and (orientation: landscape)
    and  (max-width: 1281px){
-    width: 100%;
+    /* width: 100%; */
+    margin-left: 5%;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10%;
    }
 `
 
@@ -39,7 +52,7 @@ export const Header = Styled.header`
   background: white;
   min-height: 50px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.130), 0 3px 6px rgba(0,0,0,0.0);
-  @media only screen and (max-width: 600px){
+  @media only screen and (max-width: 664px){
     display: none;
   }
   
@@ -60,7 +73,7 @@ export const BodyContainer = Styled.div`
  width: 100%;
  display: flex;
  flex-direction: row;
- @media only screen and (max-width: 600px){
+ @media only screen and (max-width: 664px){
          
    width: 100%;
    display: flex;
@@ -87,7 +100,7 @@ export const HighrightWrapper = Styled.div `
   width: 50%;
   padding: 50px;
   
-  @media only screen and (max-width: 600px){
+  @media only screen and (max-width: 664px){
    padding: 0px; 
    width: 100%;
    h1{
@@ -137,7 +150,7 @@ export const HeadingWrapper = Styled.section `
     font-weight: lighter;
 
   }
-  @media only screen and (max-width: 600px){
+  @media only screen and (max-width: 664px){
     h1:nth-child(1){
     height: 50px;
   }
@@ -163,7 +176,7 @@ export const ButtonsWrapper = Styled.section `
     text-transform: capitalize;
     font-weight: lighter;
   }
-  @media only screen and (max-width: 600px){
+  @media only screen and (max-width: 664px){
     width: 100%;
     display:flex;
     flex-direction: column;
@@ -177,7 +190,7 @@ export const ButtonsWrapper = Styled.section `
 export const ImagesWrapper = Styled.div`
 width: 50%;
 min-height: 300px;
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 664px){
   width: 100%;
   padding: 0px;
 }
@@ -207,7 +220,7 @@ export const SubImagesWrapper = Styled.div`
      height: 200px;
      padding-top: 0.5em;
    }
-   @media only screen and (max-width: 600px){
+   @media only screen and (max-width: 664px){
     grid-template-columns: auto;
     width: 100%;
     img{

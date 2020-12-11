@@ -15,6 +15,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { styles, Heading, InputText, SocialButton, SocialText, Patten } from '../../shared/styles/LoginStyles'
 import Footer from '../../components/Footer/index';
+import Header from '../../components/Header/index';
 export default function SignIn() {
     const classes = styles();
  
@@ -36,6 +37,7 @@ export default function SignIn() {
 
   return (
     <>
+    <Header/>
     <div className={classes.mainContainer}>
     <div className={classes.signupContainer}>
     <Patten className={classes.patternMedia} />

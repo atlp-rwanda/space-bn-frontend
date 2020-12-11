@@ -14,7 +14,7 @@ import Pattern from '../../shared/styles/Pattern';
 import socialAuthBtns from '../../helpers/socialAuthBtns';
 import {useStyles, mainContainer} from '../../shared/styles/SignupStyles';
 import Footer from '../../components/Footer/index';
-// import {MainContainer} from '../../shared/styles/HomeStyles';
+import Header from '../../components/Header/index';
 
 const Signup = () => {
   const classes = useStyles();
@@ -44,6 +44,8 @@ const Signup = () => {
     e.preventDefault()
   }
   return ( 
+      <>
+      <Header/>
       <div className = {classes.mainContainer}>
 
       <div className={classes.signupContainer}>
@@ -114,7 +116,7 @@ const Signup = () => {
        <Footer/>
 
       </div>
-
+     </>
     );
 }
  

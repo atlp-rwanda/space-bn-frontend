@@ -5,6 +5,7 @@ import image2 from '../../assets/images/land-img-2.png';
 import image3 from '../../assets/images/land-img-3.png';
 import image4 from '../../assets/images/land-img-4.png';
 import Footer from '../../components/Footer/index';
+import Header from '../../components/Header/index';
 import {
   ContainerFluid,BodyContainer, HighrightWrapper, HeadingWrapper,
   ButtonsWrapper, ImagesWrapper, SubImagesWrapper, MainContainer
@@ -12,9 +13,10 @@ import {
 
 const Home = () => {
      return ( 
+       <>
+       <Header />
         <MainContainer>
         <ContainerFluid>
-            {/* <Header></Header> */}
             <BodyContainer>
                 <HighrightWrapper>
                   <HeadingWrapper>
@@ -48,6 +50,7 @@ const Home = () => {
         </ContainerFluid>
         <Footer/>
         </MainContainer>
+        </>
      );
 }
  
