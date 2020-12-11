@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState} from 'react';
+import { useHistory,Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Button, Hidden, IconButton, makeStyles } from '@material-ui/core';
+import {Hidden, IconButton, makeStyles } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
 
@@ -103,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 const Header = () => {
+    const history = useHistory();
     const classes = useStyles();
     const [hideNav, setHideNow ] = useState(false)
     const handleNavLinks = (e) => {
@@ -117,8 +118,7 @@ const Header = () => {
                 margin: 0,
                 padding: 2
                 }}>
-               <Link to="/">
-                <img  
+                <img  onClick={() => history.push('/')}
                 style=
                 {{
                     margin: 0,
@@ -128,8 +128,7 @@ const Header = () => {
                     cursor: 'pointer'
                 }}
                 src={logo} alt="Barefoot Loog" />
-                </Link>
-            </div>
+             </div>
             <Hidden only={['sm', 'xl', 'xs']}>
                 <List className={classes.container} >
                     {links.map((link, index) => (

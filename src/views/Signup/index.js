@@ -12,7 +12,7 @@ import { createMuiTheme } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pattern from '../../shared/styles/Pattern';
 import socialAuthBtns from '../../helpers/socialAuthBtns';
-import {useStyles, mainContainer} from '../../shared/styles/SignupStyles';
+import {useStyles} from '../../shared/styles/SignupStyles';
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
 

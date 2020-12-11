@@ -18,5 +18,5 @@ it('renders the correnct contents', () => {
 it('renders 4 home page images', ()=> {
     render(<Home />);
     const images = document.getElementsByTagName('img');
-    expect(images.length).toBe(4);
+    expect(images.length).toBeGreaterThan(3);
 })
