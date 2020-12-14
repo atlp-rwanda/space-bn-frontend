@@ -98,7 +98,7 @@ const Signup = () => {
             }
             labelWidth={70}
           />
-           <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit">Signup</Button>
+          <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit">Signup</Button>
           {
             socialAuthBtns.map(socialBtn => (
               <div key={socialBtn.alt}>
@@ -110,14 +110,13 @@ const Signup = () => {
             ))
           }
         </FormControl>
-     
       </Card>
       </div>
     </div>
     <Footer/>
 
-     </>
+    </>
     );
 }
- 
+
 export default Signup;
