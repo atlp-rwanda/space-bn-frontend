@@ -9,7 +9,6 @@
 
 body{
   background-color: #fff!important;
-
 }
 
 nav{
@@ -76,4 +75,10 @@ nav ul li{
   top: 30px ;
   right: 20px ;
   left: auto 
+}
+.rec.rec-dot {
+  background-color: #DADADA;
+  font-size: 100px;
+  border: 1px solid #DADADA;
+  size: 24px
 }
