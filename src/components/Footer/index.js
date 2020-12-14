@@ -1,10 +1,10 @@
 import React from 'react';
 import Typography  from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import facebookRect from '../../assets/icons/facebook-rect.png';
-import instagramIcon from '../../assets/icons/instagram.png';
-import linkedIn from '../../assets/icons/linkedin.png';
-import twitter from '../../assets/icons/twitter.png';
+import facebookRect from '../../assets/icons/facebook_icon.png';
+import instagramIcon from '../../assets/icons/instagram_icon.png';
+import linkedIn from '../../assets/icons/linkedin_icon.png';
+import twitter from '../../assets/icons/twitter_icon.png';
 import { CssBaseline } from '@material-ui/core';
 
 
@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
         height: 70,
         background: '#FFFFFF',
         alignItems: 'center',
-        borderTop: '1px solid #333',
+        position: 'fixed',
+        bottom: 0,
+        borderTop: '1px solid #000',
         '@media(max-width: 610px)': {
             flexDirection: 'column',
             paddingTop: theme.spacing(1)
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1),
         "&:hover": {
             transform: 'scale(1.2)',
+            opacity: 0.7
         }    
     },
     anchor: {
