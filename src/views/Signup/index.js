@@ -13,6 +13,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pattern from '../../shared/styles/Pattern';
 import socialAuthBtns from '../../helpers/socialAuthBtns';
 import {useStyles} from '../../shared/styles/SignupStyles';
+import Footer from '../../components/Footer/index';
+import Header from '../../components/Header/index';
 
 const Signup = () => {
   const classes = useStyles();
@@ -42,6 +44,10 @@ const Signup = () => {
     e.preventDefault()
   }
   return ( 
+      <>
+      <Header/>
+      <div className = {classes.mainContainer}>
+
       <div className={classes.signupContainer}>
         {(matches && <Pattern />)}       
       <Card className={classes.pos}>
@@ -104,8 +110,13 @@ const Signup = () => {
             ))
           }
         </FormControl>
+     
       </Card>
       </div>
+    </div>
+    <Footer/>
+
+     </>
     );
 }
  

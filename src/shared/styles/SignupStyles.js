@@ -1,34 +1,43 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
+   
     root: {
       margin: 'auto',
       width: '90%',
       marginTop: 20,
       fontFamily: 'Poppins, sans-serif',
       fontWeight: 'regular',
+    
       [theme.breakpoints.down('sm')]: {
         width: '90%'
       },
+    
       [theme.breakpoints.down('xs')]: {
         width: '100%'
       },
       '@media (max-width:935px)': {
-        width: '80%',
+        width: '90%',
         marginTop: 18
       },
       '@media (max-width:650px)': {
         width: '100%',
       },
     },
+    mainContainer: {
+      width: '100%',
+      height: '115vh'
+    },
     pos:{
       marginTop: 122,
       width: 500,
       height: 600,
+      marginBottom: 10,
       background:'#FFFFFF',
       boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
       borderRadius: 5,
       margin: 'auto',
+
       [theme.breakpoints.up('md')]: {
         padding: '10px 20px 30px 57px',
         marginRight: -195,
@@ -37,8 +46,9 @@ export const useStyles = makeStyles((theme) => ({
         padding: '20px 20px 20px 50px',
       },
       '@media (max-width:935px)': {
-        width: 700,
+        width: '90% !important',
         padding: '10px 0px 30px 130px',
+
       },
       '@media (max-width:850px)': {
         width: 500,
@@ -96,6 +106,12 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row-reverse',
       justifyContent: 'space-between',
+      width: '70%',
+      '@media (max-width:935px)': {
+       width: '100%'
+
+      },
     },
   }));
+  
   

@@ -8,7 +8,7 @@ export const Heading = Styled.h1`
 `
 export const InputText = Styled(Material.FormControl)({
     marginTop: '15px',
-    marginBottom: '15px',
+    marginBottom: '15px'
 })
 
 export const Patten = Styled(Pattern)({
@@ -16,7 +16,7 @@ export const Patten = Styled(Pattern)({
      position: 'absolute',
       margin: 'auto',
        right: 205,
-         backgroundColor: '#fafafa',
+         backgroundColor: 'white',
         
 })
 
@@ -39,6 +39,10 @@ export const SocialText = Styled.span`
 
 
 export const styles = Material.makeStyles((theme) => ({
+    mainContainer: {
+       width: '100%',
+       height: '110vh'
+    },
     card: {
         width: 500,
         position: 'absolute',
@@ -46,7 +50,7 @@ export const styles = Material.makeStyles((theme) => ({
         boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
         borderRadius: 5,
         margin: 'auto',
-        marginTop: '30px',
+        marginTop: '25px',
         paddingBottom: '30px',
         [theme.breakpoints.down('sm')]: {
             width: '90%'
@@ -95,6 +99,7 @@ export const styles = Material.makeStyles((theme) => ({
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
+      
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -115,7 +120,8 @@ export const styles = Material.makeStyles((theme) => ({
         
     },
     input: {
-      color: "#2EFF22"
+      color: "#2EFF22",
+      marginTop: '100em !important',
     },
     signupContainer: {
       marginTop: '100px',
