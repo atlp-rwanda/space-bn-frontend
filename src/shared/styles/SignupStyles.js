@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     mainContainer: {
       width: '100%',
+      height: '115vh'
     },
     pos:{
       marginTop: 122,

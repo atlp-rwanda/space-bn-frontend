@@ -4,7 +4,7 @@ export default  styled.div`
     width: 394px;
     height: 132px;
     --bg: #DADADA;
-    background-color:#fafafa;
+    background-color:white;
     background-image: radial-gradient(var(--bg) 50%, transparent 16%),
     radial-gradient(var(--bg) 50%, transparent 16%);
     background-size: 28px 28px;

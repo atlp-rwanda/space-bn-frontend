@@ -2,7 +2,7 @@ import Styled from 'styled-components';
 import waveImage from '../../assets/images/wave6.svg';
 
 export const Heading =Styled.h1`
-   color: red;
+ 
    text-align: center;
    margin-top: 200px;
 `
@@ -37,7 +37,6 @@ width: 100%;
   }
   @media screen and (orientation: landscape)
    and  (max-width: 1281px){
-    /* width: 100%; */
     margin-left: 5%;
     width: 90%;
     height: auto;
@@ -124,7 +123,6 @@ export const HighrightWrapper = Styled.div `
 `
 
 export const HeadingWrapper = Styled.section `
-  /* margin-top: 6em; */
   width: 100%;
   h1{
       font-size: 3.5em;
@@ -214,9 +212,10 @@ export const SubImagesWrapper = Styled.div`
   width: 90%;
   display: grid;
   grid-template-columns: auto auto;
-  /* margin-top: 5em; */
+  height: 100%;
    img{
-     width: 300px;
+    
+     width: 98%;
      height: 200px;
      padding-top: 0.5em;
    }

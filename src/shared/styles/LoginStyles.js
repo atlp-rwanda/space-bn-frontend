@@ -50,7 +50,7 @@ export const styles = Material.makeStyles((theme) => ({
         boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
         borderRadius: 5,
         margin: 'auto',
-        marginTop: '30px',
+        marginTop: '25px',
         paddingBottom: '30px',
         [theme.breakpoints.down('sm')]: {
             width: '90%'

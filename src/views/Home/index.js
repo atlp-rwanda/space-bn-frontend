@@ -23,7 +23,7 @@ const Home = () => {
                   <h1>TRAVEL BOOKINGS</h1>
                   <h1>MADE EASY</h1>
                     <ul>
-                      <li>Confort</li>
+                      <li>Comfort</li>
                       <li>Food</li>
                       <li>Luxury</li>
                      </ul>

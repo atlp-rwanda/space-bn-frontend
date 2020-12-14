@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
         height: 70,
         background: '#FFFFFF',
         alignItems: 'center',
-        // position: 'fixed',
-        // bottom: 0,
         borderTop: '1px solid #333',
         '@media(max-width: 610px)': {
             flexDirection: 'column',
@@ -64,7 +62,7 @@ const Footer = () => {
             <CssBaseline />
             <footer className={classes.root}>
                 <Typography variant="body1" className={classes.body} data-testid="typography">
-                    {`© ${new Date().getFullYear()} | Barefoot Normad  | All Rights Reserved`}
+                    {`© ${new Date().getFullYear()} | Barefoot Nomad  | All Rights Reserved`}
                 </Typography>
                 <div>
                     <a href="/" target="_blank" rel="noopener noreferrer" className={classes.anchor}>

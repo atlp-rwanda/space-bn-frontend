@@ -113,9 +113,9 @@ const Signup = () => {
      
       </Card>
       </div>
-       <Footer/>
+    </div>
+    <Footer/>
 
-      </div>
      </>
     );
 }
