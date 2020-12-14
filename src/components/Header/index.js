@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
     list: {
         color: theme.palette.common.black,
-        marginRight: 20,
+        marginRight: 30,
         textDecoration: 'none',
         fontFamily: 'Poppins, sans-serif',
         "&:hover": {
@@ -97,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.common.white,
         width: 90, 
         textAlign: 'center',
+        borderRadius: 4,
     },
     menuIcon: {
         color: '#2196F3',

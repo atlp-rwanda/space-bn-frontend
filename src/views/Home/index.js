@@ -13,7 +13,6 @@ const Home = () => {
      return ( 
         
         <ContainerFluid>
-            {/* <Header></Header> */}
             <BodyContainer>
                 <HighrightWrapper>
                   <HeadingWrapper>
