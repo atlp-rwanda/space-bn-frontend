@@ -65,7 +65,7 @@ const Footer = () => {
             <CssBaseline />
             <footer className={classes.root}>
                 <Typography variant="body1" className={classes.body} data-testid="typography">
-                    {`© ${new Date().getFullYear()} | Barefoot Normad  | All Rights Reserved`}
+                    {`© ${new Date().getFullYear()} | Barefoot Nomad  | All Rights Reserved`}
                 </Typography>
                 <div>
                     <a href="/" target="_blank" rel="noopener noreferrer" className={classes.anchor}>
