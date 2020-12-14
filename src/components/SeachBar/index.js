@@ -25,6 +25,7 @@ const SearchBox = ({HandleSearch, prop, value}) => {
             placeholder={prop}
             value={value}
             className={classes.search}
+            inputProps={{ "data-testid": "content-input" }}
             />          
      );
 }

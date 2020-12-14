@@ -22,7 +22,7 @@ const PaperCard = ({searchValue, activePopup, setActivePopup, setHotelPosition, 
     return (
         <div className={classes.root}> 
         {searchValue.map((value, index) => (
-            <Paper className={classes.paper} key={index} onClick={() => HandleDisplay(index)}>
+            <Paper className={classes.paper} key={index} onClick={() => HandleDisplay(index)} data-testid="paper">
                 <Grid container spacing={2} className={classes.main}>
                     <Grid item xs={12} sm container >
                         <Grid item xs container direction="column">

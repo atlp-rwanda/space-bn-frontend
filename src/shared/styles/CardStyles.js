@@ -4,7 +4,7 @@ import amber from '@material-ui/core/colors/amber'
 const primary = amber[800]
 export const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(0, 1)
+        padding: theme.spacing(0, 1),
     },
     main: {
         [theme.breakpoints.down('sm')]: {
@@ -50,9 +50,13 @@ export const useStyles = makeStyles(theme => ({
        fontFamily: `'Poppins', sans-serif;`,
     },
     map: {
-        marginTop: '10vh',
+        marginTop: '9vh',
         width: '58vw',
-        zIndex: 2
+        zIndex: 2,
+        marginLeft: 5,
+        '@media(max-width: 600px)': {
+            width: 0           
+        }
     },
     toolTipImg: {
         height: 100,

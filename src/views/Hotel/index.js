@@ -6,9 +6,11 @@ import SearchBar from '../../components/SeachBar';
 import Scroll from '../../components/Scroll';
 import MapLocation from '../../components/Map';
 import { hotelInfo, concatHotelInfo } from '../../helpers/hotelInfo';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 
-const drawerWidth = 600;
+const drawerWidth = 650;
 const useStyles = makeStyles((theme) => ({
     drawerHeader: {
         padding: theme.spacing(8,0)
@@ -21,14 +23,19 @@ const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
-    }
+        justifyContent: 'space-between',
+        marginBottom:'1vh',
+        '@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)': {
+            height: '100vh'
+        }
+    },
 }))
 
 
 const Hotel = () => {
     const classes = useStyles();
-    const [searchValue, setSearchValue] = useState(hotelInfo);
+    const [hotels, sethotels] = useState(hotelInfo.concat(concatHotelInfo))
+    const [searchValue, setSearchValue] = useState(hotels);
     const [activePopup, setActivePopup] = useState(false);
     const [hotelPosition, setHotelPosition] = useState(null);
     const [activeHotel, setActiveHotel] = useState(null);
@@ -54,7 +61,7 @@ const Hotel = () => {
 
     useEffect(() => {
         //add more hotels
-        const combinedHotels = searchValue.concat(concatHotelInfo);
+        const combinedHotels = hotelInfo.concat(concatHotelInfo) ;
         setSearchValue(combinedHotels);
     }, [page])
 
@@ -67,7 +74,7 @@ const Hotel = () => {
     }
     //handle search input
     const HandleSearch = (typedValue) => {
-        const filttered = searchValue.filter(value => {
+        const filttered = hotels.filter(value => {
             if(value.name.toLowerCase().includes(typedValue.toLowerCase().trim())){
                 return true
             }
@@ -79,32 +86,37 @@ const Hotel = () => {
     }
 
     return (
+        <>
+        <Header />
         <div className={classes.container}>
-        <div className={classes.root}>
-            <div className={classes.drawerHeader} />
-            <SearchBar 
-            HandleSearch={HandleSearch}
-            value={''} 
-            prop={"Search hotel"}
-            />
-            <Scroll>
-                <PaperCard 
-                searchValue={searchValue} 
-                activePopup={activePopup} 
-                setActivePopup={setActivePopup} 
-                setHotelPosition={setHotelPosition}
-                setActiveHotel={setActiveHotel}
+            <div className={classes.root}>
+                <div className={classes.drawerHeader} />
+                <SearchBar 
+                HandleSearch={HandleSearch}
+                value={''} 
+                prop={"Search hotel"}
                 />
-            </Scroll>
-        </div>
-        <MapLocation 
-        activePopup={activePopup} 
-        hotelPosition={hotelPosition}
-        activeHotel={activeHotel}
-        searchValue={searchValue}
-        />
+                <Scroll>
+                    <PaperCard 
+                    searchValue={searchValue} 
+                    activePopup={activePopup} 
+                    setActivePopup={setActivePopup} 
+                    setHotelPosition={setHotelPosition}
+                    setActiveHotel={setActiveHotel}
+                    />
+                </Scroll>
+            </div>
+            <MapLocation 
+            activePopup={activePopup} 
+            hotelPosition={hotelPosition}
+            activeHotel={activeHotel}
+            searchValue={searchValue}
+            />
         </div> 
-
+        <div style={{marginTop: '3vh'}}>
+        <Footer />
+        </div>
+     </>
      );
 }
  
