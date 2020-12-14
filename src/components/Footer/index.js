@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         height: 70,
         background: '#FFFFFF',
         alignItems: 'center',
+        zIndex: 5,
         borderTop: '1px solid #333',
         '@media(max-width: 610px)': {
             flexDirection: 'column',
