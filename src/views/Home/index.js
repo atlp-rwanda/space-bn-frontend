@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Link } from '@material-ui/core';
 import image1 from '../../assets/images/land-img-1.png';
 import image2 from '../../assets/images/land-img-2.png';
 import image3 from '../../assets/images/land-img-3.png';
@@ -30,7 +30,7 @@ const Home = () => {
                    </HeadingWrapper>
                   <ButtonsWrapper>
                   <Button variant="contained" color="primary" data-testid="viewHotels-btn">
-                    View Hotels
+                    <Link href="/hotel" style={{color: 'white', textDecoration: 'none'}}>View Hotels</Link>
                   </Button>
                   <Button variant="contained" color="primary" data-testid="contactUs-btn">
                     Contact Us
@@ -54,4 +54,4 @@ const Home = () => {
      );
 }
  
-export default Home;
+export default  Home;

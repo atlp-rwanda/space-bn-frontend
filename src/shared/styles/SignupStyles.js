@@ -109,7 +109,6 @@ export const useStyles = makeStyles((theme) => ({
       width: '70%',
       '@media (max-width:935px)': {
        width: '100%'
-
       },
     },
   }));
