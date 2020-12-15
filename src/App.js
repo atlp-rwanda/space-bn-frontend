@@ -7,7 +7,6 @@ import Hotel from './views/Hotel';
 import FAQ from './views/FAQ';
 import './App.css';
 
-
 function App() {
   return (
     <Router>

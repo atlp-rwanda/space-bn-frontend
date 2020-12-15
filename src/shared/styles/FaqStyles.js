@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     faqContainer:{
       marginTop: 70,
       width: '100vw',
+      minHeight: '80vh'
       
     },
     toolbar: {
@@ -23,8 +24,10 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      '@media(max-width:370px)': {
+      '@media(max-width:600px)': {
+        width: '95%',
         padding: theme.spacing(0),
+        display: 'block'
       }
     },
     leftDivider: {
@@ -58,6 +61,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#5E5E5E'
   },
   body: {
-    color: '#5E5E5E'
+    color: '#5E5E5E',
+    textAlign: 'justify'
   }
 }));
