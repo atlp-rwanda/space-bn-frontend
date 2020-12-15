@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,13 +16,21 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { styles, Heading, InputText, SocialButton, SocialText, Patten } from '../../shared/styles/LoginStyles'
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
+import { AuthContext } from '../../contexts/AuthContext';
+import { SET_AUTHENTICATION, SET_ERROR } from '../../actions/types';
+import toaster from '../../helpers/toasts';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+
+
 export default function SignIn() {
     const classes = styles();
- 
-  const [values, setValues] = React.useState({
-    password: '',
-    showPassword: false,
-  });
+    const { dispatch, auth } = useContext(AuthContext);
+
+    const [values, setValues] = React.useState({
+      password: '',
+      email: '',
+      showPassword: false,
+    });
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -35,8 +43,40 @@ export default function SignIn() {
         event.preventDefault();
       };
 
+      const handleSubmit = (e) => {
+        e.preventDefault()
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        if (values.email === '') {
+          dispatch({type: SET_ERROR, payload: 'Email is required'})
+          toaster(auth.error, 'error')
+          return false
+        }
+        else if (values.email !== savedUser.Email) {
+          dispatch({type: SET_ERROR, payload: 'invalid email'})
+          toaster(auth.error, 'error')
+          return false
+        }
+        else if (values.password === '') {
+          dispatch({type: SET_ERROR, payload: 'Password is required'})
+          toaster(auth.error, 'error')
+          return false
+        }
+         else if (values.password !== savedUser.Password) {
+          dispatch({type: SET_ERROR, payload: 'invalid Password'})
+          toaster(auth.error, 'error')
+          return false
+        }
+          dispatch({type: SET_AUTHENTICATION})
+          toaster('You are logged in', 'success')
+      }
   return (
     <>
+     <ToastContainer 
+            draggable={true} 
+            transition={Zoom} 
+            autoClose={3000} 
+            position={toast.POSITION.TOP_CENTER}
+        />
     <Header/>
     <div className={classes.mainContainer}>
     <div className={classes.signupContainer}>
@@ -48,7 +88,7 @@ export default function SignIn() {
         <Heading>
           Login
         </Heading>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleSubmit}>
 
         <InputText fullWidth variant="outlined">
           <InputLabel htmlFor="outlined-email" data-testid="email-label">Email</InputLabel>
