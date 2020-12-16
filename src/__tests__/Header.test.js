@@ -1,17 +1,42 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, fireEvent } from '@testing-library/react';
+import { createMemoryHIstory } from 'history';
 import Header from '../components/Header';
 
+const mockHistoryPush = jest.fn();
 
-describe('<Nav />', () => {
-    it('should render the header content', () => {
-        render(<Header />)
-        const links = document.getElementsByTagName('nav')
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => ({
+        push: mockHistoryPush,
+    }),
+}));
 
-        expect(links.length).toBe(1)
+describe('Testing Header', () => {
+    test('Should redirect to the home page when clicked', () => {
+        const {getByRole} = render(
+            <MemoryRouter>
+                <Header />
+            </MemoryRouter>
+        );
+        
+        fireEvent.click(getByRole('img'));
+        
+        expect(mockHistoryPush).toHaveBeenCalledWith('/');
     });
-    it('should render the image on the header', () => {
+    
+    test('Should render the header content', () => {
         render(<Header />)
-        expect(document.getElementsByTagName('img').length).toBe(1)
+        const appBar = document.getElementsByTagName('AppBar')
+        
+        expect(appBar.length).toBe(0)
+    });
+    
+    test('Should add 2 and 3', () => {
+        const sum = () => 2 + 3;
+        
+        expect(sum()).toBe(5);
+        
     });
 });

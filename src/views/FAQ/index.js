@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from "../../components/Header/index";
 import Footer from "../../components/Footer/index";
 import {useStyles} from '../../shared/styles/FaqStyles';
@@ -14,7 +14,7 @@ const HandleSearch = () => {
   // do some implementations
 }
   return (
-    <Router>
+    <>
       <Header />
         <div className={classes.faqContainer}>
           <div className={classes.searchContainer}>
@@ -78,7 +78,7 @@ const HandleSearch = () => {
         </div>
         </div>
       <Footer />
-    </Router>
+    </>
   )
 }
 
