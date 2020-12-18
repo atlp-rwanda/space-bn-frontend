@@ -4,7 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import {Button, Hidden, IconButton, makeStyles } from '@material-ui/core';
+import {Button, Hidden, IconButton, makeStyles, Tooltip, Menu, Fade, MenuItem} from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
 import Typography from '@material-ui/core/Typography';
@@ -31,14 +33,11 @@ const links = [
         text: 'Contact Us',
     },
     {
-        text: <Button color="primary">
-                 <AccountCircleIcon style={{width: 50, height: 50,}} />
-             </Button> 
-    },
-    {
-        text: <Typography variant="h6" color="subtitle" style={{fontSize: '0.7rem'}}>
-                John Doe
-            </Typography>
+        text:<Tooltip title="John Doe" aria-label="username" placement="bottom"> 
+                <Button color="primary">
+                    <AccountCircleIcon style={{width: 50, height: 50,}} />
+                </Button>
+            </Tooltip> 
     },
 ];
 const useStyles = makeStyles((theme) => ({
@@ -105,31 +104,33 @@ const useStyles = makeStyles((theme) => ({
         width: 60
     },
     profile: {
-        width: 200,
-        height: 80,
-        background: 'blue',
-        color: 'white',
-        marginTop: 70,
-        marginLeft: 'auto',
+        marginTop: 55,
         display: 'flex',
-        flexDirection: 'column'
-    }
+        flexDirection: 'column',
+    },
 }))
 const AuthHeader = () => { 
     const history = useHistory();
     const classes = useStyles();
-    const [profile, setProfile] = useState(false)
     const [hideNav, setHideNow ] = useState(false)
     const { dispatch } = useContext(AuthContext);
     const handleNavLinks = (e) => {
         setHideNow(!hideNav)
     }
-    const handleClick = () => {
-        setProfile(!profile)
-    }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
     const handleLogOut = () => {
        dispatch({type: SET_LOG_OUT})
        toaster('Logged out successfully', 'success')
+           history.push('/login')
     }
     return (
         <> 
@@ -157,7 +158,7 @@ const AuthHeader = () => {
                     }}
                     src={logo} alt="Barefoot Loog" />
                 </div>
-                <Hidden only={['sm', 'xl', 'xs']}>
+                <Hidden only={['sm', 'xl', 'xs']} >
                 <List className={classes.container} >
                     <Link to={links[0].url} className={classes.list}>
                         <ListItemText >{links[0].text}</ListItemText>
@@ -171,56 +172,61 @@ const AuthHeader = () => {
                     <Link to={links[3].url} className={classes.list}>
                         <ListItemText >{links[3].text}</ListItemText>
                     </Link>
-                    <Typography className={classes.list} onClick={handleClick}>
-                        <ListItemText >{links[4].text}</ListItemText>
-                    </Typography>
-                    <Typography  className={classes.list}>
-                        <ListItemText >{links[5].text}</ListItemText>
-                    </Typography>
+                    <div className={classes.list} >
+                        <ListItemText onClick={handleClick} className="test">{links[4].text}</ListItemText>
+                    </div>
                 </List> 
-            </Hidden>
-            {hideNav && (
-            <Hidden only={['lg', 'md']}>
-                <List className={classes.mobileContainer} >
-                <Link to={links[0].url} className={classes.mobileNav}>
-                    <ListItemText >{links[0].text}</ListItemText>
-                </Link>
-                <Link to={links[1].url} className={classes.mobileNav}>
-                    <ListItemText >{links[1].text}</ListItemText>
-                </Link>
-                <Link to={links[2].url} className={classes.mobileNav}>
-                    <ListItemText >{links[2].text}</ListItemText>
-                </Link>
-                <Link to={links[3].url} className={classes.mobileNav}>
-                    <ListItemText >{links[3].text}</ListItemText>
-                </Link>
-                <Typography className={classes.mobileNav} onClick={handleClick}>
-                    <ListItemText >{links[4].text}</ListItemText>
-                </Typography>
-                <Typography  className={classes.mobileNav}>
-                    <ListItemText >{links[5].text}</ListItemText>
-                </Typography>
-                </List> 
-            </Hidden> 
-            )}
-            <Hidden only={['lg', 'md']}>
-            <IconButton
-            edge="start"
-            color="inherit"
-            aria-controls="links-menu"
-            aria-haspopup="true"
-            >
-            <MenuIcon 
-            className={classes.menuIcon}
-            onClick={handleNavLinks}
-            />
-            </IconButton>
-            </Hidden> 
+                </Hidden>
+                {hideNav && (
+                <Hidden only={['lg', 'md']} >
+                    <List className={classes.mobileContainer}>
+                    <Link to={links[0].url} className={classes.mobileNav}>
+                        <ListItemText >{links[0].text}</ListItemText>
+                    </Link>
+                    <Link to={links[1].url} className={classes.mobileNav}>
+                        <ListItemText >{links[1].text}</ListItemText>
+                    </Link>
+                    <Link to={links[2].url} className={classes.mobileNav}>
+                        <ListItemText >{links[2].text}</ListItemText>
+                    </Link>
+                    <Link to={links[3].url} className={classes.mobileNav}>
+                        <ListItemText >{links[3].text}</ListItemText>
+                    </Link>
+                    <div className={classes.mobileNav} >
+                        <ListItemText onClick={handleClick} className="test">{links[4].text}</ListItemText>
+                    </div>
+                    </List> 
+                </Hidden> 
+                )}
+                <Hidden only={['lg', 'md']}>
+                <IconButton
+                edge="start"
+                color="inherit"
+                aria-controls="links-menu"
+                aria-haspopup="true"
+                >
+                <MenuIcon 
+                className={classes.menuIcon}
+                onClick={handleNavLinks}
+                />
+                </IconButton>
+                </Hidden> 
         </AppBar>
-            {profile && <div className={classes.profile}>
-                <Button color="inherit">Profile</Button>
-                <Button color="inherit" onClick={handleLogOut}>Log out</Button>
-            </div>
+            {open && 
+            <Menu
+                ria-controls="simple-menu" 
+                aria-haspopup="true"
+                id="fade-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+                className={classes.profile}
+            >
+                <MenuItem color="inherit"><PersonIcon />Profile</MenuItem>
+                <MenuItem color="inherit" onClick={handleLogOut} ><LockIcon />Log out</MenuItem>
+            </Menu>
             }  
         </>
     );

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -24,6 +25,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 
 export default function SignIn() {
     const classes = styles();
+    const history = useHistory();
     const { dispatch, auth } = useContext(AuthContext);
 
     const [values, setValues] = React.useState({
@@ -52,7 +54,7 @@ export default function SignIn() {
           return false
         }
         else if (values.email !== savedUser.Email) {
-          dispatch({type: SET_ERROR, payload: 'invalid email'})
+          dispatch({type: SET_ERROR, payload: 'invalid Email or Password'})
           toaster(auth.error, 'error')
           return false
         }
@@ -62,12 +64,15 @@ export default function SignIn() {
           return false
         }
          else if (values.password !== savedUser.Password) {
-          dispatch({type: SET_ERROR, payload: 'invalid Password'})
+          dispatch({type: SET_ERROR, payload: 'invalid Email or Password'})
           toaster(auth.error, 'error')
           return false
         }
           dispatch({type: SET_AUTHENTICATION})
           toaster('You are logged in', 'success')
+          setTimeout(() => {
+            history.push('/dashboard')
+          }, 4000)   
       }
   return (
     <>
