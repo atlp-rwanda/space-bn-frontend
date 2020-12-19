@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useContext, useState} from 'react';
 import { useHistory,Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
@@ -6,6 +6,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {Hidden, IconButton, makeStyles } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
+import AuthHeader from './authHeader';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const links = [
     {
@@ -106,13 +108,16 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
     const history = useHistory();
     const classes = useStyles();
-    const [hideNav, setHideNow ] = useState(false)
+    const [hideNav, setHideNow ] = useState(false);
+    const { auth } = useContext(AuthContext)
+    const { isAuthenticated } = auth;
+
     const handleNavLinks = (e) => {
         setHideNow(!hideNav)
     }
     return ( 
-        <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>
-          
+        isAuthenticated ? <AuthHeader /> : (
+        <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>     
             <div style=
             {{
                 width: '10%',
@@ -129,7 +134,7 @@ const Header = () => {
                     cursor: 'pointer'
                 }}
                 src={logo} alt="Barefoot Loog" />
-             </div>
+            </div>
             <Hidden only={['sm', 'xl', 'xs']}>
                 <List className={classes.container} >
                     {links.map((link, index) => (
@@ -164,6 +169,7 @@ const Header = () => {
             </IconButton>
             </Hidden>   
         </AppBar>
+    )
     );
 }
 

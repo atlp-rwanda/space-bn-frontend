@@ -5,6 +5,8 @@ import Login from './views/Login/Login';
 import Signup from './views/Signup';
 import Hotel from './views/Hotel';
 import './App.css';
+import Dashboard from './views/Dashboard';
+import ProtectedRoute from './helpers/protected.route';
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
           <Route exact path="/hotel" component={Hotel}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     </Router>
