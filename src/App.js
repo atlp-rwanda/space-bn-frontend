@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './views/Home';
-import Login from './views/Login/Login';
+import Login from './views/Login/Login'; 
 import Signup from './views/Signup';
 import Hotel from './views/Hotel';
 import FAQ from './views/FAQ';
@@ -11,7 +11,6 @@ import Booking from './views/Booking';
 import './App.css';
 import Dashboard from './views/Dashboard';
 import ProtectedRoute from './helpers/protected.route';
-
 
 function App() {
   return (

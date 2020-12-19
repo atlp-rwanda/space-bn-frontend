@@ -5,6 +5,7 @@ import Header from '../components/Header/index';
 import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
+const mockHistoryPush = jest.fn();
 
 const SizeWrapper = (props) => {
     const theme = createMuiTheme({

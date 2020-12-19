@@ -75,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none'
     },
     /**End of mobile view nav */
-   
     container: {
         marginRight: 20,
         alignItems: 'center',
@@ -87,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
         width: 90, 
         textAlign: 'center',
         borderRadius: 4,
+        textDecoration: 'underline'
     },
     menuIcon: {
         color: '#2196F3',
