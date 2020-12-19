@@ -1,5 +1,5 @@
 import React, { useContext, useState} from 'react';
-import { useHistory,Link } from 'react-router-dom';
+import { useHistory, Link, NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
 import AuthHeader from './authHeader';
 import { AuthContext } from '../../contexts/AuthContext';
+import '../../App.css';
 
 const links = [
     {
@@ -48,17 +49,6 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.common.white,
         color: theme.palette.common.black,
     },
-    list: {
-        color: theme.palette.common.black,
-        marginRight: 30,
-        textDecoration: 'none',
-        fontFamily: 'Poppins, sans-serif',
-        "&:hover": {
-            transform: 'scale(1.02)',
-            color: theme.palette.secondary.light,
-            cursor: 'pointer'
-        } 
-    },
     /*** start of mobile view nav ****/
     mobileNav: {
         color: theme.palette.common.white,
@@ -75,13 +65,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         marginTop: 70,
-        background: '#2196F3',
+        background: '#ccc',
         height: 200,
         paddingLeft: theme.spacing(4),
         color: 'black',
         right: 0,
         top: 0,
-        position: 'fixed'
+        position: 'fixed',
+        textDecoration: 'none'
     },
     /**End of mobile view nav */
    
@@ -109,14 +100,14 @@ const Header = () => {
     const history = useHistory();
     const classes = useStyles();
     const [hideNav, setHideNow ] = useState(false);
-    const { auth } = useContext(AuthContext)
-    const { isAuthenticated } = auth;
+    // const { auth } = useContext(AuthContext)
+    // const { isAuthenticated } = auth;
 
     const handleNavLinks = (e) => {
         setHideNow(!hideNav)
     }
     return ( 
-        isAuthenticated ? <AuthHeader /> : (
+        // isAuthenticated ? <AuthHeader /> : (
         <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>     
             <div style=
             {{
@@ -138,9 +129,9 @@ const Header = () => {
             <Hidden only={['sm', 'xl', 'xs']}>
                 <List className={classes.container} >
                     {links.map((link, index) => (
-                    <Link to={link.url} key={index} className={classes.list}>
+                    <NavLink to={link.url} key={index}  activeClassName="is-active" id="navlink" data-testId="navlink">
                         <ListItemText className={link.isActive && classes.activeLink}>{link.text}</ListItemText>
-                    </Link>
+                    </NavLink>
                     ))}
                 </List> 
             </Hidden>
@@ -148,9 +139,9 @@ const Header = () => {
             <Hidden only={['lg', 'md']}>
                 <List className={classes.mobileContainer} >
                 {links.map((link, index) => (
-                <Link to={link.url} key={index} className={classes.mobileNav}>
+                <NavLink to={link.url} key={index}  activeClassName="is-active" id="navlink" data-testId="navlink">
                     <ListItemText>{link.text}</ListItemText>
-                </Link>
+                </NavLink>
                 ))}
                 </List> 
             </Hidden> 
@@ -169,7 +160,7 @@ const Header = () => {
             </IconButton>
             </Hidden>   
         </AppBar>
-    )
+    // )
     );
 }
 

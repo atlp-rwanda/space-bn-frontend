@@ -1,17 +1,68 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import Header from '../components/Header';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
+import AuthContextProvider from '../contexts/AuthContext';
+import Header from '../components/Header/index';
+import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 
-describe('<Nav />', () => {
-    it('should render the header content', () => {
-        render(<Header />)
-        const links = document.getElementsByTagName('nav')
-
-        expect(links.length).toBe(1)
+const SizeWrapper = (props) => {
+    const theme = createMuiTheme({
+        props: { MuiWithWidth: { initialWidth: "md" } },
     });
-    it('should render the image on the header', () => {
-        render(<Header />)
-        expect(document.getElementsByTagName('img').length).toBe(1)
+
+    return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
+};
+
+const mockHistoryPush = jest.fn();
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => ({
+        push: mockHistoryPush,
+    })
+}))
+
+describe('<Header />', () => {
+    it('Should render the component correctly', () => {
+        render(
+            <Router>
+                <Header />
+            </Router>
+        );
+        
+        expect(<Header />).toBeDefined();
+    });
+    
+    it('Should render the header content', () => {
+        render(
+            <Router>
+                <Header />
+            </Router>
+        );
+        const nav = document.getElementsByTagName('nav');
+        
+        expect(nav.length).toBe(1);
+    });
+    
+    test('Should redirect to the home page when clicked', () => {
+        const {getByRole} = render(
+            <MemoryRouter>
+                <Header />
+            </MemoryRouter>
+        );
+        
+        fireEvent.click(getByRole('img'));
+        
+        expect(mockHistoryPush).toHaveBeenCalledWith('/');
+    });
+    
+    it('Should hide content on resize', () => {
+        render(
+            <Router>
+                <Header />
+            </Router>, {wrapper: SizeWrapper}
+        );
+        
+        expect(document.getElementsByClassName('MuiTypography-root').length).toEqual(6);
     });
 });
