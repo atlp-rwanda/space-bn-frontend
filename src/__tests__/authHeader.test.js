@@ -141,4 +141,29 @@ describe('<AuthHeader />', () => {
         expect(mockHistory).toBeCalledWith('/login')  
         
     })
+    
+    it('Should navigate when clicked', () => {
+        const SizeWrapper = (props) => {
+            const theme = createMuiTheme({
+                props: { MuiWithWidth: { initialWidth: "sm" } },
+            });
+        
+            return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
+        };
+        
+        const {getByRole} = render(
+            <AuthContextProvider>
+                <Router>
+                    <AuthHeader />
+                </Router>
+            </AuthContextProvider>, { wrapper: SizeWrapper }
+        );
+        
+        const iconButton = getByRole('button');
+        
+        fireEvent.click(iconButton);
+        const links = document.getElementsByTagName('a');
+        
+        expect(links.length).toEqual(4);
+    });
 })
