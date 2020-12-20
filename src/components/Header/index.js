@@ -85,8 +85,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.common.white,
         width: 90, 
         textAlign: 'center',
-        borderRadius: 4,
-        textDecoration: 'underline'
+        borderRadius: 4
     },
     menuIcon: {
         color: '#2196F3',
@@ -99,15 +98,15 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
     const history = useHistory();
     const classes = useStyles();
-    const [hideNav, setHideNow ] = useState(false);
-    // const { auth } = useContext(AuthContext)
-    // const { isAuthenticated } = auth;
+    const [hideNav, setHideNav ] = useState(false);
+    const { auth } = useContext(AuthContext)
+    const { isAuthenticated } = auth;
 
     const handleNavLinks = (e) => {
-        setHideNow(!hideNav)
+        setHideNav(!hideNav)
     }
     return ( 
-        // isAuthenticated ? <AuthHeader /> : (
+        isAuthenticated ? <AuthHeader /> : (
         <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>     
             <div style=
             {{
@@ -152,15 +151,16 @@ const Header = () => {
             color="inherit"
             aria-controls="links-menu"
             aria-haspopup="true"
-            >
-            <MenuIcon 
-            className={classes.menuIcon}
             onClick={handleNavLinks}
-            />
+            >
+                <MenuIcon 
+                className={classes.menuIcon}
+                data-testId='menu_icon'
+                />
             </IconButton>
             </Hidden>   
         </AppBar>
-    // )
+    )
     );
 }
 
