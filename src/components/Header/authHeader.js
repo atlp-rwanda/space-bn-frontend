@@ -9,7 +9,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
-import Typography from '@material-ui/core/Typography';
 import { AuthContext } from '../../contexts/AuthContext';
 import { SET_LOG_OUT} from '../../actions/types';
 import toaster from '../../helpers/toasts';
@@ -204,10 +203,10 @@ const AuthHeader = () => {
                 color="inherit"
                 aria-controls="links-menu"
                 aria-haspopup="true"
+                onClick={handleNavLinks}
                 >
                 <MenuIcon 
                 className={classes.menuIcon}
-                onClick={handleNavLinks}
                 />
                 </IconButton>
                 </Hidden> 

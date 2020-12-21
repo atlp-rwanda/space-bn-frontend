@@ -1,5 +1,5 @@
 import React, { useContext, useState} from 'react';
-import { useHistory,Link } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import logo from '../../assets/images/logo.png';
 import AuthHeader from './authHeader';
 import { AuthContext } from '../../contexts/AuthContext';
+import '../../App.css';
 
 const links = [
     {
@@ -48,17 +49,6 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.common.white,
         color: theme.palette.common.black,
     },
-    list: {
-        color: theme.palette.common.black,
-        marginRight: 30,
-        textDecoration: 'none',
-        fontFamily: 'Poppins, sans-serif',
-        "&:hover": {
-            transform: 'scale(1.02)',
-            color: theme.palette.secondary.light,
-            cursor: 'pointer'
-        } 
-    },
     /*** start of mobile view nav ****/
     mobileNav: {
         color: theme.palette.common.white,
@@ -75,16 +65,16 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         marginTop: 70,
-        background: '#2196F3',
+        background: '#ccc',
         height: 200,
         paddingLeft: theme.spacing(4),
         color: 'black',
         right: 0,
         top: 0,
-        position: 'fixed'
+        position: 'fixed',
+        textDecoration: 'none'
     },
     /**End of mobile view nav */
-   
     container: {
         marginRight: 20,
         alignItems: 'center',
@@ -95,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.common.white,
         width: 90, 
         textAlign: 'center',
-        borderRadius: 4,
+        borderRadius: 4
     },
     menuIcon: {
         color: '#2196F3',
@@ -108,12 +98,12 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
     const history = useHistory();
     const classes = useStyles();
-    const [hideNav, setHideNow ] = useState(false);
+    const [hideNav, setHideNav ] = useState(false);
     const { auth } = useContext(AuthContext)
     const { isAuthenticated } = auth;
 
     const handleNavLinks = (e) => {
-        setHideNow(!hideNav)
+        setHideNav(!hideNav)
     }
     return ( 
         isAuthenticated ? <AuthHeader /> : (
@@ -138,9 +128,9 @@ const Header = () => {
             <Hidden only={['sm', 'xl', 'xs']}>
                 <List className={classes.container} >
                     {links.map((link, index) => (
-                    <Link to={link.url} key={index} className={classes.list}>
+                    <NavLink to={link.url} key={index}  activeClassName="is-active" id="navlink" data-testId="navlink">
                         <ListItemText className={link.isActive && classes.activeLink}>{link.text}</ListItemText>
-                    </Link>
+                    </NavLink>
                     ))}
                 </List> 
             </Hidden>
@@ -148,9 +138,9 @@ const Header = () => {
             <Hidden only={['lg', 'md']}>
                 <List className={classes.mobileContainer} >
                 {links.map((link, index) => (
-                <Link to={link.url} key={index} className={classes.mobileNav}>
+                <NavLink to={link.url} key={index}  activeClassName="is-active" id="navlink" data-testId="navlink">
                     <ListItemText>{link.text}</ListItemText>
-                </Link>
+                </NavLink>
                 ))}
                 </List> 
             </Hidden> 
@@ -161,11 +151,12 @@ const Header = () => {
             color="inherit"
             aria-controls="links-menu"
             aria-haspopup="true"
-            >
-            <MenuIcon 
-            className={classes.menuIcon}
             onClick={handleNavLinks}
-            />
+            >
+                <MenuIcon 
+                className={classes.menuIcon}
+                data-testId='menu_icon'
+                />
             </IconButton>
             </Hidden>   
         </AppBar>

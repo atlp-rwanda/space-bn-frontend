@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         background: '#FFFFFF',
         alignItems: 'center',
         zIndex: 5,
-        borderTop: '1px solid #333',
+        borderTop: '2px solid #E0E0E0',
         '@media(max-width: 610px)': {
             flexDirection: 'column',
             paddingTop: theme.spacing(1)
