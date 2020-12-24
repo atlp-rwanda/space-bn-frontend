@@ -1,0 +1,25 @@
+.containerFluid{
+ width: 100%;
+}
+.contentContainer{
+    display:flex;
+}
+.childContainer{
+    margin-top: 5em;
+    background: green;
+    padding-left: 2em;
+}
+
+.sidebarContainer{
+    background: red;
+}
+
+/* .hide{
+    display: none;
+} */
+
+/* @media only screen and (max-width: 664px){
+    .sidebarContainer{
+        display: none;
+    }
+} */
