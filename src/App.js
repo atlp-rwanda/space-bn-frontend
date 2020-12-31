@@ -10,6 +10,7 @@ import Contact from './views/Contact';
 import Booking from './views/Booking';
 import './App.css';
 import Dashboard from './views/Dashboard';
+import Profile from './views/Profile';
 import ProtectedRoute from './helpers/protected.route';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/booking" component={Booking}/>
+          <Route exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
