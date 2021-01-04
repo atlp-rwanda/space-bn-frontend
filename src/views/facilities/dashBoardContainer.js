@@ -1,18 +1,18 @@
 import React from 'react';
-import SideBar from './containers/sideBar';
-import Appbar from './containers/appBar'
 import { makeStyles } from '@material-ui/core/styles';
 import Facility from './facility'
 
 
 const useStyles = makeStyles((theme) => ({
   _wrapper:{
-      marginLeft:'210px',
-      marginTop:'64px',
       backgroundColor:'#fff!important',
-      padding:'40px',
-      height:'100vh'
-    
+      padding:'64px 40px 40px 70px',
+      height:'100vh' 
+  },
+  _sideBar:{
+    '@media (min-width:780px)': {
+      display:'none'
+    }
   }
  
   
@@ -22,11 +22,9 @@ const DashboardContainer=()=>{
   const classes = useStyles();
   return(
     <div>
-      <Appbar/>
       <div className={classes._wrapper}>
         <Facility />
       </div>
-      <SideBar />
     </div>
     
   );
