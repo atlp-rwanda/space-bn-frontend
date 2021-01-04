@@ -11,6 +11,7 @@ import Booking from './views/Booking';
 import './App.css';
 import Dashboard from './views/Dashboard';
 import ProtectedRoute from './helpers/protected.route';
+import DashboardContainer from './views/facilities/dashBoardContainer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/booking" component={Booking}/>
+          <Route exact path="/dash" component={DashboardContainer}/>
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
