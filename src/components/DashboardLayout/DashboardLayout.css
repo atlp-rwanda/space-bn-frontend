@@ -1,18 +1,18 @@
 .containerFluid{
  width: 100%;
 }
-.contentContainer{
+/* .contentContainer{
     display:flex;
-}
+} */
 .childContainer{
     margin-top: 5em;
-    background: green;
-    padding-left: 2em;
+    width:100%;
+   
 }
 
-.sidebarContainer{
+/* .sidebarContainer{
     background: red;
-}
+} */
 
 /* .hide{
     display: none;

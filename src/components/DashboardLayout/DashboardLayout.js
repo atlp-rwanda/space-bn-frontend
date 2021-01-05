@@ -15,13 +15,14 @@ const DashboardLayout = ({children}) => {
           <div className="contentContainer">
 
              <div className="sidebarContainer ">
-             <Sidebar isOpen={isSideBarOpen}/>
+             <Sidebar isOpen={isSideBarOpen} handleOpen={handleOpen}/>
              </div>
             
-             <div className="childContainer">
-               {children}
-             </div>
+             
             </div>
+              <div className="childContainer">
+                {children}
+              </div>
          </div>
     )
 }

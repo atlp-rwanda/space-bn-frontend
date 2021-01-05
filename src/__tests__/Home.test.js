@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from '../views/Home';
 
-it('renders the correnct contents', () => {
+it('renders the correct contents', () => {
     render(<Home/>);
     expect(screen.getByText('TRAVEL BOOKINGS')).toBeInTheDocument();
     expect(screen.getByText('MADE EASY')).toBeInTheDocument();

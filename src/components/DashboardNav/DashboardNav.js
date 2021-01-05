@@ -16,7 +16,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {useHistory} from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import Sidbar from '../Sidebar/Sidebar';
+
 
 
 
@@ -188,15 +188,15 @@ export default function  PrimarySearchAppBar(props){
           >
             <MenuIcon/>
           </IconButton>
-          <img src={logo} alt="logo" style={{width: '70px', cursor: 'pointer'}} onClick={() => history.push('/')}/>
+          <img data-testid="logo" src={logo} alt="logo" style={{width: '70px', cursor: 'pointer'}} onClick={() => history.push('/')}/>
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography>
-          <div className={classes.search}>
+          <div className={classes.search} data-testid="searchInput">
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
+            <InputBase 
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

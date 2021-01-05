@@ -1,18 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import RolesIcon from '../../assets/icons/Roles-icon.png';
 import AddUserIcon from '../../assets/icons/AddUserIcon.png';
@@ -22,7 +16,9 @@ import './Sidebar.css';
 import {userTypes} from '../../helpers/userTypes';
 const drawerWidth = '18%';
 
-const userType = 'REQUESTER';
+
+
+
 const useStyles = makeStyles((theme) => ({
  
   appBar: {
@@ -39,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper:  {
     width: drawerWidth,
     zIndex: 1,
-    marginTop: '5em',
+    marginTop: '3em',
     [theme.breakpoints.down('sm')]: {
       width: '60%',
     },
@@ -57,20 +53,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const triggerSideBarMenu = () => {
-  document.getElementById("drowerPaper").classList.toggle('show');
+const listsContainer = {
+  marginTop: '3em'
+}
+const active = {
+     borderLeft: '5px solid #2196F3',
+     background: 'rgba(33, 150, 243, 0.08)'
 }
 
 
 
-export default function PermanentDrawerLeft(props) {
-  const classes = useStyles();
-  const matches = useMediaQuery('(min-width:600px)');
-  const [open, setOpen] = React.useState(true);
 
-  const triggerSidebar  = () => {
-    setOpen(!open);
-  }
+export default function PermanentDrawerLeft(props) {
+  const user = JSON.parse(localStorage.getItem('user'))
+ 
+  const classes = useStyles();
+  const [userType,setUserType] = useState('')
+  const [currentLocation,setLocation] = useState('');
+  const loc = useLocation().pathname;
+
+  useEffect(() => {
+    setUserType(user.userType);
+    setLocation(loc);
+},[loc,user.userType]);
+
+
+
+
+  
   return (
     <>
       <CssBaseline />
@@ -84,72 +94,89 @@ export default function PermanentDrawerLeft(props) {
           }}
           anchor="left" 
         > 
-          
-         
-           <List>
-            {userType == userTypes.admin ? (
+         <List style={listsContainer}>
+            {userType === userTypes.admin ? (
                     <>
-                    <ListItem button key='Dashboard'>
+
+                    <ListItem 
+                    onClick={() => props.handleOpen()}                  
+                    button key='Dashboard' style={(currentLocation === 'dashboard') ? (active) : (null)}>
                     <ListItemIcon><DashboardIcon/></ListItemIcon>
-                    <ListItemText>Dashboard</ListItemText>
+                    <ListItemText data-testid="managerDasboardList">Dashboard</ListItemText>
                     </ListItem>
 
-                    <ListItem button key='Dashboard'>
+                    <ListItem button key='Roles' onClick={() => props.handleOpen()}>
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Roles</ListItemText>
                     </ListItem> 
 
-                    <ListItem button key='Dashboard'>
+                    <ListItem button key='AddUser' onClick={() => props.handleOpen()}>
                     <ListItemIcon><img src={AddUserIcon} alt="add user icon" /></ListItemIcon>
                     <ListItemText>Add User</ListItemText>
                     </ListItem>
  
-                    <ListItem button key='Dashboard'>
+                    <ListItem 
+                    onClick={() => props.handleOpen()}
+                    button key='Facilities'>
                     <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
                     <ListItemText>Facilities</ListItemText>
                     </ListItem>
 
                     </>
-                    ) : (userType == userTypes.manager) 
+                    ) : (userType === userTypes.manager) 
                     ? (
                       <>
-                        <ListItem button key='Dashboard'>
+                        <ListItem 
+                        onClick={() => props.handleOpen()}
+                        button key='Dashboard'  style={(currentLocation === 'dashboard') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
                         <ListItemText>Dashboard</ListItemText>
                         </ListItem> 
               
-                        <ListItem button key='Roles'>
+                        <ListItem button key='Roles'
+                        onClick={() => props.handleOpen()}
+                        >
                         <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                         <ListItemText>Roles</ListItemText>
                         </ListItem>
               
                         
-                        <ListItem button key='Dashboard'>
+                        <ListItem button key='Request' 
+                        onClick={() => props.handleOpen()}
+                        style={(currentLocation === '/requests/thread' || currentLocation === '/requests') ? (active) : (null)}>
                         <ListItemIcon><img src={RequestsIcon} alt="request icon" /></ListItemIcon>
                         <ListItemText>Requests</ListItemText>
                         </ListItem>
               
-                        <ListItem button key='Dashboard'>
+                        <ListItem button key='Facilities'
+                        onClick={() => props.handleOpen()}
+                        >
                         <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
                         <ListItemText>Facilities</ListItemText>
                         </ListItem>
   
   
                       </>
-                    ) : (userType == userTypes.requester)
+                    ) : (userType === userTypes.requester)
                     ? (
                       <>
-                        <ListItem button key='Dashboard'>
+                        <ListItem 
+                         onClick={() => props.handleOpen()}
+                        button key='Dashboard'  style={(currentLocation === 'dashboard') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
                         <ListItemText>Dashboard</ListItemText>
                         </ListItem> 
                 
-                        <ListItem button key='Dashboard'>
+                        <ListItem 
+                        onClick={() => props.handleOpen()}
+                        button key='Requests'  style={(currentLocation === '/requests/thread' || currentLocation === '/requests') ? (active) : (null)}>
                         <ListItemIcon><img src={RequestsIcon} alt="request icon" /></ListItemIcon>
                         <ListItemText>Requests</ListItemText>
                         </ListItem>
               
-                        <ListItem button key='Dashboard'>
+                        <ListItem button key='Facilities' 
+                        onClick={() => props.handleOpen()}
+                        >
                         <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
                         <ListItemText>Facilities</ListItemText>
                         </ListItem>
