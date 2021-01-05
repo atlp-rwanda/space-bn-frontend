@@ -89,19 +89,9 @@ export const TablePaginationActions = (props) => {
     rowsPerPage: PropTypes.number.isRequired,
   };
 
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      "&:hover": {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
+ 
   
-const RequestTable = () => {
-    const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [selected, setSelected] = React.useState([]);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPerPage,setRowsPerPage, rows, StyledTableRow}) => {
 
     // handle row selection on click event
     const handleClick = (event, name) => {
@@ -188,7 +178,7 @@ const RequestTable = () => {
                           <TableCell align="center" className={classes.cell}>{row.destination}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.accommodation}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.status}</TableCell>
-                          <TableCell align="center" className={classes.cell}>{row.action}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{selected.length  > 1 ? '' : row.action}</TableCell>
                         </StyledTableRow>
                     )}) 
                 }
@@ -225,16 +215,39 @@ const RequestTable = () => {
  
 
 const RequestWrapper = () => {
-  const classes = useStyles()
+  const classes2 = useStyles()
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [selected, setSelected] = React.useState([]);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      "&:hover": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
   return ( 
-    <div className={classes.root}>
-      <div className={classes.wrapper}>
-          <Typography variant="h5" className={classes.title}>Requests</Typography>
-          <Fab color="primary" aria-label="add" className={classes.addBtn}>
+    <div className={classes2.root}>
+      <div className={classes2.wrapper}>
+          <Typography variant="h5" className={classes2.title}>Requests</Typography>
+          <Fab color="primary" aria-label="add" className={classes2.addBtn}>
               <AddIcon />
           </Fab>
       </div>
-      <RequestTable />
+      <RequestTable 
+      classes={classes} 
+      page={page} 
+      setPage={setPage} 
+      selected={selected} 
+      setSelected={setSelected}
+      rowsPerPage={rowsPerPage}
+      setRowsPerPage={setRowsPerPage}
+      rows={rows}
+      StyledTableRow={StyledTableRow}
+      />
     </div>
    );
 }
