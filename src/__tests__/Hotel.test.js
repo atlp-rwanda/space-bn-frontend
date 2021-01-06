@@ -2,6 +2,7 @@ import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import Hotel from '../views/Hotel';
 import SearchBar from '../components/SeachBar';
+import AuthContextProvider from '../contexts/AuthContext';
 
 beforeEach(() => cleanup)
 
@@ -11,7 +12,7 @@ describe('<Hotel />', () => {
         window.IntersectionObserver = jest.fn(function() {
             this.observe = observe;
         });
-        render(<Hotel />)
+        render(<AuthContextProvider> <Hotel /></AuthContextProvider>)
         expect(<Hotel />).toBeDefined()
     })
     it('should observe current page', () => {

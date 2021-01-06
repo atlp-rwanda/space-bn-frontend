@@ -1,13 +1,14 @@
 import React from 'react';
 import { render, fireEvent, cleanup } from '@testing-library/react';
 import Signup from '../views/Signup';
+import AuthContextProvider from '../contexts/AuthContext';
 
 
 
 beforeEach(cleanup);
 describe('<Signup />', () => {
     it('Should render the component', () => {
-        render(<Signup />)
+        render(<AuthContextProvider><Signup /></AuthContextProvider>)
         const {getAllByText, getByAltText, getByTestId} = render();
 
         const nameLabel = getByTestId('name-label');
@@ -28,7 +29,7 @@ describe('<Signup />', () => {
         expect(passwordValue).toHaveValue('')
     });
     it('Should calls onClick props when clicked', () => {
-        const {getByTestId} = render(<Signup />)
+        const {getByTestId} = render(<AuthContextProvider><Signup /></AuthContextProvider>)
         const btn =getByTestId('submit')
         const mocked = jest.fn();
 
@@ -37,7 +38,7 @@ describe('<Signup />', () => {
         expect(mocked).toHaveBeenCalledTimes(1)
     });
     it('Should display value on input change', () => {
-        const {getByTestId} = render(<Signup />)
+        const {getByTestId} = render(<AuthContextProvider><Signup /></AuthContextProvider>)
         const passwordValue = getByTestId('password-value');
         const emailValue = getByTestId('email-value');
         const nameValue = getByTestId('name-value');
@@ -50,7 +51,7 @@ describe('<Signup />', () => {
         expect(passwordValue).toHaveValue('password') 
     });
     it('Should toggle password visibility when clicked', () => {
-        const {getByTestId} = render(<Signup />)
+        const {getByTestId} = render(<AuthContextProvider><Signup /></AuthContextProvider>)
         const togglePassIcon = getByTestId('password-icon-toggle');
         const mockedFnc = jest.fn();
 
@@ -60,7 +61,7 @@ describe('<Signup />', () => {
         expect(mockedFnc).toBeCalledTimes(1);
     });
     it('Should prevent password default behavior on mouse down', () => {
-        const {getByTestId} = render(<Signup />)
+        const {getByTestId} = render(<AuthContextProvider><Signup /></AuthContextProvider>)
         const togglePassIcon = getByTestId('password-icon-toggle');
         const handleMouseDown = jest.fn();
 
