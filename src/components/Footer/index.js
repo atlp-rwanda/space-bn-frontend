@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         },
         '@media(max-width: 405px)': {
             justifyContent: 'unset',
-            height: '100px'
+            // height: '100px'
         }
     },
     icon: {

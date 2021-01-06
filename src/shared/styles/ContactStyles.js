@@ -25,17 +25,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     mainContainer: {
         width: '100%',
-        height: '90vh',
-        '@media (max-width:1450px)': {
-            height: 'auto',
-        }
+        height: '90vh'
     },
     pos:{
         marginTop: 122,
         width: 500,
         height: 540,
         marginBottom: 10,
-        // background:'#FFFFFF',
         boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
         borderRadius: 5,
         margin: 'auto',
