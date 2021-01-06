@@ -25,14 +25,17 @@ export const useStyles = makeStyles((theme) => ({
     },
     mainContainer: {
         width: '100%',
-        height: '90vh'
+        height: '90vh',
+        '@media (max-width:1450px)': {
+            height: 'auto',
+        }
     },
     pos:{
         marginTop: 122,
         width: 500,
         height: 540,
         marginBottom: 10,
-        background:'#FFFFFF',
+        // background:'#FFFFFF',
         boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
         borderRadius: 5,
         margin: 'auto',
@@ -59,7 +62,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '@media (max-width:470px)': {
             width: 250,
-            padding: '10px 20px 30px 50px',
+            padding: '10px 20px 30px 30px',
         }
     },
     span:{
@@ -93,6 +96,9 @@ export const useStyles = makeStyles((theme) => ({
         color: '#726C6C',
         paddingRight: 60,
         fontFamily: 'Poppins, sans-serif',
+        '@media (max-width:350px)': {
+            fontSize: '20px'
+        },
     },
     contactContainer:{
         display: 'flex',
