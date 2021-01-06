@@ -54,7 +54,7 @@ const Contact = () => {
                     endAdornment={<InputAdornment position="end">
                         <img src={personnal_vector} alt="profile" style={{ width: '15px' }}/>
                     </InputAdornment>}
-                    labelWidth={70}
+                    labelWidth={80}
                     />
                 </FormControl>
                 <FormControl fullWidth className={classes.root} variant="outlined">
@@ -66,7 +66,7 @@ const Contact = () => {
                     onChange={handleChange('email')}
                     inputProps={{'data-testid':"email-value"}} 
                     endAdornment={<InputAdornment position="end">@</InputAdornment>}
-                    labelWidth={70}
+                    labelWidth={80}
                     />
                 </FormControl>
                 <FormControl fullWidth className={classes.root} variant="outlined">
@@ -80,7 +80,7 @@ const Contact = () => {
                     endAdornment={<InputAdornment position="end">
                         <img src={subject_vector} alt="profile" style={{ width: '15px' }}/>
                     </InputAdornment>}
-                    labelWidth={70}
+                    labelWidth={60}
                     />
                 </FormControl>
                 <FormControl  className={classes.root} variant="outlined">
