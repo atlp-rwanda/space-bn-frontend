@@ -23,10 +23,9 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             paddingTop: theme.spacing(1)
         },
-        '@media(max-width: 400px)': {
-            paddingBottom: theme.spacing(4),
+        '@media(max-width: 405px)': {
             justifyContent: 'unset',
-            marginBottom: 50,
+            height: '100px'
         }
     },
     icon: {
