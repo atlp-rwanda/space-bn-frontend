@@ -18,15 +18,15 @@ import
     } 
 from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { KeyboardArrowLeft, KeyboardArrowRight,} from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { useTheme, withStyles } from '@material-ui/core/styles'
-import { rows } from '../../helpers/tableData';
 import { useStyles, useStyles1 } from '../../shared/styles/TableStyles';
-import { id } from '../../helpers/tableData';
+import { id, ids, createData } from '../../helpers/tableData';
 
 
 //pagination actions
@@ -178,7 +178,7 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
                           <TableCell align="center" className={classes.cell}>{row.destination}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.accommodation}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.status}</TableCell>
-                          <TableCell align="center" className={classes.cell}>{selected.length  > 1 ? '' : row.action}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{row.action}</TableCell>
                         </StyledTableRow>
                     )}) 
                 }
@@ -220,6 +220,22 @@ const RequestWrapper = () => {
   const [page, setPage] = React.useState(0);
   const [selected, setSelected] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const buttons = <div style={{display: 'flex', flexDirection: 'row'}}>
+                  <Fab color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
+                  <IconButton color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
+                </div>;
+
+const rows = [
+  createData(ids[0], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[1], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[2], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[3], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[4], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[5], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[6], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  createData(ids[7], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+]
 
   const StyledTableRow = withStyles((theme) => ({
     root: {
