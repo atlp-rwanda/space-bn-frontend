@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
         width: 500,
         height: 540,
         marginBottom: 10,
-        background:'#FFFFFF',
+        // background:'#FFFFFF',
         boxShadow:'0px 4px 20px rgba(0, 0, 0, 0.07)',
         borderRadius: 5,
         margin: 'auto',
