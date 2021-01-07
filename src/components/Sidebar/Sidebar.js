@@ -98,7 +98,7 @@ export default function PermanentDrawerLeft(props) {
             {userType === userTypes.admin ? (
                     <>
 
-                    <ListItem 
+                    <ListItem data-testid="Dashboard"
                     onClick={() => props.handleOpen()}                  
                     button key='Dashboard' style={(currentLocation === 'dashboard') ? (active) : (null)}>
                     <ListItemIcon><DashboardIcon/></ListItemIcon>
@@ -133,14 +133,7 @@ export default function PermanentDrawerLeft(props) {
                         <ListItemText>Dashboard</ListItemText>
                         </ListItem> 
               
-                        <ListItem button key='Roles'
-                        onClick={() => props.handleOpen()}
-                        >
-                        <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                        <ListItemText>Roles</ListItemText>
-                        </ListItem>
-              
-                        
+                  
                         <ListItem button key='Request' 
                         onClick={() => props.handleOpen()}
                         style={(currentLocation === '/requests/thread' || currentLocation === '/requests') ? (active) : (null)}>

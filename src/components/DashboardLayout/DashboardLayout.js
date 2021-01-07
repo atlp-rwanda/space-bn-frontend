@@ -15,7 +15,7 @@ const DashboardLayout = ({children}) => {
           <div className="contentContainer">
 
              <div className="sidebarContainer ">
-             <Sidebar isOpen={isSideBarOpen} handleOpen={handleOpen}/>
+             <Sidebar data-testid="sidebar" isOpen={isSideBarOpen} handleOpen={handleOpen}/>
              </div>
             
              

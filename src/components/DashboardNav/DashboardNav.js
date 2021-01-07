@@ -128,14 +128,14 @@ export default function  PrimarySearchAppBar(props){
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}  data-testid="triggerMobileMenu">Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
-    <Menu
+    <Menu 
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -144,7 +144,7 @@ export default function  PrimarySearchAppBar(props){
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem data-testid="messages">
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -152,7 +152,7 @@ export default function  PrimarySearchAppBar(props){
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem data-testid="notifications"> 
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -160,7 +160,7 @@ export default function  PrimarySearchAppBar(props){
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} data-testid="profile">
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -184,6 +184,7 @@ export default function  PrimarySearchAppBar(props){
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            data-testid = 'triggerSidebar'
             onClick={() => props.handleOpen()}
           >
             <MenuIcon/>
