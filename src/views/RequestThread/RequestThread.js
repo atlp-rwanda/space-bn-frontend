@@ -81,7 +81,11 @@ const useStyles = makeStyles((theme) => ({
 
                              </li>
                          </ul>
-
+  
+                        
+                    <div className="infoServiceWrapper">
+                       <div className="infoWrapper">
+                     
                         <div className="hotelHighRight">
                              <ul>
                                  <li>PROIN GRAVIDA </li>
@@ -104,6 +108,8 @@ const useStyles = makeStyles((theme) => ({
                           </div>
                        </div>
 
+                       </div>
+
                        <div className="services">
                           <h4>4 Star Hotel</h4>
                           <ul>
@@ -119,10 +125,12 @@ const useStyles = makeStyles((theme) => ({
                                 <img src={wifiIcon} alt = 'wifi icon' />   
                                 Free WIFI
                               </li>
+                              <li>
+                                 <img src={poolIcon} alt = 'pool icon' />   
+                                 Dammy 
+                              </li>
                          </ul>
-                       </div>
-
-                       <div>
+                        <div className="backToRequestsBtn">
                           
                        <Button  
                        style=
@@ -132,7 +140,9 @@ const useStyles = makeStyles((theme) => ({
                          <img src={backSlideIcon} style={{paddingLeft:'3px'}} alt="icon" />  BACK TO REQUESTS
                         </Button>        
                        </div>
-                         
+                       </div>
+                       </div>
+                   
                      </div>
                      <div className="chatWrapper" data-testid="chatWrapper">
                          <div className="chatWrapperContainer">
