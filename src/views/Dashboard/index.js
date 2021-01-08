@@ -11,7 +11,7 @@ const Dashboard = () => {
                 <RequestWrapper />
             <Footer />
         </>
-     );
+    );
 }
- 
+
 export default Dashboard;
