@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import {Button, Hidden, IconButton, makeStyles, Tooltip, Menu, Fade, MenuItem} from '@material-ui/core';
+import {Button, Hidden, IconButton,InputBase, makeStyles, Tooltip, Menu, Fade, MenuItem} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -13,6 +13,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { SET_LOG_OUT} from '../../actions/types';
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
+import Badge from '@material-ui/core/Badge';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import ListItem from '@material-ui/core/ListItem';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 const links = [
     {
@@ -40,6 +46,11 @@ const links = [
     },
 ];
 const useStyles = makeStyles((theme) => ({
+    menuButton: {
+        color: '#2196F3',
+        marginRight: theme.spacing(2),
+      },
+
     root: {
         display: 'flex',
         flexDirection: 'row',
@@ -57,6 +68,57 @@ const useStyles = makeStyles((theme) => ({
             cursor: 'pointer'
         } 
     },
+
+
+    search: {
+      position: 'relative',
+      color: '#5E5E5E',
+      background: '#ededed !important',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: (theme.palette.common.white, 0.15),
+      '&:hover': {
+        backgroundColor: (theme.palette.common.white, 0.25),
+      },
+      marginRight: theme.spacing(2),
+      marginLeft: 0,
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(40),
+        width: 'auto',
+      },
+    },
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    inputRoot: {
+      color: 'inherit',
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },
+    sectionDesktop: {
+      display: 'none',
+      color:'#2196F3',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+      },
+    },
+
+
     /*** start of mobile view nav ****/
     mobileNav: {
         color: theme.palette.common.white,
@@ -74,8 +136,8 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         marginTop: 70,
         background: '#2196F3',
-        height: 200,
-        paddingLeft: theme.spacing(4),
+        height: 230,
+        paddingLeft: theme.spacing(1),
         color: 'black',
         right: 0,
         top: 0,
@@ -108,9 +170,15 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
 }))
-const AuthHeader = () => { 
+const AuthHeader = ({onDashboard=false, handleOpen}) => { 
     const history = useHistory();
     const classes = useStyles();
+
+ 
+
+ 
+
+
     const [hideNav, setHideNow ] = useState(false)
     const { dispatch } = useContext(AuthContext);
     const handleNavLinks = (e) => {
@@ -131,6 +199,52 @@ const AuthHeader = () => {
        toaster('Logged out successfully', 'success')
            history.push('/login')
     }
+
+    //mobile menu
+
+    // const renderMobileMenu = (
+  //       <Menu 
+  //         anchorEl={mobileMoreAnchorEl}
+  //         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+  //         id={mobileMenuId}
+  //         keepMounted
+  //         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+  //         open={isMobileMenuOpen}
+  //         onClose={handleMobileMenuClose}
+  //       >
+  //         <MenuItem data-testid="messages">
+  //           <IconButton aria-label="show 4 new mails" color="inherit">
+  //             <Badge badgeContent={4} color="secondary">
+  //               <MailIcon />
+  //             </Badge>
+  //           </IconButton>
+  //           <p>Messages</p>
+  //         </MenuItem>
+  //         <MenuItem data-testid="notifications"> 
+  //           <IconButton aria-label="show 11 new notifications" color="inherit">
+  //             <Badge badgeContent={11} color="secondary">
+  //               <NotificationsIcon />
+  //             </Badge>
+  //           </IconButton>
+  //           <p>Notifications</p>
+  //         </MenuItem>
+  //         <MenuItem onClick={handleProfileMenuOpen} data-testid="profile">
+  //           <IconButton
+  //             aria-label="account of current user"
+  //             aria-controls="primary-search-account-menu"
+  //             aria-haspopup="true"
+  //             color="inherit"
+  //           >
+  //             <AccountCircle />
+  //           </IconButton>
+  //           <p>Profile</p>
+  //         </MenuItem>
+  //       </Menu>
+  //     );
+
+
+
+
     return (
         <> 
             <ToastContainer 
@@ -140,12 +254,30 @@ const AuthHeader = () => {
                 position={toast.POSITION.TOP_CENTER}
             />
             <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>        
+                
+             
+
                 <div style=
                 {{
                     width: '10%',
                     margin: 0,
-                    padding: 2
+                    padding: 2,
+                    display: 'flex',
+                    justifyContent:'space-between'
                     }}>
+                       
+                    {(onDashboard)?(
+                      <IconButton
+                      edge="start"
+                      className={classes.menuButton}
+                      color="inherit"
+                      aria-label="open drawer"
+                      data-testid = 'triggerSidebar'
+                      onClick={() => handleOpen()}
+                  >
+                      <MenuIcon/>
+                  </IconButton>
+                    ): (null)}
                     <img  onClick={() => history.push('/')}
                     style=
                     {{
@@ -156,29 +288,79 @@ const AuthHeader = () => {
                         cursor: 'pointer'
                     }}
                     src={logo} alt="Barefoot Loog" />
+                    
                 </div>
+
+                {(onDashboard)?(
+                   <div style={{background: 'red', marginLeft: '-3%',width: '30%', height: '40px', marginTop: '1%'}} className={classes.search} data-testid="searchInput">
+                   <div className={classes.searchIcon}>
+                     <SearchIcon />
+                   </div>
+                   <InputBase 
+                     placeholder="Search…"
+                     classes={{
+                       root: classes.inputRoot,
+                       input: classes.inputInput,
+                     }}
+                     inputProps={{ 'aria-label': 'search' }}
+   
+                   />
+                 </div>
+                 
+                ):(null)}
+               
                 <Hidden only={['sm', 'xl', 'xs']} >
                 <List className={classes.container} >
-                    <Link to={links[0].url} className={classes.list}>
+                     {(!onDashboard)
+                        ? 
+                        (
+                        <>
+                        <Link to={links[0].url} className={classes.list}>
                         <ListItemText >{links[0].text}</ListItemText>
-                    </Link>
-                    <Link to={links[1].url} className={classes.list}>
-                        <ListItemText >{links[1].text}</ListItemText>
-                    </Link>
-                    <Link to={links[2].url} className={classes.list}>
-                        <ListItemText >{links[2].text}</ListItemText>
-                    </Link>
-                    <Link to={links[3].url} className={classes.list}>
-                        <ListItemText >{links[3].text}</ListItemText>
-                    </Link>
+                        </Link>
+                        <Link to={links[1].url} className={classes.list}>
+                            <ListItemText >{links[1].text}</ListItemText>
+                        </Link>
+                        <Link to={links[2].url} className={classes.list}>
+                            <ListItemText >{links[2].text}</ListItemText>
+                        </Link>
+                        <Link to={links[3].url} className={classes.list}>
+                            <ListItemText >{links[3].text}</ListItemText>
+                        </Link>
+                        </>
+                        ): 
+                        (
+                            <>
+                            <div className={classes.grow} />
+                            <div className={classes.sectionDesktop}>
+                              <IconButton aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="secondary">
+                                  <MailIcon />
+                                </Badge>
+                              </IconButton>
+                              <IconButton aria-label="show 17 new notifications" color="inherit">
+                                <Badge badgeContent={17} color="secondary">
+                                  <NotificationsIcon />
+                                </Badge>
+                              </IconButton>
+                             
+                            </div>
+                           
+ </>                            
+                        )
+
+                        }
+                   
                     <div className={classes.list} >
                         <ListItemText onClick={handleClick} className="test">{links[4].text}</ListItemText>
                     </div>
                 </List> 
                 </Hidden>
                 {hideNav && (
-                <Hidden only={['lg', 'md']} >
-                    <List className={classes.mobileContainer}>
+                <Hidden style={{height:'300px'}} only={['lg', 'md']} >
+                <List className={classes.mobileContainer} style={{height: '200px !important'}}>
+                {(!onDashboard) ? (
+                    <>
                     <Link to={links[0].url} className={classes.mobileNav}>
                         <ListItemText >{links[0].text}</ListItemText>
                     </Link>
@@ -191,11 +373,41 @@ const AuthHeader = () => {
                     <Link to={links[3].url} className={classes.mobileNav}>
                         <ListItemText >{links[3].text}</ListItemText>
                     </Link>
-                    <div className={classes.mobileNav} >
+                    
+                         </>
+
+                     ):
+                     (
+                    <>
+                    <List style={{display: 'flex', flexDirection: 'column',
+                     width: '150px', alignItems:'left', marginLeft: '0'}}>
+                    <ListItem data-testid="messages" style={{marginLeft: '-7%'}}>
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                        <Badge badgeContent={4} color="secondary">
+                            <MailIcon />
+                        </Badge>
+                        </IconButton>
+                        <ListItemText sytle={{fontZize: '13px'}}>Messages</ListItemText>
+                    </ListItem>
+                    <ListItem data-testid="notifications" style={{marginLeft: '-7%'}}> 
+                        <IconButton aria-label="show 11 new notifications" color="inherit">
+                        <Badge badgeContent={11} color="secondary">
+                            <NotificationsIcon />
+                        </Badge>
+                        </IconButton>
+                        <ListItemText sytle={{fontZize: '13px'}}>Notifications</ListItemText>
+                    </ListItem>
+                    </List>
+                 
+                  
+                    </>
+                     )
+                     }   
+                     <div className={classes.mobileNav} >
                         <ListItemText onClick={handleClick} className="test">{links[4].text}</ListItemText>
                     </div>
                     </List> 
-                </Hidden> 
+                    </Hidden> 
                 )}
                 <Hidden only={['lg', 'md']}>
                 <IconButton
@@ -223,7 +435,7 @@ const AuthHeader = () => {
                 TransitionComponent={Fade}
                 className={classes.profile}
             >
-                <MenuItem color="inherit"><PersonIcon />Profile</MenuItem>
+                <MenuItem color="inherit" onClick={()=> {history.push('/profile')}}><PersonIcon />Profile</MenuItem>
                 <MenuItem color="inherit" onClick={handleLogOut} ><LockIcon />Log out</MenuItem>
             </Menu>
             }  

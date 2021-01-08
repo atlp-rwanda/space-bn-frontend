@@ -1,14 +1,17 @@
 import React from 'react';
-import Footer from '../../components/Footer';
-import AuthHeader from '../../components/Header/authHeader';
+import RequestWrapper from '../../components/Request';
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout'
+
 
 const Dashboard = () => {
     return ( 
+        <DashboardLayout>
         <>
-            <AuthHeader />
-            <div style={{textAlign: 'center', marginTop: '20vh', height: '100vh'}}>Welcome to Your Barefoot account</div>
-            <Footer />
+           
+                <RequestWrapper />
+
         </>
+        </DashboardLayout>
      );
 }
  

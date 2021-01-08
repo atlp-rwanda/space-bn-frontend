@@ -1,8 +1,0 @@
-.hide{
-    display: none;
-}
-@media only screen and (max-width: 664px){
-    .sidebarContainer{
-        display: none;
-    }
-}

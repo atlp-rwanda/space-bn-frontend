@@ -1,9 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import Home from '../views/Home';
+import AuthContextProvider from '../contexts/AuthContext';
 
-it('renders the correct contents', () => {
-    render(<Home/>);
+it('renders the correnct contents', () => {
+    render(
+        <AuthContextProvider>
+            <Router>
+                <Home/>
+            </Router>
+        </AuthContextProvider>
+        );
     expect(screen.getByText('TRAVEL BOOKINGS')).toBeInTheDocument();
     expect(screen.getByText('MADE EASY')).toBeInTheDocument();
     expect(screen.getByTestId('viewHotels-btn')).toBeEnabled();
@@ -16,7 +24,13 @@ it('renders the correct contents', () => {
 });
 
 it('renders 4 home page images', ()=> {
-    render(<Home />);
+    render(
+    <AuthContextProvider>
+        <Router>
+            <Home/>
+        </Router>
+    </AuthContextProvider>
+    );
     const images = document.getElementsByTagName('img');
     expect(images.length).toBeGreaterThan(3);
 })

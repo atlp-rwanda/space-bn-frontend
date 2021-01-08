@@ -13,6 +13,8 @@ import Dashboard from './views/Dashboard';
 import ProtectedRoute from './helpers/protected.route';
 import Sidebar from './components/Sidebar/Sidebar';
 import RequestThread from './views/RequestThread/RequestThread';
+import ProfileDummy from './views/ProfileDummy/ProfileDummy';
+import FacilitiesDummy from './views/FacilitiesDummy/FacilitiesDummy';
 
 
 function App() {
@@ -20,7 +22,6 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          
           <Route exact path="/" component={Home}/>
           <Route exact path="/hotel" component={Hotel}/>
           <Route exact path="/login" component={Login}/>
@@ -32,7 +33,10 @@ function App() {
           <Route exact path="/booking" component={Booking}/>
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/requests/thread" exact component={RequestThread} />
-        </Switch>
+          <Route path="/profile" exact component={ProfileDummy} />
+          <Route path="/facilities" exact component={FacilitiesDummy} />
+
+       </Switch>
       </div>
     </Router>
   );

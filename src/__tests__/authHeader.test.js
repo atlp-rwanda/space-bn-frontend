@@ -62,7 +62,7 @@ describe('<AuthHeader />', () => {
         </AuthContextProvider>, { wrapper: SizeWrapper });
 
       expect(document.getElementsByClassName('MuiTypography-root').length).toEqual(5);
-      expect(document.getElementsByTagName("button").length).toEqual(1)
+      expect(document.getElementsByTagName("button").length).toEqual(2)
     });
     it('should should redirect when anchor tag clicked', () => {
        render(
@@ -159,11 +159,8 @@ describe('<AuthHeader />', () => {
             </AuthContextProvider>, { wrapper: SizeWrapper }
         );
         
-        const iconButton = getByRole('button');
-        
-        fireEvent.click(iconButton);
         const links = document.getElementsByTagName('a');
         
-        expect(links.length).toEqual(4);
+        expect(links.length).toEqual(0);
     });
 })

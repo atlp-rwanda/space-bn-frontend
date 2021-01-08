@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import {useHistory} from 'react-router-dom'
 import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 import backSlideIcon from '../../assets/icons/back-slide-icon.png';
 import './RequestThread.css';
@@ -35,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
     useEffect(() => {
        showBottomMessage();
     })
-
+ 
+    const history = useHistory();
     const classes = useStyles(); 
     const [value, setValue] = React.useState(2);
      const container = {
@@ -54,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
             <div style={container}>
                 <div data-testid="threadNav" style={header} className="navigation">
                        <ul>
-                           <li>
-                               <img src={backSlideIcon} alt="back slide icon" />
+                           <li onClick={() => history.push('/dashboard')}>
+                               <img  src={backSlideIcon} alt="back slide icon" />
                            </li>
                            <li>
                                <hr  style={{color:'#9A9797', marginTop:'1em'}} />
@@ -132,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
                          </ul>
                         <div className="backToRequestsBtn">
                           
-                       <Button  
+                       <Button   onClick={() => history.push('/dashboard')}
                        style=
                        {{borderRadius:'20px 20px',
                          background: '#2C98F0', color: 'white'

@@ -1,6 +1,6 @@
 export const userTypes = {
     admin:'ADMIN',
     manager:'MANAGER',
-    requester:'REQUESTER',
+    requester:'Nomad',
     travellAdmin:'TRAVEL_ADMIN'
 }

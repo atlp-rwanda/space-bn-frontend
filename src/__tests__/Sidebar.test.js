@@ -9,7 +9,7 @@ beforeEach(() => {
     Email: 'johndoe@gmail.com',
     Password: 'JohnDoe123',
     Avatar:'user avatar url',
-    userType: 'REQUESTER'
+    userType: 'Nomad'
 }
 localStorage.setItem('user', JSON.stringify(userInfo))
 });
@@ -66,7 +66,7 @@ describe('AMDIN', () => {
         )
     expect(screen.queryByText(/Roles/i)).toBeNull();
     expect(screen.queryByText(/Add User/i)).toBeNull();
-    expect(screen.queryByText(/Requests/i)).not.toBeNull();
+    expect(screen.queryByText(/Requests/i)).toBeNull();
     expect(screen.queryByText(/Facilities/i)).not.toBeNull();
     expect(screen.queryByText(/Dashboard/i)).not.toBeNull();
 
@@ -78,7 +78,7 @@ describe('AMDIN', () => {
             Email: 'johndoe@gmail.com',
             Password: 'JohnDoe123',
             Avatar:'user avatar url',
-            userType: 'REQUESTER'
+            userType: 'Nomad'
         }
         localStorage.setItem('user', JSON.stringify(userPayloads))
     
@@ -89,7 +89,7 @@ describe('AMDIN', () => {
         )
     expect(screen.queryByText(/Roles/i)).toBeNull();
     expect(screen.queryByText(/Add User/i)).toBeNull();
-    expect(screen.queryByText(/Requests/i)).not.toBeNull();
+    expect(screen.queryByText(/Profile/i)).not.toBeNull();
     expect(screen.queryByText(/Facilities/i)).not.toBeNull();
     expect(screen.queryByText(/Dashboard/i)).not.toBeNull();
 

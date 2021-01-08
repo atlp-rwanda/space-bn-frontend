@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import './DashboardLayout.css';
-import DashboardNav from '../DashboardNav/DashboardNav';
 import Sidebar from '../Sidebar/Sidebar';
+import AuthHeader from '../../components/Header/authHeader';
+import Footer from '../../components/Footer/index'
+
 
 const DashboardLayout = ({children}) => {
   
@@ -11,7 +13,8 @@ const DashboardLayout = ({children}) => {
 
     return (
         <div className="containerFluid">
-          <DashboardNav handleOpen={handleOpen}/>
+          {/* <DashboardNav handleOpen={handleOpen}/> */}
+          <AuthHeader handleOpen={handleOpen} onDashboard={true}/>
           <div className="contentContainer">
 
              <div className="sidebarContainer ">
@@ -22,6 +25,7 @@ const DashboardLayout = ({children}) => {
             </div>
               <div className="childContainer">
                 {children}
+                <Footer/>
               </div>
          </div>
     )

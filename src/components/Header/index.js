@@ -106,7 +106,7 @@ const Header = () => {
         setHideNav(!hideNav)
     }
     return ( 
-        isAuthenticated ? <AuthHeader /> : (
+        isAuthenticated ? <AuthHeader/> : (
         <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>     
             <div style=
             {{

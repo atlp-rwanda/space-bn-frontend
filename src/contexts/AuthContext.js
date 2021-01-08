@@ -11,7 +11,7 @@ const AuthContextProvider = (props) => {
         Email: 'johndoe@gmail.com',
         Password: 'JohnDoe123',
         Avatar:'user avatar url',
-        userType: 'REQUESTER'
+        userType: 'Nomad'
     }
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(userInfo))

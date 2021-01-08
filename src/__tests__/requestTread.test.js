@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { render,screen } from '@testing-library/react';
 import RequestThread from '../views/RequestThread/RequestThread';
+import AuthContextProvider from '../contexts/AuthContext';
 
 beforeEach(() => {
   const userInfo = {
@@ -17,9 +18,11 @@ localStorage.setItem('user', JSON.stringify(userInfo))
 describe('<RequestThread />', () => {
     it('should render the component', ( )=> {
         render(
+          <AuthContextProvider>
             <Router>
                 <RequestThread />
             </Router>
+          </AuthContextProvider>
         )
     })
 })
@@ -27,9 +30,12 @@ describe('<RequestThread />', () => {
 describe('Elements', () => {
   it('should render the elements', () => {
     render(
+      <AuthContextProvider>
       <Router>
           <RequestThread />
       </Router>
+      </AuthContextProvider>
+
    )
    expect(screen.getByTestId('threadNav')).not.toBeNull();
    expect(screen.getByTestId('requestInfoWrapper')).not.toBeNull();
