@@ -11,13 +11,7 @@ body{
   background-color: #fff!important;
 
 }
-/* .App {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff !important;
-}
-  background-color: #F4F4F4;
-} */
+
 nav{
   display: flex;
   flex-direction: row;
