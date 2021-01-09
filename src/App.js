@@ -10,10 +10,10 @@ import Contact from './views/Contact';
 import Booking from './views/Booking';
 import './App.css';
 import Dashboard from './views/Dashboard';
+import Profile from './views/Profile';
 import ProtectedRoute from './helpers/protected.route';
 import Sidebar from './components/Sidebar/Sidebar';
 import RequestThread from './views/RequestThread/RequestThread';
-import ProfileDummy from './views/ProfileDummy/ProfileDummy';
 import FacilitiesDummy from './views/FacilitiesDummy/FacilitiesDummy';
 
 
@@ -31,9 +31,9 @@ function App() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/booking" component={Booking}/>
+          <Route exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/requests/thread" exact component={RequestThread} />
-          <Route path="/profile" exact component={ProfileDummy} />
           <Route path="/facilities" exact component={FacilitiesDummy} />
 
        </Switch>
