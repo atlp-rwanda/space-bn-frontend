@@ -46,9 +46,10 @@ const links = [
     },
 ];
 const useStyles = makeStyles((theme) => ({
+   
     menuButton: {
         color: '#2196F3',
-        marginRight: theme.spacing(2),
+        // marginRight: theme.spacing(1),
       },
 
     root: {
@@ -79,12 +80,12 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         backgroundColor: (theme.palette.common.white, 0.25),
       },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
+      // marginRight: theme.spacing(2),
+      marginLeft: '20%',
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(40),
-        width: 'auto',
+        marginLeft: theme.spacing(0),
+        width: 'auto'
       },
     },
     searchIcon: {
@@ -160,9 +161,9 @@ const useStyles = makeStyles((theme) => ({
     menuIcon: {
         color: '#2196F3',
         alignSelf: 'center',
-        paddingRight: 10,
+        // paddingRight: 10,
         height: 60,
-        width: 60
+        // width: 60
     },
     profile: {
         marginTop: 55,
@@ -200,50 +201,6 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
            history.push('/login')
     }
 
-    //mobile menu
-
-    // const renderMobileMenu = (
-  //       <Menu 
-  //         anchorEl={mobileMoreAnchorEl}
-  //         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //         id={mobileMenuId}
-  //         keepMounted
-  //         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //         open={isMobileMenuOpen}
-  //         onClose={handleMobileMenuClose}
-  //       >
-  //         <MenuItem data-testid="messages">
-  //           <IconButton aria-label="show 4 new mails" color="inherit">
-  //             <Badge badgeContent={4} color="secondary">
-  //               <MailIcon />
-  //             </Badge>
-  //           </IconButton>
-  //           <p>Messages</p>
-  //         </MenuItem>
-  //         <MenuItem data-testid="notifications"> 
-  //           <IconButton aria-label="show 11 new notifications" color="inherit">
-  //             <Badge badgeContent={11} color="secondary">
-  //               <NotificationsIcon />
-  //             </Badge>
-  //           </IconButton>
-  //           <p>Notifications</p>
-  //         </MenuItem>
-  //         <MenuItem onClick={handleProfileMenuOpen} data-testid="profile">
-  //           <IconButton
-  //             aria-label="account of current user"
-  //             aria-controls="primary-search-account-menu"
-  //             aria-haspopup="true"
-  //             color="inherit"
-  //           >
-  //             <AccountCircle />
-  //           </IconButton>
-  //           <p>Profile</p>
-  //         </MenuItem>
-  //       </Menu>
-  //     );
-
-
-
 
     return (
         <> 
@@ -253,16 +210,17 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 autoClose={8000} 
                 position={toast.POSITION.TOP_CENTER}
             />
-            <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)'}} component="nav" className={classes.root}>        
+            <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)', display:'flex', alignItems:'center'}} component="nav" className={classes.root}>        
                 
              
 
                 <div style=
                 {{
-                    width: '10%',
+                    width: '15%',
                     margin: 0,
                     padding: 2,
                     display: 'flex',
+                    // background: 'red',
                     justifyContent:'space-between'
                     }}>
                        
@@ -274,8 +232,9 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                       aria-label="open drawer"
                       data-testid = 'triggerSidebar'
                       onClick={() => handleOpen()}
+                      style={{width: '70px',height:'70px'}}
                   >
-                      <MenuIcon/>
+                      <MenuIcon sytle={{width: '70%'}}/>
                   </IconButton>
                     ): (null)}
                     <img  onClick={() => history.push('/')}
@@ -283,8 +242,8 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                     {{
                         margin: 0,
                         padding: 0,
-                        width: '88px',
-                        height: '98%',
+                        width: '70px',
+                       
                         cursor: 'pointer'
                     }}
                     src={logo} alt="Barefoot Loog" />
@@ -292,7 +251,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 </div>
 
                 {(onDashboard)?(
-                   <div style={{background: 'red', marginLeft: '-3%',width: '30%', height: '40px', marginTop: '1%'}} className={classes.search} data-testid="searchInput">
+                   <div style={{background: 'red',width: '30%', height: '40px'}} className={classes.search} data-testid="searchInput">
                    <div className={classes.searchIcon}>
                      <SearchIcon />
                    </div>
@@ -416,6 +375,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 aria-controls="links-menu"
                 aria-haspopup="true"
                 onClick={handleNavLinks}
+                style={{width: '20%'}}
                 >
                 <MenuIcon 
                 className={classes.menuIcon}

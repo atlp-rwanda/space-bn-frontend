@@ -127,7 +127,7 @@ const history = useHistory();
                     <ListItemText>Facilities</ListItemText>
                     </ListItem>
 
-                    <ListItem button key='Roles' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    <ListItem button key='Profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
@@ -155,7 +155,7 @@ const history = useHistory();
                         <ListItemText>Facilities</ListItemText>
                         </ListItem>
 
-                        <ListItem button key='Roles' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                        <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
@@ -184,7 +184,7 @@ const history = useHistory();
                         <ListItemText>Facilities</ListItemText>
                         </ListItem>
 
-                        <ListItem button key='Roles' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                        <ListItem button key='FacilitiesProfile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>

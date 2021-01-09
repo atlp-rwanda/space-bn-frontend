@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     const [value, setValue] = React.useState(2);
      const container = {
          width: '100%',
-         height: '100vh',
+         height: 'max-content',
       
      }
      const header = {

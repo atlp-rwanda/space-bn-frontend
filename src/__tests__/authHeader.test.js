@@ -62,7 +62,7 @@ describe('<AuthHeader />', () => {
         </AuthContextProvider>, { wrapper: SizeWrapper });
 
       expect(document.getElementsByClassName('MuiTypography-root').length).toEqual(5);
-      expect(document.getElementsByTagName("button").length).toEqual(2)
+      expect(document.getElementsByTagName("button").length).toEqual(1)
     });
     it('should should redirect when anchor tag clicked', () => {
        render(
