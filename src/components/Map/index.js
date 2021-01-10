@@ -18,19 +18,37 @@ const url = `https://api.mapbox.com/styles/v1/${REACT_APP_SECRET_USERNAME}/${REA
 const position = [-1.970579, 30.104429]
 const zoom = 13;
 
+const Skater = new Icon({
+    iconUrl:locationIcon,
+    iconSize:[30, 30],
+});
+
+export const SubMap = () => {
+  
+        const posSerena= [-1.9553824506281774, 30.0646717204476];
+
+    return(
+        <MapContainer center={posSerena} zoom={zoom} style={{height:'100%', width:'100%'}}>
+             <TileLayer
+                attribution='&copy; 2020 <a href="/">space-bn</a> contributors'
+                url={url}
+            />
+            <Marker position={posSerena} icon={Skater}/>
+             
+        </MapContainer>
+    )
+}
+
 const MapLocation = ({searchValue, activePopup, hotelPosition, activeHotel}) => {
     const classes = useStyles();
 
-    const Skater = new Icon({
-        iconUrl:locationIcon,
-        iconSize:[30, 30],
-    });
+  
 
     
     return (
         <MapContainer center={position} zoom={zoom} scrollWheelZoom={false} className={classes.map}>
             <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                attribution='&copy; 2020 <a href="/">space-bn</a> contributors'
                 url={url}
             />
             {searchValue.map((hotelCoordinate, index) => (

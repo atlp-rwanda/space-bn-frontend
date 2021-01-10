@@ -23,11 +23,11 @@ describe('<Hotel />', () => {
         expect(observe).toBeTruthy()
     })
     it('should filter on change event', () => {
-        const { getByPlaceholderText }= render(<SearchBar />);
-        const input = getByPlaceholderText('Search');
+        const { getByPlaceholderText }= render(<AuthContextProvider> <Hotel /></AuthContextProvider>);
+        const input = getByPlaceholderText('Search hotel');
         const handleChange = jest.fn();
         
-        input.value = 'test value'
+        
         fireEvent.change(input, {target: {value: "test value"}})
         handleChange()
         expect(handleChange).toBeCalledTimes(1)
