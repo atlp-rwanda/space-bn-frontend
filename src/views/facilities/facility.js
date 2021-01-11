@@ -9,13 +9,14 @@ import { useForm } from 'react-hook-form';
 
 const useStyles = makeStyles((theme) => ({
   _addBtn:{
-      color:'blue',
+      color:'#2196F3',
       fontSize:'2rem',
   },
   _titleSection:{
     display:'flex',
+    fontSize:'24px',
     justifyContent:'space-between',
-    padding:'0 0 15px 0',
+    padding:'0 0 15px 15px',
     fontWeight:'600',
     '&:hover':{
       cursor:'pointer'

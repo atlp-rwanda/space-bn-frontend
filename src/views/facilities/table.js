@@ -22,19 +22,8 @@ import EditIcon from '@material-ui/icons/Edit';
 function createData(name, Location, Address, Image, Rooms,Action) {
   return { name, Location, Address, Image, Rooms,Action };
 }
-const btn=<strong> <EditIcon className="_editBtn" /> <DeleteIcon  className="_delBtn" /> </strong>
-const rows = [
-  createData(123, 'Lagos', "21'st Ave", 67, 14,btn),
-  createData(1332, 'Kigali', "21'st Ave",51, 32,btn),
-  createData(154, 'Lagos', "21'st Ave", 24, 6,btn),
-  createData(454, 'Lagos', "21'st Ave", 24, 34,btn),
-  createData(849, 'Lagos', "21'st Ave", 49, 9,btn),
-  createData(129, 'Lagos', "21'st Ave", 87, 11,btn),
-  createData(893, 'Lagos', "21'st Ave", 37, 90,btn),
-  createData(542, 'Lagos', "21'st Ave", 94, 34,btn),
-  createData(453, 'Lagos', "21'st Ave", 65, 56,btn),
-  createData(454, 'Lagos', "21'st Ave", 98, 23,btn),
-];
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -63,7 +52,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Facility ID' },
+  { id: 'name', numeric: true, disablePadding: true, label: 'Facility ID' },
   { id: 'Location', numeric: true, disablePadding: false, label: 'Location' },
   { id: 'Address', numeric: true, disablePadding: false, label: 'Address' },
   { id: 'Image', numeric: true, disablePadding: false, label: 'Image' },
@@ -110,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EnhancedTable() {
+  
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('Location');
@@ -122,6 +112,19 @@ export default function EnhancedTable() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+  const btn=<strong> <EditIcon style={{background: selected.length >1? '#cfcfcf': '#2196F3' }} className="_editBtn" /> <DeleteIcon style={{color: selected.length >1? '#cfcfcf': '#E10050' }}  className="_delBtn" /> </strong>
+  const rows = [
+    createData(123, 'Lagos', "21'st Ave", 67, 14,btn),
+    createData(1332, 'Kigali', "21'st Ave",51, 32,btn),
+    createData(154, 'Lagos', "21'st Ave", 24, 6,btn),
+    createData(454, 'Lagos', "21'st Ave", 24, 34,btn),
+    createData(849, 'Lagos', "21'st Ave", 49, 9,btn),
+    createData(129, 'Lagos', "21'st Ave", 87, 11,btn),
+    createData(893, 'Lagos', "21'st Ave", 37, 90,btn),
+    createData(542, 'Lagos', "21'st Ave", 94, 34,btn),
+    createData(453, 'Lagos', "21'st Ave", 65, 56,btn),
+    createData(454, 'Lagos', "21'st Ave", 98, 23,btn),
+  ];
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -219,7 +222,7 @@ export default function EnhancedTable() {
                     {headCells.map((headCell) => (
                       <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align={'left'}
                         padding={headCell.disablePadding ? 'none' : 'default'}
                         sortDirection={orderBy === headCell.id ? order : false}
 
@@ -269,11 +272,12 @@ export default function EnhancedTable() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.Location}</TableCell>
-                      <TableCell align="right">{row.Address}</TableCell>
-                      <TableCell align="right">{row.Image}</TableCell>
-                      <TableCell align="right">{row.Rooms}</TableCell>
-                      <TableCell align="right">{row.Action}</TableCell>
+                      <TableCell >{row.Location}</TableCell>
+                      <TableCell >{row.Address}</TableCell>
+                      <TableCell >{row.Image}</TableCell>
+                      <TableCell >{row.Rooms}</TableCell>
+                      
+                      <TableCell >{row.Action}</TableCell>
                     </TableRow>
                   );
                 })}

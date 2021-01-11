@@ -1,6 +1,6 @@
 import React from 'react';
 import Facility from '../views/facilities/facility';
-import { render, cleanup,fireEvent,screen} from '@testing-library/react';
+import { render, cleanup,fireEvent} from '@testing-library/react';
 import AuthContextProvider from '../contexts/AuthContext';
 import Table from '../views/facilities/table'
 import Container from '../views/facilities/dashBoardContainer'
