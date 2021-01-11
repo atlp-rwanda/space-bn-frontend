@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(0),
         width: 'auto'
       },
+      '@media (max-width: 299px)' : {
+        display:'none'
+      }
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
@@ -101,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -159,9 +161,7 @@ const useStyles = makeStyles((theme) => ({
     menuIcon: {
         color: '#2196F3',
         alignSelf: 'center',
-        // paddingRight: 10,
         height: 60,
-        // width: 60
     },
     profile: {
         marginTop: 55,
@@ -248,7 +248,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 </div>
 
                 {(onDashboard)?(
-                   <div style={{background: 'red',width: '30%', height: '40px'}} className={classes.search} data-testid="searchInput">
+                   <div style={{width: '30%', height: '40px'}} className={classes.search} data-testid="searchInput">
                    <div className={classes.searchIcon}>
                      <SearchIcon />
                    </div>
