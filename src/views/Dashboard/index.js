@@ -1,15 +1,17 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 import AuthHeader from '../../components/Header/authHeader';
+import RequestWrapper from '../../components/Request';
+
 
 const Dashboard = () => {
     return ( 
         <>
             <AuthHeader />
-            <div style={{textAlign: 'center', marginTop: '20vh', height: '100vh'}}>Welcome to Your Barefoot account</div>
+                <RequestWrapper />
             <Footer />
         </>
-     );
+    );
 }
- 
+
 export default Dashboard;
