@@ -13,7 +13,6 @@ const DashboardLayout = ({children}) => {
 
     return (
         <div className="containerFluid">
-          {/* <DashboardNav handleOpen={handleOpen}/> */}
           <AuthHeader handleOpen={handleOpen} onDashboard={true}/>
           <div className="contentContainer">
 

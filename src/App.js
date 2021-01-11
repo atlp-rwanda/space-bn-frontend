@@ -34,7 +34,6 @@ function App() {
           <Route exact path="/faq" component={FAQ}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
-          {/* <Route exact path="/booking" component={Booking}/> */}
           <Route exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/booking" component={Accommadation} />
           <ProtectedRoute exact path="/:hotelId/rooms">
