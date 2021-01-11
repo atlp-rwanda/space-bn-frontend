@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
    
     menuButton: {
         color: '#2196F3',
-        // marginRight: theme.spacing(1),
       },
 
     root: {
@@ -80,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         backgroundColor: (theme.palette.common.white, 0.25),
       },
-      // marginRight: theme.spacing(2),
       marginLeft: '20%',
       width: '100%',
       [theme.breakpoints.up('sm')]: {
@@ -220,7 +218,6 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                     margin: 0,
                     padding: 2,
                     display: 'flex',
-                    // background: 'red',
                     justifyContent:'space-between'
                     }}>
                        
