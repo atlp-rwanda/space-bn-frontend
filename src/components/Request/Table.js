@@ -226,7 +226,7 @@ const RequestWrapper = () => {
   const buttons = <div style={{display: 'flex', flexDirection: 'row'}}>
                   <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
                   <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
-                  <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer'}} />
+                  <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
                 </div>;
 
 const rows = [

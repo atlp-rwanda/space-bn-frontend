@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/faq" component={FAQ}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
-          <Route exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/booking" component={Accommadation} />
           <ProtectedRoute exact path="/:hotelId/rooms">
             <RequestProvider>
@@ -53,8 +53,8 @@ function App() {
             </RequestProvider>
           </ProtectedRoute>
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-          <Route path="/requests/thread" exact component={RequestThread} />
-          <Route path="/facilities" exact component={FacilitiesDummy} />
+          <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
+          <ProtectedRoute path="/facilities" exact component={FacilitiesDummy} />
 
        </Switch>
       </div>

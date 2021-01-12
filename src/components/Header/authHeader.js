@@ -69,6 +69,13 @@ const useStyles = makeStyles((theme) => ({
         } 
     },
 
+    leftNavWrapper: {
+      '@media (min-width: 1200px)' : {
+        width: '4% !important'
+        
+      }
+
+    },
 
     search: {
       position: 'relative',
@@ -212,13 +219,14 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 
              
 
-                <div style=
+                <div className={classes.leftNavWrapper} style=
                 {{
                     width: '15%',
                     margin: 0,
                     padding: 2,
                     display: 'flex',
-                    justifyContent:'space-between'
+                    justifyContent:'space-between',
+                    alignItems: 'center'
                     }}>
                        
                     {(onDashboard)?(
@@ -239,7 +247,8 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                     {{
                         margin: 0,
                         padding: 0,
-                        width: '70px',
+                        width: '65px',
+                        height: '55px',
                        
                         cursor: 'pointer'
                     }}
