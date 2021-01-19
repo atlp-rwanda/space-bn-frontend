@@ -56,3 +56,25 @@ nav ul li{
   font-weight: bold;
   text-decoration: none;
 }
+.MuiDataGrid-colCellTitle{
+  font-weight: 700!important;
+}
+._editBtn{
+  color:#fff;
+  border-radius:50%;
+  padding:5px;  
+}
+._editBtn:hover{
+  cursor:'pointer'
+}
+
+._delBtn{
+  margin-left:5px;
+  font-size:26px
+}
+._delBtn:hover{
+  cursor:'pointer'
+}
+.MuiTablePagination-toolbar{
+  float: left;
+}
