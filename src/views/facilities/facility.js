@@ -6,6 +6,7 @@ import Tablez from './table'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useForm } from 'react-hook-form';
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 
 const useStyles = makeStyles((theme) => ({
   _addBtn:{
@@ -126,10 +127,11 @@ const Facility =()=>{
     set_FacilityDetails(_facilityDetails.filter(i=>i!==index))
   };
   const onSubmit = data => {
-    console.log(data)
+    alert.log(data)
   };
 
   return(
+    <DashboardLayout>
     <div>
       <div className={classes._titleSection}>
         <p>Facilities</p>
@@ -210,6 +212,7 @@ const Facility =()=>{
         </Fade>
       </Modal>
     </div>
+    </DashboardLayout>
   );
 }
 export default  Facility;

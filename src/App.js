@@ -13,7 +13,6 @@ import Profile from './views/Profile';
 import ProtectedRoute from './helpers/protected.route';
 import Sidebar from './components/Sidebar/Sidebar';
 import RequestThread from './views/RequestThread/RequestThread';
-import FacilitiesDummy from './views/FacilitiesDummy/FacilitiesDummy';
 
 import Accommadation from "./views/Accommadation";
 import Rooms from "./views/Rooms";
@@ -53,16 +52,10 @@ function App() {
               <TravelRequest />
             </RequestProvider>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/facility">
-            <RequestProvider>
-              <FacilityContainer />
-            </RequestProvider>
-          </ProtectedRoute>
+          <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
-          <ProtectedRoute path="/facilities" exact component={FacilitiesDummy} />
-
-       </Switch>
+         </Switch>
       </div>
     </Router>
   );
