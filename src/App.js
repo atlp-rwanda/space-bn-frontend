@@ -16,6 +16,7 @@ import Rooms from "./views/Rooms";
 import RoomDetail from "./views/Room_detail";
 import TravelRequest from "./views/TravelRequest";
 import { RequestProvider } from "./contexts/RequestContext";
+import FacilityContainer from "./views/facilities/dashBoardContainer";
 
 function App() {
   return (
@@ -45,6 +46,11 @@ function App() {
           <ProtectedRoute exact path="/request">
             <RequestProvider>
               <TravelRequest />
+            </RequestProvider>
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/facility">
+            <RequestProvider>
+              <FacilityContainer />
             </RequestProvider>
           </ProtectedRoute>
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
