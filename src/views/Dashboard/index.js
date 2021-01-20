@@ -1,17 +1,18 @@
 import React from 'react';
-import Footer from '../../components/Footer';
-import AuthHeader from '../../components/Header/authHeader';
 import RequestWrapper from '../../components/Request';
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout'
 
 
 const Dashboard = () => {
     return ( 
+        <DashboardLayout>
         <>
-            <AuthHeader />
+           
                 <RequestWrapper />
-            <Footer />
+
         </>
-    );
+        </DashboardLayout>
+     );
 }
 
 export default Dashboard;

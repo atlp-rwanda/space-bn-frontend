@@ -1,17 +1,16 @@
 import React from 'react';
-import AuthHeader from '../../components/Header/authHeader';
-import Footer from '../../components/Footer';
 import ProfileInfos from "../../components/ProfileInfos";
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 
 const Profile = () => {
     return ( 
+        <DashboardLayout>
         <>
-            <AuthHeader />              
             <div>
                 <ProfileInfos />
             </div>
-            <Footer />
         </>
+        </DashboardLayout>
     );
 }
 

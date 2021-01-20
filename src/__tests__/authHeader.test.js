@@ -159,11 +159,8 @@ describe('<AuthHeader />', () => {
             </AuthContextProvider>, { wrapper: SizeWrapper }
         );
         
-        const iconButton = getByRole('button');
-        
-        fireEvent.click(iconButton);
         const links = document.getElementsByTagName('a');
         
-        expect(links.length).toEqual(4);
+        expect(links.length).toEqual(0);
     });
 })

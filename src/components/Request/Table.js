@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 import 
     {   Table, 
         TableBody, 
@@ -27,6 +28,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import { useTheme, withStyles } from '@material-ui/core/styles'
 import { useStyles, useStyles1 } from '../../shared/styles/TableStyles';
 import { id, ids, createData } from '../../helpers/tableData';
+import SideForwardIcon from '../../assets/icons/slideForwardIcon.png'
 
 
 //pagination actions
@@ -92,7 +94,6 @@ export const TablePaginationActions = (props) => {
  
   
 export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPerPage,setRowsPerPage, rows, StyledTableRow}) => {
-
     // handle row selection on click event
     const handleClick = (event, name) => {
       const selectedIndex = selected.indexOf(name);
@@ -215,6 +216,7 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
  
 
 const RequestWrapper = () => {
+  const history = useHistory();
   const classes2 = useStyles()
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -222,8 +224,9 @@ const RequestWrapper = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const buttons = <div style={{display: 'flex', flexDirection: 'row'}}>
-                  <Fab color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
-                  <IconButton color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
+                  <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
+                  <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
+                  <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
                 </div>;
 
 const rows = [

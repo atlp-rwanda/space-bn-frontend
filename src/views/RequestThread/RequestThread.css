@@ -1,0 +1,387 @@
+.navigation ul {
+    width: 100%;
+   
+    display: flex;
+    justify-content: space-between;
+}
+.navigation ul li{
+    list-style-type: none;
+    cursor: pointer;
+}
+.navigation ul li:nth-child(3):hover{
+    transform: scale(1.2);
+}
+
+.navigation ul li:nth-child(1):hover{
+    transform: scale(1.2);
+}
+
+
+.navigation ul li:nth-child(2){
+    
+    width:220px;
+}
+.navigation ul li:nth-child(1){
+  background: #9A9797;
+  width:30px;
+  height:30px;
+  padding:5px;
+  border-radius: 50%;
+  text-align: center;
+}
+.navigation ul li:nth-child(3){
+  background: #2C98F0;
+  color: white;
+  text-align: center;
+  width:30px;
+  height:30px;
+  padding:5px;
+  border-radius: 50%;
+}
+
+/* ------------------------- thread container style------------------- */
+.threadContainer{
+    width:100%;
+    height: max-content;
+    /* margin-top: 1em; */
+    padding: 1% 3% 3% 3%;
+    
+}
+
+.threadWrapper{
+    width: 100%;
+    padding:0% 0% 0% 1%;
+    height: max-content;
+    display: flex;
+    
+}
+.requestInfoWrapper{
+    width: 20%;
+    border-right: 1px solid #5e5e5e9b;
+}
+.chatWrapper{
+    width: 78%;
+}
+.requestInfoWrapper ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.requestInfoWrapper ul li{
+    list-style-type: none;
+}
+.requestInfoWrapper ul li:nth-child(1){
+    color: #5E5E5E;
+    font-size: 20px;
+}
+.requestInfoWrapper ul li:nth-child(2){
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.pending {
+  background: #FFA500;
+}
+.rejected {
+    background: #E10050;
+}
+.approved {
+  background: #75B77C;
+}
+.chatWrapperContainer{
+    padding:20px 0px 0px 20px;
+    width: 100%;
+}
+.hotelHighRight ul{
+ width: 95%;
+}
+.hotelHighRight ul li{
+    color: #000000 !important;
+}
+.hotelImageWrapper{
+    width: 100%;
+    padding:0px 20px 0px 10px;
+}
+.hotelImageWrapper img{
+    width: 100%;
+    height: 200px;
+}
+
+.services ul{
+    width:80%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.services ul li{
+    font-size: 12px !important;
+    font-weight: lighter;
+    padding:2px;
+}
+.services ul li img{
+    width: 30px;
+    padding-right: 10px;
+}
+
+
+
+
+/* ------------------------------  chat header ------------------------------- */
+
+.chatHeader{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #9a979786;
+}
+
+.profileWrapper{
+    width: 15%;
+    float: right;
+}
+.profileWrapper img{
+    width: 40px;
+    border-radius: 50%;
+}
+.profileWrapper ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.profileWrapper ul li{
+    list-style-type: none;
+}
+.profileWrapper ul li small{
+    font-size: 12px;
+    display: block;
+    font-weight: lighter;
+    color: #5e5e5e8f;
+}
+
+.messagesBlock{
+    width: 100%;
+    padding: 0% 5% 2%  5%;
+    margin-top: 1.5em;
+    height: max-content;
+
+}
+.messageItem{
+    width: 95%;
+    /* min-height: 150px; */
+    height: max-content;
+    padding: 1%;
+    border-radius: 5px 5px;
+    margin-top: 2em;
+    -webkit-box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.089); 
+    box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.089);
+}
+
+.messageItemHeader{
+    width: 15%;
+}
+.messageItemHeader img{
+    width: 40px;
+    border-radius: 50%;
+}
+.messageItemHeader ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.messageItemHeader ul li{
+    list-style-type: none;
+}
+.messageItemHeader ul li small{
+    font-size: 12px;
+    display: block;
+    font-weight: lighter;
+    color: #5e5e5e8f;
+}
+.messageTextBox{
+    width: 90%;
+    height: max-content;
+    color: #5e5e5eea;
+    margin-left: 7%;
+    margin-top: 1em;
+    font-size: 13px;
+    font-weight: lighter;
+
+}
+.messageStatus{
+    color: #2C98F0;
+    margin: 2% 6% 0% 0%;
+    width: 100%;
+    text-align: right;
+}
+.messagesContainer{
+    height: 350px;
+    /* background: green; */
+    overflow-y: scroll;
+
+  
+}
+.messagesContainer::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: white !important;
+  }
+
+.messagesContainer  ::-webkit-scrollbar {
+    width: 8px;
+    background-color: white !important;
+  }
+.messagesContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #75778059;
+  }
+.textBoxWrapper{
+    width: 100%;
+    height: 100px;
+    margin-top: 1em;
+    border-radius: 10px 10px;
+    border: 1px solid #5e5e5e77;
+}
+.textBoxWrapper input{
+    width: 100%;
+    height: 40%;
+    border-width: 0px;
+    margin-top: 10px;
+    padding-left: 2%;
+}
+.textBoxWrapper input::placeholder{
+    color: #5e5e5e85;
+    font-size: 13px;
+}
+.textBoxWrapper input:focus{
+    outline: none;
+}
+.textBoxTools {
+    border-top: 1px solid #5e5e5e77;
+}
+.textBoxTools ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.textBoxTools ul li{
+    list-style-type: none;
+   
+}
+.textBoxTools ul li:nth-child(1){
+    padding: 10px 20px 0px 20px;
+   
+}
+.textBoxTools ul li:nth-child(2){
+    padding: 0px 20px 0px 20px;
+}
+.textBoxTools ul li img{
+    width: 30px;
+}
+.textBoxTools ul li:nth-child(2) img{
+    width: 50px;
+}
+.textBoxTools ul li:nth-child(2) img:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.textBoxTools ul li:nth-child(1) img:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
+
+/* -------------------- media queries --------------------- */
+@media only screen and (max-width: 664px){
+    .navigation{
+        width: 80% !important;
+    }
+    .threadWrapper{
+        flex-direction: column;
+    }
+    .requestInfoWrapper{
+     width: 95%;
+   
+   
+    }
+   .chatWrapper{
+    width: 95%;
+    margin-top: 5em;
+    border-top: 1px solid #5e5e5e48;
+    
+}
+  .requestInfoWrapper{
+      border-right: 0px;
+  }
+.chatHeader{
+    width: 90%;
+  
+}
+.profileWrapper{
+    width: 100%;
+}
+.messageItemHeader{
+    width: 40%;
+}
+
+}
+
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2){
+    .navigation{
+        width: 50% !important;
+    }
+    .threadWrapper{
+        flex-direction: column;
+    }
+    .requestInfoWrapper{
+     width: 95%;
+   
+   
+    }
+   .chatWrapper{
+    width: 95%;
+    margin-top: 5em;
+    border-top: 1px solid #5e5e5e48;
+    
+}
+  .requestInfoWrapper{
+      border-right: 0px;
+  }
+.chatHeader{
+    width: 90%;
+  
+}
+.profileWrapper{
+    width: 100%;
+}
+.messageItemHeader{
+    width: 30%;
+}
+.hotelImageWrapper img{
+    width: 100%;
+    height: 400px;
+}
+.infoServiceWrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.infoWrapper{
+    width: 60%;
+}
+.services{
+    width: 30%;
+    margin-top: 3em;
+}
+.services ul{
+    width: 100%;
+}
+.backToRequestsBtn{
+    margin-top: 20%;
+}
+}

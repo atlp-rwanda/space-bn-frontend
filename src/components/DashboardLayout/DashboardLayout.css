@@ -1,0 +1,9 @@
+.containerFluid{
+ width: 100%;
+}
+
+.childContainer{
+    margin-top: 5em;
+    width:100%;
+   
+}
