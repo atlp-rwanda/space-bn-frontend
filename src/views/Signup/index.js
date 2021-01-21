@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import FormControl from '@material-ui/core/FormControl';
@@ -15,10 +16,20 @@ import socialAuthBtns from '../../helpers/socialAuthBtns';
 import {useStyles} from '../../shared/styles/SignupStyles';
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
+import { SignupContext } from '../../contexts/SignupContext';
+import { SET_SIGNUP_ERROR, SET_SIGNUP_LOADING, SET_SIGNUP_RESPONSE } from '../../actions/types';
+import toaster from '../../helpers/toasts';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
+
+const { REACT_APP_BACKEND_URL } = process.env;
 
 const Signup = () => {
   const classes = useStyles();
   const theme = createMuiTheme();
+  const history = useHistory()
+  const { dispatch } = useContext(SignupContext)
+
 
   const matches = useMediaQuery(theme.breakpoints.up('md'));
   
@@ -42,9 +53,47 @@ const Signup = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault()
+    const { name, email, password } = values;
+    const nameArr = name.split(' ')
+
+    dispatch({type: SET_SIGNUP_LOADING});
+
+    if (name === '') {
+      toaster('Name is required!', 'warn')
+      return false;
+    } else if (nameArr[1] === undefined) {
+      toaster('Please provide fullname','warn')
+      return false;
+    } else if ( email === '') {
+      toaster('Email is required', 'warn')
+      return false;
+    } else if (password === '') {
+      toaster('Password is required', 'warn')
+      return false;
+    } else {
+      axios.post(`${REACT_APP_BACKEND_URL}/user/signup`, {firstname: nameArr[0], lastname:nameArr[1], email, password})
+      .then((result) => {
+        dispatch({type:SET_SIGNUP_RESPONSE, user: result.data.user_details, token: result.data.token})
+        toaster(result.data.message, 'success')
+        setAuthorization(result.data.token)
+        setTimeout(() => {
+          history.push('/dashboard')
+        }, 3500)
+      })
+      .catch((err) => {
+        dispatch({type:SET_SIGNUP_ERROR, payload: err.response.data})
+        toaster(err.response.data.message || err.request.data.message, 'error')
+      })
+    }
   }
   return ( 
       <>
+      <ToastContainer 
+        draggable={true} 
+        transition={Zoom} 
+        autoClose={3000} 
+        position={toast.POSITION.TOP_CENTER}
+      />
       <Header/>
       <div className = {classes.mainContainer}>
 
@@ -109,8 +158,7 @@ const Signup = () => {
               </div>
             ))
           }
-        </FormControl>
-     
+        </FormControl>    
       </Card>
       </div>
     </div>
@@ -120,4 +168,9 @@ const Signup = () => {
     );
 }
  
+export const setAuthorization = (token) => {
+  const _IdToken = token;
+  localStorage.setItem("_IdToken", _IdToken);
+  axios.defaults.headers.common = { "Authorization": `Bearer ${_IdToken}` };
+}
 export default Signup;

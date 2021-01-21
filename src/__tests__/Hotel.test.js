@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import Hotel from '../views/Hotel';
-import SearchBar from '../components/SeachBar';
 import AuthContextProvider from '../contexts/AuthContext';
 
 beforeEach(() => cleanup)
@@ -26,7 +25,6 @@ describe('<Hotel />', () => {
         const { getByPlaceholderText }= render(<AuthContextProvider> <Hotel /></AuthContextProvider>);
         const input = getByPlaceholderText('Search hotel');
         const handleChange = jest.fn();
-        
         
         fireEvent.change(input, {target: {value: "test value"}})
         handleChange()
