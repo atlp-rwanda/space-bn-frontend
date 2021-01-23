@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useEffect, useState} from "react";
 import Header from "../../components/Header/index";
 import Footer from "../../components/Footer/index";
 import Typography from "@material-ui/core/Typography";
@@ -9,23 +9,52 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import useStyles from "../../shared/styles/travelrequest";
 import BackImg from "../../assets/images/back2.png";
-import { Link } from "react-router-dom";
 import toaster from "../../helpers/toasts";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import {RequestContext} from "../../contexts/RequestContext";
+import Axios from "axios";
+import { formatTime } from '../../helpers/timeFormatter';
+import { useTranslation } from "react-i18next";
+
+
+const { REACT_APP_BACKEND_URL } = process.env;
 
 const TravelRequest = () => {
   const classes = useStyles();
   const history = useHistory();
-  const {checkin, checkout, roomName,roomPrice, guest,roomType} = useContext(RequestContext)
+  const [requestData, setRequestData] = useState({});
+  const { t } = useTranslation();
+
   const submitrequest = () => {
-    toaster("Travel request successful", "success");
+    toaster(t("Travel request submitted successfully"), "success");
     
     setTimeout(() => {
       history.push("/booking");
     }, 4000);
   };
+  const handleEdit = () => {
+    setTimeout(() => {
+      history.push("/0/rooms")
+    })
+  }
+  const invalidTime = requestData.dateStart === undefined;
+  const { pathname } = window.location;
+  const requestId = pathname.split('/')[2];
+
+  useEffect(() => {
+    const token = localStorage.getItem('userToken')
+    const currentLng = localStorage.getItem('i18nextLng');
+    Axios.get(`${REACT_APP_BACKEND_URL}/requests/${requestId}`, {
+      headers: {
+        'authorization': token,
+        "Accept-Language": currentLng
+      }
+    })
+    .then((res) => setRequestData(res.data.displayRequest))
+    .catch((err) => {
+      toaster(err.message, 'error')
+    })
+  },[requestId])
   return (
     <>
       <Header />
@@ -47,7 +76,7 @@ const TravelRequest = () => {
             textAlign: "center",
           }}
         >
-          Travel request
+          {t('Travel request')}
         </Typography>
         <div className={classes.root}>
           <Card>
@@ -57,22 +86,21 @@ const TravelRequest = () => {
                 variant="body1"
                 style={{ fontWeight: "700", marginBottom: "0" }}
               >
-                Reservation Summary
+                {t('Travel Request Summary')}
               </Typography>
             </CardHeader>
             <CardContent>
               <Typography variant="body1" className={classes.fontWeight}>
-                Check in:
+                {t('Check in')}:
               </Typography>
               <Typography gutterBottom variant="body2">
-                {new Date(checkin).toDateString()} 
+                {invalidTime ? '' : formatTime(requestData.dateStart)} 
               </Typography>
-
               <Typography variant="body1" className={classes.fontWeight}>
-                Check out:
+                {t('Check out')}:
               </Typography>
               <Typography gutterBottom variant="body2">
-                { new Date(checkout).toDateString() }
+                {invalidTime ? '' : formatTime((requestData.dateEnd))}
               </Typography>
               <Divider light />
               <div
@@ -83,72 +111,68 @@ const TravelRequest = () => {
                 }}
               >
                 <Typography variant="body1" className={classes.fontWeight} style={{fontSize:'1.2rem'}}>
-                  Rooms Information
+                  {t('Request Information')}
                 </Typography>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-
               <Typography gutterBottom variant="body1" >
-                Room Name : 
+                {t('Room ID')} : 
               </Typography>
               <Typography gutterBottom variant="body1">
-               {roomName}
+               {requestData.idRoom}
               </Typography>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-
               <Typography gutterBottom variant="body1" >
-                Guest Number : 
+                {t('Requester Name')} : 
               </Typography>
               <Typography gutterBottom variant="body1">
-                {guest}
+                {requestData.requesterName}
               </Typography>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-
               <Typography gutterBottom variant="body1" >
-                Room Type : 
+                {t('Room Type')} : 
               </Typography>
               <Typography gutterBottom variant="body1">
-               {roomType}
+               {requestData.roomType}
               </Typography>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="body1" >
-                  Room charge
+                  {t('Hotel Name')}
                 </Typography>
                 <Typography gutterBottom variant="body1">
-                  ${roomPrice}
+                  {requestData.hotelName}
                 </Typography>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="body1" className={classes.fontWeight}>
-                  Total charge
+                  {t('Request Status')}
                 </Typography>
-                <Typography className={classes.fontWeight} variant="body1">${roomPrice * guest}</Typography>
+                <Typography className={classes.fontWeight} variant="body1">{requestData.requestStatus}</Typography>
               </div>
             </CardContent>
           </Card>
           <div className={classes.Btn}>
-            <Link to='/0/rooms' style={{ textDecoration: "none" }}>
-              <Button
-                size="small"
-                variant="contained"
-                className={classes.editBtn}
-                
-              >
-                Edit
-              </Button>
-            </Link>
-
+            <Button
+              size="small"
+              variant="contained"
+              className={classes.editBtn}
+              onClick={handleEdit}
+              disabled={requestData.requestStatus !== 'PENDING'}
+            >
+              {t('Edit')}
+            </Button>
             <Button
               size="small"
               data-testid="submit"
               variant="contained"
               className={classes.submitBtn}
               onClick={submitrequest}
+              disabled={requestData.requestStatus !== 'PENDING'}
             >
-              Submit
+              {t('Submit')}
             </Button>
           </div>
         </div>

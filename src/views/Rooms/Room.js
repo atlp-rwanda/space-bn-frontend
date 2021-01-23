@@ -113,7 +113,7 @@ const Room = (props) => {
                       {props.size}
                     </span>
                   </Typography>
-                  <Link to={`/request`} style={{ textDecoration: "none" }}>
+                  <Link to={`/requests/${props.id}`} style={{ textDecoration: "none" }}>
                     <Button
                       size="small"
                       className={classes.bookBtn}

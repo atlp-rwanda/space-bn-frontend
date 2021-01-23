@@ -4,7 +4,7 @@ import AuthContextProvider from '../contexts/AuthContext';
 import AuthHeader from '../components/Header/authHeader';
 import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-
+import NotificationProvider from '../contexts/NotificationContext';
 
 
 const SizeWrapper = (props) => {
@@ -30,7 +30,9 @@ describe('<AuthHeader />', () => {
     it('should render the component correctly', () => {
         render(
         <AuthContextProvider>
-            <AuthHeader />
+            <NotificationProvider>
+                <AuthHeader />
+            </NotificationProvider>
         </AuthContextProvider>
         )
         expect(<AuthHeader />).toBeDefined()
@@ -38,8 +40,11 @@ describe('<AuthHeader />', () => {
     it('should render the header content', () => {
         render(
         <AuthContextProvider>
-            <AuthHeader />
-        </AuthContextProvider>)
+            <NotificationProvider>
+                <AuthHeader />
+            </NotificationProvider>
+        </AuthContextProvider>
+        )
         const nav = document.getElementsByTagName('nav')
 
         expect(nav.length).toBe(1)
@@ -47,9 +52,11 @@ describe('<AuthHeader />', () => {
     it('should push to home page when logo clicked', () => {
         const {getByRole} = render(
             <AuthContextProvider>
-                <MemoryRouter>
-                    <AuthHeader />
-                </MemoryRouter>
+                <NotificationProvider>
+                    <MemoryRouter>
+                        <AuthHeader />
+                    </MemoryRouter>
+                </NotificationProvider>
             </AuthContextProvider>
             )
             fireEvent.click(getByRole('img'))
@@ -58,9 +65,11 @@ describe('<AuthHeader />', () => {
     it('should hide content on resize', () => {
        render(
        <AuthContextProvider>
-           <Router>
-                <AuthHeader />
-            </Router>
+           <NotificationProvider>
+            <Router>
+                    <AuthHeader />
+                </Router>
+            </NotificationProvider>
         </AuthContextProvider>, { wrapper: SizeWrapper });
 
       expect(document.getElementsByClassName('MuiTypography-root').length).toEqual(5);
@@ -69,9 +78,11 @@ describe('<AuthHeader />', () => {
     it('should should redirect when anchor tag clicked', () => {
        render(
        <AuthContextProvider>
-           <Router>
-                <AuthHeader />
-            </Router>
+           <NotificationProvider>
+            <Router>
+                    <AuthHeader />
+                </Router>
+            </NotificationProvider>
         </AuthContextProvider>, { wrapper: SizeWrapper });
 
       expect(document.getElementsByTagName('a').length).toEqual(4)
@@ -79,9 +90,11 @@ describe('<AuthHeader />', () => {
     it('should should display profile info when get clicked', () => {     
        render(
        <AuthContextProvider>
-           <Router>
-                <AuthHeader />
-            </Router>
+           <NotificationProvider>
+            <Router>
+                    <AuthHeader />
+                </Router>
+            </NotificationProvider>
         </AuthContextProvider>, { wrapper: SizeWrapper });
         const mockedFn = jest.fn()
 
@@ -93,22 +106,26 @@ describe('<AuthHeader />', () => {
     it('should should render profile content', () => {     
         render(
             <AuthContextProvider>
-                <Router>
-                     <AuthHeader open={true} />
-                 </Router>
+                <NotificationProvider>
+                    <Router>
+                        <AuthHeader open={true} />
+                    </Router>
+                 </NotificationProvider>
              </AuthContextProvider>, { wrapper: SizeWrapper});
         const btn = screen.getByRole('button', {name: /username/i})
         
         fireEvent.click(btn)
         const ul = document.getElementsByTagName('li')
-
+        expect(ul.length).toEqual(3) 
     })
     it('should should dispatch logout on click', () => {     
         render(
             <AuthContextProvider>
-                <Router>
-                     <AuthHeader open={true} />
-                 </Router>
+                <NotificationProvider>
+                    <Router>
+                        <AuthHeader open={true} />
+                    </Router>
+                 </NotificationProvider>
              </AuthContextProvider>, { wrapper: SizeWrapper});
         const btn = screen.getByRole('button', {name: /username/i})
         
@@ -125,9 +142,11 @@ describe('<AuthHeader />', () => {
     it('should should redirect on login page when logout dispatched', () => {     
         render(
             <AuthContextProvider>
-                <MemoryRouter>
-                     <AuthHeader />
-                 </MemoryRouter>
+                <NotificationProvider>
+                    <MemoryRouter>
+                        <AuthHeader />
+                    </MemoryRouter>
+                 </NotificationProvider>
              </AuthContextProvider>, { wrapper: SizeWrapper});
         const btn = screen.getByRole('button', {name: /username/i})
         
@@ -148,11 +167,13 @@ describe('<AuthHeader />', () => {
             return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
         };
         
-         render(
+        render(
             <AuthContextProvider>
-                <Router>
-                    <AuthHeader />
-                </Router>
+                <NotificationProvider>
+                    <Router>
+                        <AuthHeader />
+                    </Router>
+                </NotificationProvider>
             </AuthContextProvider>, { wrapper: SizeWrapper }
         );
         

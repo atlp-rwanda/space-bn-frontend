@@ -84,7 +84,6 @@ const Rooms = () => {
     const filtersRoom = rooms.filter((room) => {
       const a = new Date(e.target.value);
       const b = new Date(room.checkOut);
-      console.log(a,b,"***********");
       if (a - b >= 1e3) {
         return true;
       }

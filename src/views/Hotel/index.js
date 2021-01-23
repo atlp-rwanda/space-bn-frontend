@@ -93,7 +93,7 @@ const Hotel = () => {
             value={""}
             prop={"Search hotel"}
           />
-          <Scroll>
+          <Scroll height={'83vh'}>
             <PaperCard
               searchValue={searchValue}
               activePopup={activePopup}

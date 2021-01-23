@@ -25,10 +25,10 @@ import { useTranslation } from "react-i18next";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
-  const SignIn = () => {
+const SignIn = () => {
     const classes = styles();
     const history = useHistory();
-    const { dispatch,auth} = useContext(AuthContext);
+    const { dispatch, auth} = useContext(AuthContext);
     const { t } = useTranslation();
     const [values, setValues] = useState({
       password: '',
@@ -75,6 +75,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
            const jsonData = await response.json();
            if(jsonData.user !== undefined){
                localStorage.setItem("userId",jsonData.user.id);
+               localStorage.setItem("userName",jsonData.user.firstname);
                localStorage.setItem("userToken",jsonData.token);
                localStorage.setItem("userImageUrl",jsonData.user.user_image);
                dispatch({type: SET_LOADING, payload: false })      
@@ -88,8 +89,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
             dispatch({type: SET_ERROR, payload: jsonData.message})
             toaster(jsonData.message, 'error')
                       
-           }
-           
+           }         
       }
   return (
     <>
