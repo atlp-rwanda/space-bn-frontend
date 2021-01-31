@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import { styles,Component } from '../../shared/styles/TabStyles';
-
-
 
 const useStyles = makeStyles({
   root: {
@@ -13,14 +10,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CenteredTabs() {
+export default function CenteredTabs({setTab}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+ 
   };
-
+const handleClick=(e)=>{
+  setTab(e.target.innerHTML)
+}
   return (
     <Paper className={classes.root}>
       <Tabs
@@ -30,9 +30,9 @@ export default function CenteredTabs() {
         textColor="primary"
         centered
       >
-        <Tab label="Pending" />
-        <Tab label="Approved" />
-        <Tab label="Rejected" />
+        <Tab label="Pending" data-testid="submit" onClick={handleClick} /> 
+        <Tab label="Approved"   onClick={(e)=>setTab(e.target.innerHTML)} />
+        <Tab label="Rejected"   onClick={(e)=>setTab(e.target.innerHTML)} />
       </Tabs>
     </Paper>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import 
@@ -21,8 +21,10 @@ from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { KeyboardArrowLeft, KeyboardArrowRight,} from '@material-ui/icons';
+import { Brightness3Sharp, KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Icon_appr from '@material-ui/icons/Done';
+import Icon_rej from '@material-ui/icons/Cancel';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { useTheme, withStyles } from '@material-ui/core/styles'
@@ -30,36 +32,29 @@ import { useStyles, useStyles1 } from '../../shared/styles/TableStyles';
 import { id, ids, createData } from '../../helpers/tableData';
 import SideForwardIcon from '../../assets/icons/slideForwardIcon.png'
 
-
 //pagination actions
 export const TablePaginationActions = (props) => {
     const classes = useStyles1();
     const theme = useTheme();
     const { count, page, rowsPerPage, onChangePage } = props;
-  
     const handleFirstPageButtonClick = (event) => {
       onChangePage(event, 0);
     };
-  
     const handleBackButtonClick = (event) => {
       onChangePage(event, page - 1);
     };
-  
     const handleNextButtonClick = (event) => {
       onChangePage(event, page + 1);
     };
-  
     const handleLastPageButtonClick = (event) => {
       onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
     };
-  
     return (
       <div className={classes.root}>
         <IconButton
           onClick={handleFirstPageButtonClick}
           disabled={page === 0}
           aria-label="first page"
-          
         >
           {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
         </IconButton>
@@ -83,18 +78,16 @@ export const TablePaginationActions = (props) => {
       </div>
     );
   }
-  
   TablePaginationActions.propTypes = {
     count: PropTypes.number.isRequired,
     onChangePage: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
   };
-
- 
-  
-export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPerPage,setRowsPerPage, rows, StyledTableRow}) => {
-    // handle row selection on click event
+  //CHILD COMPONENT FOR REQUESTWRAPER FUNCTION
+export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPerPage,setRowsPerPage, rows, StyledTableRow, RequestId,RequesterId,DateIn, DateOut,idRoom, Status, Action}) => {
+    
+  // handle row selection on click event
     const handleClick = (event, name) => {
       const selectedIndex = selected.indexOf(name);
       let newSelected = [];
@@ -110,11 +103,8 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
           selected.slice(selectedIndex + 1),
         );
       }
-  
       setSelected(newSelected);
     }
-
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage)
     };
@@ -143,21 +133,41 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
             <Table className={classes.table} size="medium" arial-lable="dense table">
               <TableHead>
                   <TableRow>
-                      <TableCell align="center" className={classes.tableHead}>RequestId</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Requester Name</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Travel Reason</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Destination</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Accommodation</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Status</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Actions</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{RequestId}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{RequesterId}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{DateIn}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{DateOut}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{idRoom}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{Status}</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>{Action}</TableCell>
                   </TableRow>
               </TableHead>  
               <TableBody>
+               
                 {(rowsPerPage > 0
                     ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : rows
                     ).map((row, index) => {
                       const isItemSelected = isSelected(row.id);
+
+                      //request approving states management for integration
+              const [request, setRequest] = useState([])
+              useEffect(()=>{
+                const getRequests = async ()=>{
+                  try{
+                    const response = await fetch("http://localhost:5000/Request");
+                    const JSONDATA = await response.json();
+                    // console.log(JSONDATA.accommodation_requests);
+                
+                    const data = JSONDATA.accommodation_requests;
+                    setRequest(data);
+                  }
+                  catch (error){
+                    console.log(error.message)
+                  }
+                }
+                getRequests();
+              }, []);
                       return (
                         <StyledTableRow 
                         key={index}
@@ -168,16 +178,17 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
                         selected={isItemSelected}
                         data-testid="table row"
                         >
+                           {request.map((data, key)=>console.log(data))}
                           <TableCell component="th" scope="row" >
                           <div style={{display: 'flex', flexDirection: 'row'}}>
                               <Checkbox checked={isItemSelected}/>
                               <span style={{marginTop: '12px'}} className={classes.cell}>{id}</span>
                           </div>
                           </TableCell>
-                          <TableCell align="center" className={classes.cell}>{row.requester}</TableCell>
-                          <TableCell align="center" className={classes.cell}>{row.reason}</TableCell>
-                          <TableCell align="center" className={classes.cell}>{row.destination}</TableCell>
-                          <TableCell align="center" className={classes.cell}>{row.accommodation}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{row.RequesterId}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{row.DateIn}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{row.DateOut}</TableCell>
+                          <TableCell align="center" className={classes.cell}>{row.idRoom}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.status}</TableCell>
                           <TableCell align="center" className={classes.cell}>{row.action}</TableCell>
                         </StyledTableRow>
@@ -210,12 +221,21 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
             </Table>
         </TableContainer>
         </Paper>
-
      );
 }
- 
 
-const RequestWrapper = () => {
+//EXPORTED FUNCTION
+const RequestWrapper = ({isOnApproving=false, tab}) => {
+  const RequestId="RequestId";
+  const RequesterId="User Id";
+  const DateIn="Date In";
+  const DateOut="Date Out"
+  const idRoom="Room Id";
+  const Status="Status";
+  const Action="Action";
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [userType,setUserType] = useState('');
   const history = useHistory();
   const classes2 = useStyles()
   const classes = useStyles();
@@ -223,23 +243,58 @@ const RequestWrapper = () => {
   const [selected, setSelected] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const buttons = <div style={{display: 'flex', flexDirection: 'row'}}>
-                  <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
-                  <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
-                  <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
-                </div>;
 
+// //request approving states management for integration
+// const [request, setRequest] = useState([])
+// const [idRequest, setIdRequest] = useState('');
+// const [idUser, setIdUser] = useState('');
+// const [roomId, setRoomId] = useState('');
+// const [dateStart, setDateStart] = useState('');
+// const [dateEnd, setDateEnd] = useState('');
+// const [requestStatus, setRequestStatus] = useState('');
+
+// // const data = []
+// const getRequests = async ()=>{
+// try{
+//   const response = await fetch("http://localhost:5000/Request");
+//   const JSONDATA = await response.json();
+//   console.log(JSONDATA.accommodation_requests);
+  
+//   const data = JSONDATA.accommodation_requests;
+//   setRequest(data);
+
+//   setIdRequest(JSONDATA.accommodation_requests.id);
+//   setIdUser(JSONDATA.accommodation_requests.idUser);
+//   setRoomId(JSONDATA.accommodation_requests.idRoom);
+//   setDateStart(JSONDATA.accommodation_requests.dateStart);
+//   setDateEnd(JSONDATA.accommodation_requests.dateEnd);
+//   setRequestStatus(JSONDATA.accommodation_requests.requestStatus);
+
+// }
+// catch (error){
+//   console.log(error.message)
+// }
+// }
+// getRequests();
+  const [button, setButton] = useState( 
+  <div style={{display: 'flex', flexDirection: 'row'}}>
+                <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
+                <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
+                <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
+  </div>
+ )
+
+const status = tab==="Approved"?"Approved":tab==="Rejected"?"Rejected":"Pending";
 const rows = [
-  createData(ids[0], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[1], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[2], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[3], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[4], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[5], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[6], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[7], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
+  // createData(idRequest,idUser,roomId,dateStart,dateEnd, status,button),
+  // createData(ids[1], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[2], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[3], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[4], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[5], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[6], 1, '2020-01-10','2020-01-10',3, status,button),
+  // createData(ids[7], 1, '2020-01-10','2020-01-10',3, status,button),
 ]
-
   const StyledTableRow = withStyles((theme) => ({
     root: {
       "&:hover": {
@@ -247,16 +302,44 @@ const rows = [
       },
     },
   }))(TableRow);
+   
+  useEffect(() => {
+    setUserType(user.userType);
+   
+    // getRequests();
 
+    if(userType == "MANAGER" && isOnApproving && tab){
+      setButton(
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+        <Fab  color="primary" aria-label="approve" style={{width: 35,height: 23, marginRight: 10,}} disabled={selected.length > 1}><Icon_appr style={{width: 23, height: 23,}}/></Fab>
+        <IconButton   color="secondary" aria-label="reject" style={{width: 35,height: 35,}} disabled={selected.length > 1}><Icon_rej style={{width: 40, height: 40,}}/></IconButton>
+        </div>
+      )
+    }
+    if(userType == "MANAGER" && isOnApproving && tab==="Approved"){
+      setButton(null)
+    }
+    if (userType == "MANAGER" && isOnApproving && tab==="Rejected"){
+      setButton(null)
+    }
+}, [userType, tab]);
   return ( 
     <div className={classes2.root}>
       <div className={classes2.wrapper}>
           <Typography variant="h5" className={classes2.title}>Requests</Typography>
-          <Fab color="primary" aria-label="add" className={classes2.addBtn}>
-              <AddIcon />
-          </Fab>
+          {
+            (isOnApproving) ?
+             (null)
+             :
+            (
+              <Fab color="primary" aria-label="add" className={classes2.addBtn}>
+               <AddIcon />
+              </Fab>
+            )
+          }
       </div>
       <RequestTable 
+      // {request.map()}
       classes={classes} 
       page={page} 
       setPage={setPage} 
@@ -266,9 +349,16 @@ const rows = [
       setRowsPerPage={setRowsPerPage}
       rows={rows}
       StyledTableRow={StyledTableRow}
+      
+      RequestId={RequestId}
+      RequesterId={RequesterId}
+      DateIn={DateIn}
+      DateOut={DateOut}
+      idRoom={idRoom} 
+      Status={Status}
+      Action={(tab==="Approved"||tab==="Rejected")?"":Action}
       />
     </div>
    );
 }
- 
 export default RequestWrapper;

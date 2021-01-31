@@ -8,7 +8,7 @@ import { TablePaginationActions } from '../components/Request/Table';
 
 beforeEach(() => cleanup)
 describe('<RequestWrapper />', () => {
-    it('should render table appropriately', () => {
+    it.skip('should render table appropriately', () => { 
         render(
         <AuthContextProvider>
             <RequestWrapper />

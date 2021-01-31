@@ -58,7 +58,7 @@ function App() {
             <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
-            <Route exact path="/requestApproving" component={RequestApproval}/>
+            <ProtectedRoute exact path="/requestApproving" component={RequestApproval}/>
           </Switch>
 
         </div>

@@ -101,7 +101,7 @@ const history = useHistory();
                     onClick={() => {props.handleOpen(); history.push('/dashboard')}}                  
                     button key='Dashboard' style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                     <ListItemIcon><DashboardIcon/></ListItemIcon>
-                    <ListItemText data-testid="managerDasboardList">Dashboard</ListItemText>
+                    <ListItemText data-testid="managerDasboardList">Requests</ListItemText>
                     </ListItem>
 
                     <ListItem button key='Roles' onClick={() => {props.handleOpen()}}
@@ -138,13 +138,25 @@ const history = useHistory();
                     ) : (userType === userTypes.manager) 
                     ? (
                       <>
-                        <ListItem 
+                        {/* <ListItem 
                         onClick={() => {props.handleOpen(); history.push('/dashboard')}}
                         button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
-                        </ListItem> 
+                        <ListItemText>Requests</ListItemText>
+                        </ListItem>  */}
+                        {/* <ListItem
+                        onClick={() => {props.handleOpen(); history.push('/requestApproving')}}
+                        button key='Dashboard'  style={(currentLocation === '/requestApproving') ? (active) : (null)}>
+                        <ListItemIcon><DashboardIcon/></ListItemIcon>
+                        <ListItemText>Requests</ListItemText>
+                        </ListItem> */}
               
+                        <ListItem
+                        onClick={() => {props.handleOpen(); history.push('/requestApproving')}}
+                        button key='Dashboard'  style={(currentLocation === '/requestApproving') ? (active) : (null)}>
+                        <ListItemIcon><DashboardIcon/></ListItemIcon>
+                        <ListItemText>Requests</ListItemText>
+                        </ListItem>
                   
               
                         <ListItem button key='Facilities'
@@ -171,10 +183,8 @@ const history = useHistory();
                          onClick={() =>{props.handleOpen(); history.push('/dashboard')}}
                         button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
+                        <ListItemText>Requests</ListItemText>
                         </ListItem> 
-                
-                      
               
                         <ListItem button key='Facilities' 
                         onClick={() =>{ props.handleOpen(); history.push('/facilities')}}

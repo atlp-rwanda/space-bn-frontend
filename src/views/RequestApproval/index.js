@@ -1,37 +1,24 @@
 import React from 'react';
 import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
-// import Table_Pending from './rejected';
-// import Tabs from '../../components/tab/Tabs';
+import Table from '../../components/Request/Table';
+import Tabs from '../../components/Tab/Tabs';
 
 const RequestApproval = () =>{
-    const wrap1 = {
-        background:"lightblue",
-        with: "600px !important",
-        display: "flex",
-        justifyContent: "space-around",
-        height: "500px"
+    const [tab, setTab]=React.useState("Pending");
+    const style = {
+        padding: "5%",
+        paddingBottom:0
 };
-const wrap2 = {
-     background: "pink",
-    // with: "600px !important", 
-    height: "400px",
 
-}
-    
     return(
         <DashboardLayout>
-           <div style={{width: "500px", background: "red"}}>
-                <div style = {wrap2}>
-                <div>
-                    <h1>REQUESTS APPROVING</h1>
-                </div> 
-                </div>  
-                {/* <Tabs/> */}
-                {/* <Table_Pending> */}
-
-           </div>
+           <div style={style}>
+            
+                <Tabs setTab={setTab}/>
+            </div>
+                <Table isOnApproving={true} tab={tab}/>
+           
         </DashboardLayout>   
     )
 }
-
 export default RequestApproval;

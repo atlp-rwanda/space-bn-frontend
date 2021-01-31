@@ -1,9 +1,10 @@
 import React from 'react';
 import { Checkbox }from '@material-ui/core';
 
-
-export const createData = (id, requester, reason, destination, accommodation, status, action) => {
-    return { id, requester, reason, destination, accommodation, status, action}
+export const createData = (id, RequesterId, DateIn, DateOut, idRoom, status, action) => {
+  return { id, RequesterId, DateIn, DateOut, idRoom, status, action}
+// export const createData = (RequesterId, DateIn, DateOut, idRoom, status, action) => {
+//     return { RequesterId, DateIn, DateOut, idRoom, status, action}
 };
 
 export const id = ['1A2T3BED']
