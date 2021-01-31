@@ -21,6 +21,7 @@ import TravelRequest from "./views/TravelRequest";
 import { RequestProvider } from "./contexts/RequestContext";
 import FacilityContainer from "./views/facilities/dashBoardContainer";
 import SignupContextProvider from './contexts/SignupContext';
+import RequestApproval from './views/RequestApproval';
 
 function App() {
   return (
@@ -57,7 +58,9 @@ function App() {
             <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
+            <Route exact path="/requestApproving" component={RequestApproval}/>
           </Switch>
+
         </div>
       </Router>
     </SignupContextProvider>
