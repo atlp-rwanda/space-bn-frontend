@@ -105,7 +105,7 @@ const history = useHistory();
                     </ListItem>
 
                     <ListItem button key='Roles' onClick={() => {props.handleOpen()}}
-                     style={(currentLocation === '/roles') ? (active) : (null)}
+                     style={(currentLocation === '/userroles') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Roles</ListItemText>
@@ -121,7 +121,7 @@ const history = useHistory();
                     <ListItem 
                     onClick={() => {props.handleOpen(); history.push('/facilities')}}
                     button key='Facilities'
-                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                    style={(currentLocation === '/userroles') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
                     <ListItemText>Facilities</ListItemText>
