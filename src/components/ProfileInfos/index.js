@@ -179,9 +179,9 @@ const ProfileInfos = () => {
                                 <Button variant="contained" color="primary" className={classes.button}>EDIT PROFILE PICTURE</Button>
                             </Grid>
                             <Grid item xs>
-                            <Fab color="secondary" aria-label="edit">
-                                    <EditIcon />
-                            </Fab>
+                                <Grid item>
+                                    <Typography variant="subtitle1" className={classes.paragraph}>By clicking in the checkbox, you will allow the application to use your Profile Information on any travel request. </Typography>
+                                </Grid>
                                 <Grid item xs>
                                     <form className={classes.form}>
                                         <div>

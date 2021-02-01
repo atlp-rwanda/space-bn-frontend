@@ -72,3 +72,8 @@ nav ul li{
 .MuiTablePagination-toolbar{
   float: left;
 }
+#toast-container {
+  top: 30px ;
+  right: 20px ;
+  left: auto 
+}
