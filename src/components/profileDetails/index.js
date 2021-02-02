@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import {Button, makeStyles } from '@material-ui/core';
-import profileImage1 from "../../assets/images/didace 1.svg";
+import profileImage1 from "../../assets/images/profile_photo.svg";
 import uploadImage from "../../assets/images/Upload.png";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper} from '../../shared/styles/ProfileInfosStyles';
@@ -239,7 +239,7 @@ const ProfileInfos = () => {
         })
         
     }
-
+/*
      const getInfo = async ()=>{
          try {
             const response = await fetch('http://localhost:5000/user/1');
@@ -277,7 +277,7 @@ const ProfileInfos = () => {
             }
      }
 
-
+*/
 
     const EditInput = ()=>{
         return input
@@ -288,7 +288,7 @@ const ProfileInfos = () => {
     }
 
     useEffect(() => {
-        getInfo();
+       // getInfo();
     }, [ ])
 
     const editUserInfo = ()=>{
@@ -389,7 +389,7 @@ const ProfileInfos = () => {
                         </div>
                         <Grid style={{display:"flex",justifyContent:"space-between",marginTop:'10px'}}>
                         <Typography align="center" variant="h5" className={classes.title}></Typography>
-                        <Button variant="contained" color="primary"  className={classes.confirm} onClick={e => postInfo(e)} >SAVE</Button>
+                        <Button variant="contained" color="primary"  className={classes.confirm}  >SAVE</Button>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import { Button, makeStyles, Checkbox } from '@material-ui/core';
-import profileImage from "../../assets/images/profile_photo.svg";
+import profileImage from "../../assets/images/didace.svg";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
@@ -66,7 +66,8 @@ const useStyles = makeStyles(theme => ({
     img: {
         width: 150,
         height: 150,
-        margin: '30px 0 20px 20px'
+        margin: '30px 0 20px 20px',
+        boerderRadius:45
         
     },
     profile: {
