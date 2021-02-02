@@ -5,11 +5,11 @@ import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import {Button, makeStyles } from '@material-ui/core';
 import profileImage1 from "../../assets/images/profile_photo.svg";
-import uploadImage from "../../assets/images/Upload.png";
+//import uploadImage from "../../assets/images/Upload.png";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper} from '../../shared/styles/ProfileInfosStyles';
 
-import toaster from '../../helpers/toasts';
+//import toaster from '../../helpers/toasts';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -218,7 +218,7 @@ const ProfileInfos = () => {
     const[identification_type, setIdentification_type] = useState("")
     const[identification_number, setIdentification_number] = useState("")
     const[profileImage, setProfileImage] = useState("")
-    const[imageUrl, setImageUrl] = useState("")
+    //const[imageUrl, setImageUrl] = useState("")
 
     const[labelHidden, setLabelHidden] = useState({display:'block'})
     const[input, setInput] = useState({display:'none'})
@@ -233,8 +233,8 @@ const ProfileInfos = () => {
             method:"post",
             body:data
         }).then((data)=>{
-            console.log(data.url)
-            setImageUrl(data.url)
+            //console.log(data.url)
+            //setImageUrl(data.url)
             return data.url
         })
         
