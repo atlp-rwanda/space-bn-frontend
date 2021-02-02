@@ -9,7 +9,7 @@ import profileImage1 from "../../assets/images/profile_photo.svg";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper} from '../../shared/styles/ProfileInfosStyles';
 
-//import toaster from '../../helpers/toasts';
+import toaster from '../../helpers/toasts';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -239,7 +239,7 @@ const ProfileInfos = () => {
         })
         
     }
-/*
+
      const getInfo = async ()=>{
          try {
             const response = await fetch('http://localhost:5000/user/1');
@@ -254,7 +254,7 @@ const ProfileInfos = () => {
             //setGender(jsonData.user.gender);
             setIdentification_type(jsonData.user.identification_type);
             setIdentification_number(jsonData.user.identification_number);
-            setImageUrl(jsonData.user.setImageUrl);
+            //setImageUrl(jsonData.user.setImageUrl);
 
          } catch (error) {
              console.log(error.message)
@@ -277,7 +277,7 @@ const ProfileInfos = () => {
             }
      }
 
-*/
+
 
     const EditInput = ()=>{
         return input
@@ -288,7 +288,7 @@ const ProfileInfos = () => {
     }
 
     useEffect(() => {
-       // getInfo();
+        getInfo();
     }, [ ])
 
     const editUserInfo = ()=>{
@@ -389,7 +389,7 @@ const ProfileInfos = () => {
                         </div>
                         <Grid style={{display:"flex",justifyContent:"space-between",marginTop:'10px'}}>
                         <Typography align="center" variant="h5" className={classes.title}></Typography>
-                        <Button variant="contained" color="primary"  className={classes.confirm}  >SAVE</Button>
+                        <Button variant="contained" color="primary"  className={classes.confirm} onClick={e=>postInfo(e)} >SAVE</Button>
                         </Grid>
                     </Grid>
                 </Grid>
