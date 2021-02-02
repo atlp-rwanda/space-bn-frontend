@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import {Button, makeStyles } from '@material-ui/core';
-import profileImage1 from "../../assets/images/profile_photo.svg";
+import profileImage1 from "../../assets/images/didace 1.svg";
 //import uploadImage from "../../assets/images/Upload.png";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper} from '../../shared/styles/ProfileInfosStyles';
@@ -68,8 +68,6 @@ const useStyles = makeStyles(theme => ({
     img: {
         width: 150,
         height: 150,
-        
-        borderRadius: '50%'
         
     },
     profile: {
@@ -224,18 +222,16 @@ const ProfileInfos = () => {
     const[input, setInput] = useState({display:'none'})
 
     const uploadImage = ()=>{
-        
+        console.log(profileImage)
         const data = new FormData();
         data.append("file",profileImage);
         data.append("upload_preset", "instagram-clone");
         data.append("cloud_name", "dazayujls")
-        fetch("https://api.cloudinary.com/v1_1/dazayujls/image/upload/", {
-            method:"post",
+        fetch("https://api.cloudinary.com/v1_1/dazayujls/image/upload/",{
+            method:"POST",
             body:data
-        }).then((data)=>{
-            //console.log(data.url)
-            //setImageUrl(data.url)
-            return data.url
+        }).then((res)=>{
+            console.log(res.url)
         })
         
     }
@@ -290,6 +286,7 @@ const ProfileInfos = () => {
     useEffect(() => {
         getInfo();
     }, [ ])
+    useEffect(() => {});
 
     const editUserInfo = ()=>{
       setLabelHidden({display:'none'});
@@ -315,7 +312,7 @@ const ProfileInfos = () => {
                         <Grid item xs={12} sm container >
                             <Grid item sm={4} direction="column" container className={classes.profile} >
                                 <img src={profileImage1} alt="profile" className={classes.img}/>
-                                <input  type="file" alt="upload Image" className={classes.uploadbutton} onChange={(e)=>{setProfileImage(e.target.files[0])}} onClick={()=>uploadImage()}/>
+                                <input  type="file" alt="upload Image" className={classes.uploadbutton} onClick={()=>uploadImage()} onChange={(e)=>setProfileImage(e.target.files[0])} />
                             </Grid>
                             <Grid item xs>
                                 <Grid item xs>

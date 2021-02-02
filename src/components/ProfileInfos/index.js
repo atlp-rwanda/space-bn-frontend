@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import { Button, makeStyles, Checkbox } from '@material-ui/core';
-import profileImage from "../../assets/images/didace.svg";
+import profileImage from "../../assets/images/didace 1.svg";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
