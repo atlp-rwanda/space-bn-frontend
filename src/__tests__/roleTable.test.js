@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
-import UserRole from '../views/UserRole';
+import RoleTable from '../views/UserRole/table';
 import { render, cleanup,fireEvent} from '@testing-library/react';
 import AuthContextProvider from '../contexts/AuthContext';
 
@@ -20,9 +20,14 @@ describe('<UserRole />', () => {
       render(
       <AuthContextProvider>
        <Router>
-          <UserRole />
+          <RoleTable />
        </Router>   
       </AuthContextProvider>)
-      expect(<UserRole />).toBeDefined();
+      expect(<RoleTable />).toBeDefined();
+  });
+ it('should sort element', ( )=> {
+    const { getByTestId } = render(<RoleTable />);
+    fireEvent.click(getByTestId('sortDataBtn'));
+    fireEvent.click(getByTestId('sortDataBtn'));   
   });
 });

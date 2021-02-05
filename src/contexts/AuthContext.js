@@ -1,9 +1,7 @@
 /* eslint-disable */
 import React, { createContext, useEffect, useReducer } from 'react';
 import { authReducer } from '../reducers/authReducer';
-
 export const AuthContext = createContext();
-
 const AuthContextProvider = (props) => {
     const [auth, dispatch] = useReducer(authReducer, {error: null, isAuthenticated: false})
     const userInfo = {
@@ -11,7 +9,7 @@ const AuthContextProvider = (props) => {
         Email: 'johndoe@gmail.com',
         Password: 'JohnDoe123',
         Avatar:'user avatar url',
-        userType: 'Nomad'
+        userType: 'ADMIN'
     }
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(userInfo))
@@ -22,5 +20,4 @@ const AuthContextProvider = (props) => {
         </AuthContext.Provider>
     )
 };
-
 export default AuthContextProvider;
