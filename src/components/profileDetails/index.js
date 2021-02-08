@@ -1,15 +1,15 @@
-import {React,useState,useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
-import {Button, makeStyles } from '@material-ui/core';
-import profileImage1 from "../../assets/images/didace 1.svg";
-//import uploadImage from "../../assets/images/Upload.png";
+import { Button, makeStyles } from '@material-ui/core';
+import profileImage from "../../assets/images/didace 1.svg";
 import Typography from '@material-ui/core/Typography';
-import { InputWrapper} from '../../shared/styles/ProfileInfosStyles';
+import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
 import toaster from '../../helpers/toasts';
+
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -66,12 +66,14 @@ const useStyles = makeStyles(theme => ({
         }
     },
     img: {
-        width: 150,
-        height: 150,
+        width: 180,
+        height: 180,
+        
+        borderRadius:180,
+        backgroundColor:'blue'
         
     },
     profile: {
-        width:200,
         paddingLeft: theme.spacing(15),
         '@media (max-width:960px)': {
             margin: '10px 10px',
@@ -86,16 +88,21 @@ const useStyles = makeStyles(theme => ({
         }
     },
     button: {
-        width: 150,
-        background: 'E0E0E0',
-        textAlign: 'center',
-        fontSize:'15px'
+        width: 186,
+        background: '#2196F3',
+        textAlign: 'center'
     },
     form: {
         display: 'flex',
         flexDirection: 'column',
+        fontSize:20,
         marginLeft: 120,
-        marginTop:20,
+        marginBottom:20,
+        '@media (max-width:1024px)': {
+            marginLeft: 20,
+            width: '70%',
+            fontSize:20,
+        },
         '@media(max-width: 1111px)': {
             marginLeft: 50
         },'@media (max-width:768px)': {
@@ -104,37 +111,60 @@ const useStyles = makeStyles(theme => ({
         '@media(max-width: 400px)': {
             marginLeft: 20
         },
+        '@media(max-width: 375px)': {
+            marginLeft: '20px',
+            fontSize: 15
+        },
+        '@media(max-width: 414px)': {
+            fontSize:15
+        },
     },
     inputField: {
         width: '40%',
         margin: '10px 20px 0 0',
-        padding: '10px 8px',
+        padding: '1px 8px',
         border: '2px solid #7B7B7B',
         borderRadius: '3px',
-        marginLeft:'100px',
         outline: 'none',
-        fontSize:15,
+        fontSize:'20px',
+        marginLeft:'60px',
+        marginBottom:20,
+        '@media (max-width:1024px)': {
+            marginLeft: 20,
+            width: '70%',
+            fontSize:20,
+        },
         '@media (max-width:960px)': {
             width: '60%',
         },
         '@media (max-width:768px)': {
-            margin: '10px 15px 0 0',
+            marginLeft: 20,
             width: '70%',
+            fontSize:15,
         },
         '@media(max-width: 400px)': {
-            margin: '8px 10px 0 0',
+            marginLeft: '20px',
+        },
+        '@media(max-width: 375px)': {
+            marginLeft: '60px',
+        },
+        '@media(max-width: 414px)': {
+            marginLeft: '60px',
+            fontSize:15
+        },
+        '@media(max-width: 448px)': {
+            marginLeft: '60px',
+            fontSize:15
         },
     },
     optionField: {
         marginTop: '10px',
+        marginLeft:60,
         width: '90px',
         paddingLeft: '2px 8px',
         border: '2px solid #7B7B7B',
         borderRadius: '4px',
-        marginLeft:'100px',
-        outline: "none",
-        display:"none"
-        
+        outline: "none"
     },
     lastContainer: {
         margin: '40px  0 30px 10%',
@@ -158,52 +188,22 @@ const useStyles = makeStyles(theme => ({
             paddingRight: theme.spacing(0)
     }},
     confirm: {
-        width: 150,
-        marginRight:'20px',
-        marginBottom:'40px',
-        marginLeft:'80px',
+        margin: '20px auto',
+        width: 180,
         textTransform: 'capitalize',
-        background: '#2196F3'
+        background: '#2196F3',
+        alignSelf: 'center'
     },
     span: {
         fontFamily: `'Poppins', sans-serif;`,
         fontWeight: 'bold'
     },
-    label: {
-        fontFamily: `'Poppins', sans-serif;`,
-        fontWeight: 'bold',
-        position: 'absolute',
-        paddingright: '30px',
-        fontSize:'18px',
-        marginRight:10
-    },
-    userInfo:{
-        marginLeft: '120px',
-        fontSize:'18px'
-        },
-    formDiv:{
-        marginTop: '20px',
-        marginRight:'20px'
-     },
-     middle:{
-        display:"flex",
-        flexDirection:"column"
-     },
-     uploadbutton:{
-         width:180,
-         cursor:'pointer'
-         
-     },
-     toastcontainer:{
-        top: '30px',
-        right: '20px',
-        left: 'auto'
+    label:{
+        fontSize:'15px'
     }
-
 }))
 
 const ProfileInfos = () => {
-
     const classes = useStyles();
 
     const[inputFname, setInputFname] = useState("")
@@ -211,88 +211,69 @@ const ProfileInfos = () => {
     const[telephone, setTelephone] = useState("")
     const[email, setemail] = useState("")
     const[origin, setOrigin] = useState("")
-    const[profession, setProfession] = useState("")
-    //const[gender, setGender] = useState("")
+    //const[profession, setProfession] = useState("")
+    const[gender, setGender] = useState("")
     const[identification_type, setIdentification_type] = useState("")
     const[identification_number, setIdentification_number] = useState("")
-    const[profileImage, setProfileImage] = useState("")
-    //const[imageUrl, setImageUrl] = useState("")
+    const[showbutton, setShowbutton] = useState({display:'none'})
+     
+    const userId = localStorage.getItem("userProfile");
 
-    const[labelHidden, setLabelHidden] = useState({display:'block'})
-    const[input, setInput] = useState({display:'none'})
-
-    const uploadImage = ()=>{
-        console.log(profileImage)
-        const data = new FormData();
-        data.append("file",profileImage);
-        data.append("upload_preset", "instagram-clone");
-        data.append("cloud_name", "dazayujls")
-        fetch("https://api.cloudinary.com/v1_1/dazayujls/image/upload/",{
-            method:"POST",
-            body:data
-        }).then((res)=>{
-            console.log(res.url)
-        })
+    const getInfo = async ()=>{
+         console.log(userId)
         
-    }
+        try {
+            const response = await fetch('http://localhost:5000/user/'+ userId, {
+                method:'get',
+                headers:{
+                    "Authorization":"Bearer "+localStorage.getItem("userProfileToken"),
+                },
+            } );
 
-     const getInfo = async ()=>{
-         try {
-            const response = await fetch('http://localhost:5000/user/1');
             const jsonData = await response.json();
+                
+           setInputFname(jsonData.user.firstname);
+           setInputLname(jsonData.user.lastname);
+           setTelephone(jsonData.user.telephone);
+           setemail(jsonData.user.email);
+           setOrigin(jsonData.user.origin);
+           //setProfession(jsonData.user.profession);
+           setGender(jsonData.user.gender);
+           setIdentification_type(jsonData.user.identification_type);
+           setIdentification_number(jsonData.user.identification_number);
+           //setImageUrl(jsonData.user.setImageUrl);
 
-            setInputFname(jsonData.user.firstname);
-            setInputLname(jsonData.user.lastname);
-            setTelephone(jsonData.user.telephone);
-            setemail(jsonData.user.email);
-            setOrigin(jsonData.user.origin);
-            setProfession(jsonData.user.profession);
-            //setGender(jsonData.user.gender);
-            setIdentification_type(jsonData.user.identification_type);
-            setIdentification_number(jsonData.user.identification_number);
-            //setImageUrl(jsonData.user.setImageUrl);
-
-         } catch (error) {
-             console.log(error.message)
-         }
-     }
-
-     const postInfo = async (e) => {
-         e.preventDefault();
-
-         const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,email:email,origin:origin,profession:profession,identification_type:identification_type,identification_number:setIdentification_number}
-
-         const response = await fetch('http://localhost:5000/user/1',
-         {
-             method:'PUT',
-             headers:{"Content-Type":"Application/json"},
-             body:JSON.stringify(body)
-            });
-            if(response){
-                toaster('Your Profile information saved.', 'success')
-            }
-     }
-
-
-
-    const EditInput = ()=>{
-        return input
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
-    const EditInfo = ()=>{
-        return labelHidden
+    const postInfo = async (e) => {
+        e.preventDefault();
+        const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,email:email,origin:origin,setGender:gender,identification_type:identification_type,identification_number:identification_number}
+ 
+        const response = await fetch('http://localhost:5000/user/' + userId,
+        {
+            method:'put',
+            headers:{
+                "Content-Type":"Application/json",
+                "Authorization":"Bearer "+localStorage.getItem("userProfileToken")
+            },
+            body:JSON.stringify(body)
+           });
+           if(response){
+               console.log(response)
+               toaster('Your Profile information saved.', 'success')
+           }
+    }
+
+    const imageUpload = ()=>{
+
     }
 
     useEffect(() => {
         getInfo();
-    }, [ ])
-    useEffect(() => {});
-
-    const editUserInfo = ()=>{
-      setLabelHidden({display:'none'});
-      setInput({display:'block'});
-      
-    }
+    })
     
     return (
         <div className={classes.main}>
@@ -302,91 +283,91 @@ const ProfileInfos = () => {
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item direction="column" container>
-                        <div style={{display:"flex",justifyContent:"space-between",marginTop:40}}>
-                        <div></div>
-                        <Typography align="center" variant="h5" className={classes.title}>Your Profile Information Details</Typography>
-
-                        <Button variant="contained" color="primary"  className={classes.confirm} onClick={editUserInfo} >Edit</Button>
-                        </div>
-                        <div style={{marginTop:'40px'}}>
+                        <Typography align="center" variant="h5" className={classes.title}>Profile Information</Typography>
                         <Grid item xs={12} sm container >
                             <Grid item sm={4} direction="column" container className={classes.profile} >
-                                <img src={profileImage1} alt="profile" className={classes.img}/>
-                                <input  type="file" alt="upload Image" className={classes.uploadbutton} onClick={()=>uploadImage()} onChange={(e)=>setProfileImage(e.target.files[0])} />
+                                <img src={profileImage} alt="profile" className={classes.img}/>
+                                <Button variant="contained" color="primary" className={classes.button} onClick={imageUpload}>EDIT PROFILE PICTURE</Button>
                             </Grid>
                             <Grid item xs>
+                                <Grid item>
+                                    <Typography variant="subtitle1" className={classes.paragraph}> </Typography>
+                                </Grid>
                                 <Grid item xs>
-                    
-                                <form className={classes.form}>
+                                    <form className={classes.form}>
                                         <div>
-                                            <label className={classes.label}> Firstname:</label>
+                                            <LabelWrapper> Firstname:</LabelWrapper>
                                             <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()} >{inputFname}</label>
-                                                <input className={classes.inputField} value={inputFname} style={EditInput()} onChange={(e)=>{setInputFname(e.target.value)}}/>
+                                                <input type="text" className={classes.inputField} value={inputFname} onChange={(e)=>{setInputFname(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}} />
+                                                
                                             </InputWrapper>
                                         </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>Lastname:</label>
+                                        <div>
+                                            <LabelWrapper>Lastname:</LabelWrapper>
                                             <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()} >{inputLname}</label>
-                                                <input className={classes.inputField} value={inputLname} style={EditInput()} onChange={(e)=>{setInputLname(e.target.value)}} />
+                                                <input type="text" className={classes.inputField} value={inputLname} onChange={(e)=>{setInputLname(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                
                                             </InputWrapper>
                                         </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>Telephone:</label>
+                                        <div>
+                                            <LabelWrapper>Telephone:</LabelWrapper>
                                             <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()}>{telephone}</label>
-                                                <input className={classes.inputField} style={EditInput()} value={telephone} onChange={(e)=>{setTelephone(e.target.value)}}/>
+                                                <input type="text" className={classes.inputField} value={telephone} onChange={(e)=>{setTelephone(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                
                                             </InputWrapper>
                                         </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>Email:</label>
+                                        <div>
+                                            <LabelWrapper>Email:</LabelWrapper>
                                             <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()}>{email}</label>
-                                                <input className={classes.inputField} style={EditInput()} value={email} onChange={(e)=>{setemail(e.target.value)}} />
+                                                <input type="text" className={classes.inputField} value={email} onChange={(e)=>{setemail(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                
                                             </InputWrapper>
                                         </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>Origin:</label>
+                                        <div>
+                                            <LabelWrapper>Origin:</LabelWrapper>
                                             <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()}>{origin}</label>
-                                                <input className={classes.inputField} style={EditInput()} value={origin} onChange={(e)=>{setOrigin(e.target.value)}} />
-                                            </InputWrapper>
-                                        </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>Profession:</label>
-                                            <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()}>{profession}</label>
-                                                <input className={classes.inputField} style={EditInput()} value={profession} onChange={(e)=>{setProfession(e.target.value)}}/>
+                                                <input type="text" className={classes.inputField} value={origin} onChange={(e)=>{setOrigin(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                
                                             </InputWrapper>
                                         </div>
 
-                                        <div className={classes.formDiv}>
-                                        <label className={classes.label}>ID type:</label>
-                                        <InputWrapper>
-                                            <label className={classes.userInfo} style={EditInfo()} >{identification_type}</label>
-                                            <select className={classes.optionField} style={EditInput()} value={identification_type} onChange={(e)=>{setIdentification_type(e.target.value)}}>
-                                                <option>ID</option>
-                                                <option>Passport</option>
+                                        <div>
+                                            <LabelWrapper>ID type:</LabelWrapper>
+                                            <InputWrapper>
+                                                <input type="text" className={classes.inputField} value={identification_type} onChange={(e)=>{setIdentification_type(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                               
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
+                                            <LabelWrapper>ID number:</LabelWrapper>
+                                            <InputWrapper>
+                                                <input type="email" className={classes.inputField} value={identification_number} onChange={(e)=>{setIdentification_number(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
+                                        <LabelWrapper>Gender:</LabelWrapper>
+                                        <InputWrapper onClick={()=>{setShowbutton({display:'block'})}} value={gender}>
+                                            <select
+                                                className={classes.optionField}
+                                            >
+                                                <option>Other</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
                                             </select>
                                         </InputWrapper>
                                         </div>
-                                        <div className={classes.formDiv}>
-                                            <label className={classes.label}>ID Number:</label>
-                                            <InputWrapper>
-                                                <label className={classes.userInfo} style={EditInfo()}>1{identification_number}</label>
-                                                <input className={classes.inputField} style={EditInput()} value={identification_number} onChange={(e)=>{setIdentification_number(e.target.value)}}/>
-                                            </InputWrapper>
-                                        </div>
-                                  </form>
-                                  </Grid>
+                                    </form>
+                                </Grid>
                             </Grid>
-
-                        </Grid>
-                        </div>
-                        <Grid style={{display:"flex",justifyContent:"space-between",marginTop:'10px'}}>
-                        <Typography align="center" variant="h5" className={classes.title}></Typography>
-                        <Button variant="contained" color="primary"  className={classes.confirm} onClick={e=>postInfo(e)} >SAVE</Button>
+                            <Grid item direction='column' container
+                                className={classes.lastContainer}
+                            >
+                                <Typography variant="subtitle1" className={classes.consent} style={showbutton}>
+                                     Click <span className={classes.span}>CONFIRM CHANGES</span> to save the changes you made to your profile information.
+                                </Typography>
+                                <Button variant="contained" color="primary"  className={classes.confirm} onClick={e => {postInfo(e)}} style={showbutton}>CONFIRM CHANGES</Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -395,5 +376,6 @@ const ProfileInfos = () => {
     )
 }
 
-
 export default ProfileInfos;
+
+

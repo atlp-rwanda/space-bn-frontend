@@ -402,7 +402,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 className={classes.profile}
             >
                 <MenuItem color="inherit" onClick={()=> {history.push('/profile')}}><PersonIcon />Profile</MenuItem>
-                <MenuItem color="inherit" onClick={()=> {history.push('/profileview')}}><PersonIcon />Edit Profile</MenuItem>
+                <MenuItem color="inherit" onClick={()=> {history.push('/profileview')}}><PersonIcon />Edit</MenuItem>
                 <MenuItem color="inherit" onClick={handleLogOut} ><LockIcon />Log out</MenuItem>
             </Menu>
             }  

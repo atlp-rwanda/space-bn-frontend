@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react' ;
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
@@ -92,15 +92,44 @@ const useStyles = makeStyles(theme => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
+        fontSize:20,
         marginLeft: 120,
+        marginBottom:20,
         '@media(max-width: 1111px)': {
             marginLeft: 50
         },'@media (max-width:768px)': {
             marginLeft: 50,
         },
+
         '@media(max-width: 400px)': {
             marginLeft: 20
         },
+        '@media(max-width: 375px)': {
+            fontSize:15,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
+        '@media(max-width: 414px)': {
+            fontSize:16,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
+        '@media(max-width: 320px)': {
+            fontSize:12,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
+        '@media(max-width: 448px)': {
+            fontSize:15,
+            marginLeft:'10px',
+            marginBottom:20,
+        },
+        '@media(max-width: 360px)': {
+            fontSize:13,
+            marginLeft:'10px',
+            marginBottom:20,
+        },
+
     },
     inputField: {
         width: '40%',
@@ -108,6 +137,7 @@ const useStyles = makeStyles(theme => ({
         padding: '1px 8px',
         border: '2px solid #7B7B7B',
         borderRadius: '3px',
+
         outline: 'none',
         '@media (max-width:960px)': {
             width: '60%',
@@ -119,14 +149,21 @@ const useStyles = makeStyles(theme => ({
         '@media(max-width: 400px)': {
             margin: '8px 10px 0 0',
         },
+
     },
     optionField: {
         marginTop: '10px',
+        marginLeft:60,
         width: '90px',
         paddingLeft: '2px 8px',
         border: '2px solid #7B7B7B',
         borderRadius: '4px',
-        outline: "none"
+        outline: "none",
+        '@media(max-width: 850px)': {
+            fontSize:15,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
     },
     lastContainer: {
         margin: '40px  0 30px 10%',
@@ -159,11 +196,85 @@ const useStyles = makeStyles(theme => ({
     span: {
         fontFamily: `'Poppins', sans-serif;`,
         fontWeight: 'bold'
+    },
+    label:{
+        fontSize:20,
+        marginLeft:'60px',
+        marginBottom:20,
+        '@media(max-width: 850px)': {
+            fontSize:15,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
+        '@media(max-width: 448px)': {
+            fontSize:15,
+            marginLeft:'10px',
+            marginBottom:20,
+        },
+        '@media(max-width: 375px)': {
+            fontSize:15,
+            marginLeft:'20px',
+            marginBottom:20,
+        },
+        '@media(max-width: 320px)': {
+            fontSize:10,
+            marginLeft:'10px',
+            marginBottom:20,
+        },
+        '@media(max-width: 360px)': {
+            fontSize:12,
+            marginLeft:'10px',
+            marginBottom:20,
+        },
+
+    },
+    checkboxField:{
+        marginLeft:20,
+
     }
 }))
 
+
+
 const ProfileInfos = () => {
     const classes = useStyles();
+
+    const[inputFname, setInputFname] = useState("")
+    const[inputLname, setInputLname] = useState("")
+    const[telephone, setTelephone] = useState("")
+    const[email, setemail] = useState("")
+    const[origin, setOrigin] = useState("")
+    //const[gender, setGender] = useState("")
+    const[identification_type, setIdentification_type] = useState("")
+    const[identification_number, setIdentification_number] = useState("")
+
+    const getInfo = async ()=>{
+
+        const userId = localStorage.getItem("userProfile");
+        try {
+            const response = await fetch('http://localhost:5000/user/'+ userId );
+
+            const jsonData = await response.json();
+                
+           setInputFname(jsonData.user.firstname);
+           setInputLname(jsonData.user.lastname);
+           setTelephone(jsonData.user.telephone);
+           setemail(jsonData.user.email);
+           setOrigin(jsonData.user.origin);
+           //setGender(jsonData.user.gender);
+           setIdentification_type(jsonData.user.identification_type);
+           setIdentification_number(jsonData.user.identification_number);
+           //setImageUrl(jsonData.user.setImageUrl);
+
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    useEffect(() => {
+
+        getInfo();
+    }, [ ])
     
     return (
         <div className={classes.main}>
@@ -173,50 +284,67 @@ const ProfileInfos = () => {
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item direction="column" container>
-                        <Typography align="center" variant="h5" className={classes.title}>Profile Information</Typography>
+                        <Typography align="center" variant="h5" className={classes.title}>Welcome {inputFname} to your Profile Information</Typography>
                         <Grid item xs={12} sm container >
                             <Grid item sm={4} direction="column" container className={classes.profile} >
                                 <img src={profileImage} alt="profile" className={classes.img}/>
-                                <Button variant="contained" color="primary" className={classes.button}>EDIT PROFILE PICTURE</Button>
+                                <Button variant="contained" color="primary" className={classes.button} style={{display:'none'}} >EDIT PROFILE PICTURE</Button>
                             </Grid>
                             <Grid item xs>
                                 <Grid item>
-                                    <Typography variant="subtitle1" className={classes.paragraph}>By clicking in the checkbox, you will allow the application to use your Profile Information on any travel request. </Typography>
+                                    <Typography variant="subtitle1" className={classes.paragraph}> </Typography>
                                 </Grid>
                                 <Grid item xs>
                                     <form className={classes.form}>
-                                        <div>
-                                            <LabelWrapper> Name:</LabelWrapper>
+                                        <div> 
+                                                                                    
+                                            <LabelWrapper> Firstname:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} />
-                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                                <label className={classes.label}>{inputFname}</label>
+                                                <Checkbox color='primary' className={classes.checkboxField} /> 
                                             </InputWrapper>
                                         </div>
                                         <div>
-                                            <LabelWrapper>Role:</LabelWrapper>
+                                            
+                                            <LabelWrapper>Lastname:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} />
-                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                            <label className={classes.label}>{inputLname}</label>
+                                            <Checkbox color='primary' className={classes.checkboxField} />  
                                             </InputWrapper>
                                         </div>
                                         <div>
-                                            <LabelWrapper>Address:</LabelWrapper>
+                                            <LabelWrapper>Telephone:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} />
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
-                                        </div>
-                                        <div>
-                                            <LabelWrapper>Phone:</LabelWrapper>
-                                            <InputWrapper>
-                                                <input type="text" className={classes.inputField} />
+                                            <label className={classes.label}>{telephone}</label>
                                                 <Checkbox color='primary' className={classes.checkboxField} />
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>Email:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="email" className={classes.inputField} />
+                                            <label className={classes.label}>{email}</label>
+                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
+                                            <LabelWrapper>Origin:</LabelWrapper>
+                                            <InputWrapper>
+                                            <label className={classes.label}>{origin}</label>
+                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                            </InputWrapper>
+                                        </div>
+
+                                        <div>
+                                            <LabelWrapper>ID Type:</LabelWrapper>
+                                            <InputWrapper>
+                                            <label className={classes.label}>{identification_type}</label>
+                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
+                                            <LabelWrapper>ID Number:</LabelWrapper>
+                                            <InputWrapper>
+                                            <label className={classes.label}>1{identification_number}</label>
                                                 <Checkbox color='primary' className={classes.checkboxField} />
                                             </InputWrapper>
                                         </div>
@@ -239,9 +367,9 @@ const ProfileInfos = () => {
                                 className={classes.lastContainer}
                             >
                                 <Typography variant="subtitle1" className={classes.consent}>
-                                    By clicking <span className={classes.span}>CONFIRM DETAILS</span> button, you will allow applicaton to use your Profile Informaton on any travel request.
+                                    By <span className={classes.span}>CHECHING</span> the checkbox above, you will allow application to use the corresponding Informaton on any travel request.
                                 </Typography>
-                                <Button variant="contained" color="primary"  className={classes.confirm}>CONFIRM DETAILS</Button>
+                                
                             </Grid>
                         </Grid>
                     </Grid>
