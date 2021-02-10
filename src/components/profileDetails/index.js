@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import { Button, makeStyles } from '@material-ui/core';
-import profileImage from "../../assets/images/didace 1.svg";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
@@ -67,10 +66,8 @@ const useStyles = makeStyles(theme => ({
     },
     img: {
         width: 180,
-        height: 180,
-        
-        borderRadius:180,
-        backgroundColor:'blue'
+        height: 180, 
+        borderRadius:180
         
     },
     profile: {
@@ -211,20 +208,21 @@ const ProfileInfos = () => {
     const[telephone, setTelephone] = useState("")
     const[email, setemail] = useState("")
     const[origin, setOrigin] = useState("")
-    //const[profession, setProfession] = useState("")
     const[gender, setGender] = useState("")
     const[identification_type, setIdentification_type] = useState("")
     const[identification_number, setIdentification_number] = useState("")
     const[showbutton, setShowbutton] = useState({display:'none'})
+    const[imageUrl, setImageUrl] = useState("")
      
     const userId = localStorage.getItem("userProfile");
 
     const getInfo = async ()=>{
-         console.log(userId)
+       
+        console.log(userId)
         
         try {
             const response = await fetch('http://localhost:5000/user/'+ userId, {
-                method:'get',
+                
                 headers:{
                     "Authorization":"Bearer "+localStorage.getItem("userProfileToken"),
                 },
@@ -237,11 +235,10 @@ const ProfileInfos = () => {
            setTelephone(jsonData.user.telephone);
            setemail(jsonData.user.email);
            setOrigin(jsonData.user.origin);
-           //setProfession(jsonData.user.profession);
            setGender(jsonData.user.gender);
            setIdentification_type(jsonData.user.identification_type);
            setIdentification_number(jsonData.user.identification_number);
-           //setImageUrl(jsonData.user.setImageUrl);
+           setImageUrl(jsonData.user.user_image);
 
         } catch (error) {
             console.log(error.message)
@@ -251,7 +248,7 @@ const ProfileInfos = () => {
     const postInfo = async (e) => {
         e.preventDefault();
         const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,email:email,origin:origin,setGender:gender,identification_type:identification_type,identification_number:identification_number}
- 
+        
         const response = await fetch('http://localhost:5000/user/' + userId,
         {
             method:'put',
@@ -267,13 +264,9 @@ const ProfileInfos = () => {
            }
     }
 
-    const imageUpload = ()=>{
-
-    }
-
     useEffect(() => {
-        getInfo();
-    })
+        setImageUrl(localStorage.getItem("userImageUrl"))
+    },[])
     
     return (
         <div className={classes.main}>
@@ -286,8 +279,9 @@ const ProfileInfos = () => {
                         <Typography align="center" variant="h5" className={classes.title}>Profile Information</Typography>
                         <Grid item xs={12} sm container >
                             <Grid item sm={4} direction="column" container className={classes.profile} >
-                                <img src={profileImage} alt="profile" className={classes.img}/>
-                                <Button variant="contained" color="primary" className={classes.button} onClick={imageUpload}>EDIT PROFILE PICTURE</Button>
+                                <img src={imageUrl} alt="profile" className={classes.img}/>
+                    
+                               
                             </Grid>
                             <Grid item xs>
                                 <Grid item>
@@ -298,35 +292,35 @@ const ProfileInfos = () => {
                                         <div>
                                             <LabelWrapper> Firstname:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={inputFname} onChange={(e)=>{setInputFname(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}} />
+                                                <input type="text" value={inputFname}  className={classes.inputField}  onChange={ (e)=>{ setInputFname(e.target.value);e.preventDefault();}} onClick={()=>{getInfo();setShowbutton({display:'block'})}} />
                                                 
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>Lastname:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={inputLname} onChange={(e)=>{setInputLname(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField} value={inputLname} onChange={(e)=>{setInputLname(e.target.value)}} onClick={()=>{getInfo();setShowbutton({display:'block'})}}/>
                                                 
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>Telephone:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={telephone} onChange={(e)=>{setTelephone(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField}  onChange={(e)=>{setTelephone(e.target.value)}} value={telephone} onClick={()=>{getInfo(); setShowbutton({display:'block'})}}/>
                                                 
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>Email:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={email} onChange={(e)=>{setemail(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField} value={email} onChange={(e)=>{setemail(e.target.value)}} onClick={()=>{getInfo(); setShowbutton({display:'block'})}}/>
                                                 
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>Origin:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={origin} onChange={(e)=>{setOrigin(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField} value={origin} onChange={e=>setOrigin(e.target.value)} onClick={()=>{getInfo(); setShowbutton({display:'block'})}}/>
                                                 
                                             </InputWrapper>
                                         </div>
@@ -334,24 +328,30 @@ const ProfileInfos = () => {
                                         <div>
                                             <LabelWrapper>ID type:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="text" className={classes.inputField} value={identification_type} onChange={(e)=>{setIdentification_type(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField} value={identification_type} onChange={(e)=>{setIdentification_type(e.target.value)}} onClick={()=>{getInfo(); setShowbutton({display:'block'})}}/>
                                                
                                             </InputWrapper>
                                         </div>
                                         <div>
                                             <LabelWrapper>ID number:</LabelWrapper>
                                             <InputWrapper>
-                                                <input type="email" className={classes.inputField} value={identification_number} onChange={(e)=>{setIdentification_number(e.target.value)}} onClick={()=>{setShowbutton({display:'block'})}}/>
+                                                <input type="text" className={classes.inputField} value={identification_number} onChange={(e)=>{setIdentification_number(e.target.value)}} onClick={()=>{getInfo(); setShowbutton({display:'block'})}}/>
+                                                
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
+                                            <LabelWrapper>Image URL:</LabelWrapper>
+                                            <InputWrapper>
+                                                <input type="text" className={classes.inputField} value={imageUrl} onChange={(e)=>{setIdentification_number(e.target.value)}} onClick={()=>{getInfo(); setShowbutton({display:'block'})}} />
                                                 
                                             </InputWrapper>
                                         </div>
                                         <div>
                                         <LabelWrapper>Gender:</LabelWrapper>
-                                        <InputWrapper onClick={()=>{setShowbutton({display:'block'})}} value={gender}>
+                                        <InputWrapper onClick={()=>{getInfo(); setShowbutton({display:'block'})}} value={gender}>
                                             <select
                                                 className={classes.optionField}
                                             >
-                                                <option>Other</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
@@ -377,5 +377,3 @@ const ProfileInfos = () => {
 }
 
 export default ProfileInfos;
-
-

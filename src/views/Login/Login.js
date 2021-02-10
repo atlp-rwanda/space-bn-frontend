@@ -62,6 +62,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
                console.log(jsonData.user)
                localStorage.setItem("userProfile",jsonData.user.id);
                localStorage.setItem("userProfileToken",jsonData.token);
+               localStorage.setItem("userImageUrl",jsonData.user.user_image);
                       
                dispatch({type: SET_AUTHENTICATION})
                toaster('You are logged in', 'success')

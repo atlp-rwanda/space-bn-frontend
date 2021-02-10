@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import { Patten } from "../../shared/styles/LoginStyles";
 import { Hidden } from "@material-ui/core";
 import { Button, makeStyles, Checkbox } from '@material-ui/core';
-import profileImage from "../../assets/images/didace 1.svg";
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
@@ -64,10 +63,9 @@ const useStyles = makeStyles(theme => ({
         }
     },
     img: {
-        width: 150,
-        height: 150,
-        margin: '30px 0 20px 20px',
-        boerderRadius:45
+        width: 180,
+        height: 180, 
+        borderRadius:180
         
     },
     profile: {
@@ -244,9 +242,11 @@ const ProfileInfos = () => {
     const[telephone, setTelephone] = useState("")
     const[email, setemail] = useState("")
     const[origin, setOrigin] = useState("")
-    //const[gender, setGender] = useState("")
+    const[gender, setGender] = useState("")
     const[identification_type, setIdentification_type] = useState("")
     const[identification_number, setIdentification_number] = useState("")
+    const[imageUrl, setImageUrl] = useState("")
+   
 
     const getInfo = async ()=>{
 
@@ -261,10 +261,10 @@ const ProfileInfos = () => {
            setTelephone(jsonData.user.telephone);
            setemail(jsonData.user.email);
            setOrigin(jsonData.user.origin);
-           //setGender(jsonData.user.gender);
+           setGender(jsonData.user.gender);
            setIdentification_type(jsonData.user.identification_type);
            setIdentification_number(jsonData.user.identification_number);
-           //setImageUrl(jsonData.user.setImageUrl);
+           setImageUrl(jsonData.user.user_image);
 
         } catch (error) {
             console.log(error.message)
@@ -287,7 +287,7 @@ const ProfileInfos = () => {
                         <Typography align="center" variant="h5" className={classes.title}>Welcome {inputFname} to your Profile Information</Typography>
                         <Grid item xs={12} sm container >
                             <Grid item sm={4} direction="column" container className={classes.profile} >
-                                <img src={profileImage} alt="profile" className={classes.img}/>
+                                <img src={imageUrl} alt="profile" className={classes.img}/>
                                 <Button variant="contained" color="primary" className={classes.button} style={{display:'none'}} >EDIT PROFILE PICTURE</Button>
                             </Grid>
                             <Grid item xs>
@@ -349,12 +349,16 @@ const ProfileInfos = () => {
                                             </InputWrapper>
                                         </div>
                                         <div>
+                                            <LabelWrapper>Image URL:</LabelWrapper>
+                                            <InputWrapper>
+                                            <label className={classes.label} style={{fontSize:13}}>{imageUrl}</label>
+                                                <Checkbox color='primary' className={classes.checkboxField} />
+                                            </InputWrapper>
+                                        </div>
+                                        <div>
                                         <LabelWrapper>Gender:</LabelWrapper>
                                         <InputWrapper>
-                                            <select
-                                                className={classes.optionField}
-                                            >
-                                                <option>Other</option>
+                                            <select className={classes.optionField} value={gender}>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
