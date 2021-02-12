@@ -19,11 +19,10 @@ export const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(6)
     },
     questionContainer: {
-      padding: theme.spacing(2, 6),
-      marginTop: 30,
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      padding: theme.spacing(2, 4),
+      marginTop: 20,
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
       '@media(max-width:600px)': {
         width: '95%',
         padding: theme.spacing(0),
@@ -35,15 +34,15 @@ export const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       marginTop: 20,
-      marginLeft: '30px',
       borderLeft: '1px solid #C3C3C3',
       height: 'auto',
     },
     contentContainer: {
-      marginTop: '-5px'
+      marginTop: '-10px'
     },
     content: {
-      paddingLeft: 20
+      paddingLeft: 0,
+      margin: '10px 0 30px 0'
     },
     badge: {
       background: "rgba(229, 229, 229, 1)",
@@ -55,13 +54,17 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover':{
       cursor:'pointer',
       textDecoration: 'underline'
-    }
+    },
+    margin: '0 10px'
   },
   title: {
-    color: '#5E5E5E'
+    color: '#5E5E5E',
+    margin: '10px'
   },
   body: {
     color: '#5E5E5E',
-    textAlign: 'justify'
+    textAlign: 'justify',
+    width: '95%',
+    margin: '0 10px'
   }
 }));
