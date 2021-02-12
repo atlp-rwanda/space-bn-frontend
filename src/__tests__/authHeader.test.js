@@ -100,7 +100,6 @@ describe('<AuthHeader />', () => {
         fireEvent.click(btn)
         const ul = document.getElementsByTagName('li')
 
-        
     })
     it('should should dispatch logout on click', () => {     
         render(
@@ -135,8 +134,7 @@ describe('<AuthHeader />', () => {
         const ul = document.getElementsByTagName('li')
         const logout = ul[1]
 
-        fireEvent.click(logout) 
-        
+        fireEvent.click(logout)  
     })
     
     it('Should navigate when clicked', () => {

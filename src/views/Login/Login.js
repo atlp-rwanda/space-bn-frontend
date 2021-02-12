@@ -22,6 +22,8 @@ import { SET_AUTHENTICATION, SET_ERROR,SET_LOADING } from '../../actions/types';
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 
+const { REACT_APP_BACKEND_URL } = process.env;
+
   const SignIn = () => {
     const classes = styles();
     const history = useHistory();
@@ -60,7 +62,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
           toaster(auth.error, 'error')
           return false
         } 
-        const response =  await fetch('http://localhost:5000/user/signin',
+        const response =  await fetch(`${REACT_APP_BACKEND_URL}/user/signin`,
           {
             method:'post',
             headers:{"Content-Type":"Application/json"},
@@ -69,8 +71,6 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
            const jsonData = await response.json();
 
            if(jsonData.user !== undefined){
-
-               console.log(jsonData.user)
                localStorage.setItem("userId",jsonData.user.id);
                localStorage.setItem("userToken",jsonData.token);
                localStorage.setItem("userImageUrl",jsonData.user.user_image);

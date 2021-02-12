@@ -247,7 +247,7 @@ const ProfileInfos = () => {
         e.preventDefault();
         const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,email:email,origin:origin,setGender:gender,identification_type:identification_type,identification_number:identification_number}
         
-        const response = await fetch('http://localhost:5000/user/' + userId,
+        const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`,
         {
             method:'put',
             headers:{
