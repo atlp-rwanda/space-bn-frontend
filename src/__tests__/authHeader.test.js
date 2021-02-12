@@ -100,7 +100,6 @@ describe('<AuthHeader />', () => {
         fireEvent.click(btn)
         const ul = document.getElementsByTagName('li')
 
-       // expect(ul.length).toEqual(2)
         
     })
     it('should should dispatch logout on click', () => {     
@@ -136,9 +135,7 @@ describe('<AuthHeader />', () => {
         const ul = document.getElementsByTagName('li')
         const logout = ul[1]
 
-        fireEvent.click(logout)
-
-       // expect(mockHistory).toBeCalledWith('/login')  
+        fireEvent.click(logout) 
         
     })
     
