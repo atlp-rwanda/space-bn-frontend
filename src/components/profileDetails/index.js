@@ -6,9 +6,9 @@ import { Hidden } from "@material-ui/core";
 import { Button, makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
-
 import toaster from '../../helpers/toasts';
 
+const { REACT_APP_BACKEND_URL } = process.env;
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -214,17 +214,15 @@ const ProfileInfos = () => {
     const[showbutton, setShowbutton] = useState({display:'none'})
     const[imageUrl, setImageUrl] = useState("")
      
-    const userId = localStorage.getItem("userProfile");
+    const userId = localStorage.getItem("userId");
 
     const getInfo = async ()=>{
-       
-        console.log(userId)
         
         try {
-            const response = await fetch('http://localhost:5000/user/'+ userId, {
+            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`,{
                 
                 headers:{
-                    "Authorization":"Bearer "+localStorage.getItem("userProfileToken"),
+                    "Authorization":"Bearer "+localStorage.getItem("userToken"),
                 },
             } );
 
@@ -254,12 +252,11 @@ const ProfileInfos = () => {
             method:'put',
             headers:{
                 "Content-Type":"Application/json",
-                "Authorization":"Bearer "+localStorage.getItem("userProfileToken")
+                "Authorization":"Bearer "+localStorage.getItem("userToken")
             },
             body:JSON.stringify(body)
            });
            if(response){
-               console.log(response)
                toaster('Your Profile information saved.', 'success')
            }
     }

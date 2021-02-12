@@ -18,14 +18,14 @@ import { styles, Heading, InputText, SocialButton, SocialText, Patten } from '..
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
 import { AuthContext } from '../../contexts/AuthContext';
-import { SET_AUTHENTICATION } from '../../actions/types';
+import { SET_AUTHENTICATION, SET_ERROR,SET_LOADING } from '../../actions/types';
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 
   const SignIn = () => {
     const classes = styles();
     const history = useHistory();
-    const { dispatch} = useContext(AuthContext);
+    const { dispatch,auth} = useContext(AuthContext);
 
     const [values, setValues] = useState({
       password: '',
@@ -48,28 +48,41 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
         e.preventDefault()
         const body = {email:values.email,password:values.password};
 
+
+        dispatch({type: SET_LOADING, payload: true })
+        if (values.email === '') {
+          dispatch({type: SET_ERROR, payload: 'Email is required'})
+          toaster(auth.error, 'error')
+          return false
+        }
+        else if (values.password === '') {
+          dispatch({type: SET_ERROR, payload: 'Password is required'})
+          toaster(auth.error, 'error')
+          return false
+        } 
         const response =  await fetch('http://localhost:5000/user/signin',
           {
             method:'post',
             headers:{"Content-Type":"Application/json"},
             body:JSON.stringify(body)
            });
-
            const jsonData = await response.json();
 
            if(jsonData.user !== undefined){
 
                console.log(jsonData.user)
-               localStorage.setItem("userProfile",jsonData.user.id);
-               localStorage.setItem("userProfileToken",jsonData.token);
+               localStorage.setItem("userId",jsonData.user.id);
+               localStorage.setItem("userToken",jsonData.token);
                localStorage.setItem("userImageUrl",jsonData.user.user_image);
-                      
-               dispatch({type: SET_AUTHENTICATION})
-               toaster('You are logged in', 'success')
+               dispatch({type: SET_LOADING, payload: false })      
+               dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
+               toaster(jsonData.message, 'success')
                 setTimeout(() => {
                 history.push('/dashboard');
                }, 4000) 
            }else{
+            dispatch({type: SET_LOADING, payload: false })
+            dispatch({type: SET_ERROR, payload: 'Please Enter correct email and password'})
             toaster('Please Enter correct email and password', 'info')
                       
            }

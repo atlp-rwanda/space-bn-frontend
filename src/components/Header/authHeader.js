@@ -203,7 +203,11 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
     const handleLogOut = () => {
        dispatch({type: SET_LOG_OUT})
        toaster('Logged out successfully', 'success')
-           history.push('/login')
+       setTimeout(()=>{
+        localStorage.removeItem("userToken")
+        history.push('/login')
+       }, 4000)
+           
     }
 
 

@@ -7,6 +7,8 @@ import { Button, makeStyles, Checkbox } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 
+const { REACT_APP_BACKEND_URL } = process.env;
+
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -250,9 +252,9 @@ const ProfileInfos = () => {
 
     const getInfo = async ()=>{
 
-        const userId = localStorage.getItem("userProfile");
+        const userId = localStorage.getItem("userId");
         try {
-            const response = await fetch('http://localhost:5000/user/'+ userId );
+            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}` );
 
             const jsonData = await response.json();
                 
