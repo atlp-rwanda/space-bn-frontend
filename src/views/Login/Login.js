@@ -76,7 +76,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
                localStorage.setItem("userImageUrl",jsonData.user.user_image);
                dispatch({type: SET_LOADING, payload: false })      
                dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
-               toaster(jsonData.message, 'success')
+               toaster('You are now logged in . ', 'success')
                 setTimeout(() => {
                 history.push('/dashboard');
                }, 4000) 
