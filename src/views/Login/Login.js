@@ -71,25 +71,25 @@ const SignIn = () => {
               "Accept-Language": currentLng
             },
             body:JSON.stringify(body)
-           });
-           const jsonData = await response.json();
-           if(jsonData.user !== undefined){
-               localStorage.setItem("userId",jsonData.user.id);
-               localStorage.setItem("userName",jsonData.user.firstname);
-               localStorage.setItem("userToken",jsonData.token);
-               localStorage.setItem("userImageUrl",jsonData.user.user_image);
-               dispatch({type: SET_LOADING, payload: false })      
-               dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
-               toaster(t('Logged in successfully'), 'success')
-                setTimeout(() => {
-                history.push('/dashboard');
-               }, 4000) 
-           }else{
+          });
+          const jsonData = await response.json();
+          if(jsonData.user !== undefined){
+              localStorage.setItem("userId",jsonData.user.id);
+              localStorage.setItem("userRoleId",jsonData.user.roleId);
+              localStorage.setItem("userToken",jsonData.token);
+              localStorage.setItem("userImageUrl",jsonData.user.user_image);
+              dispatch({type: SET_LOADING, payload: false })      
+              dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
+              toaster(t('Logged in successfully'), 'success')
+              setTimeout(() => {
+              history.push('/dashboard');
+              }, 4000) 
+          }else{
             dispatch({type: SET_LOADING, payload: false })
             dispatch({type: SET_ERROR, payload: jsonData.message})
             toaster(jsonData.message, 'error')
                       
-           }         
+          }         
       }
   return (
     <>
