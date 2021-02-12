@@ -254,7 +254,7 @@ const ProfileInfos = () => {
 
         const userId = localStorage.getItem("userId");
         try {
-            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}` );
+            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`);
 
             const jsonData = await response.json();
                 
