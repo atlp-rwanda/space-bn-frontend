@@ -20,7 +20,9 @@ jest.mock('react-router-dom', () => ({
         push: mockHistoryPush,
     })
 }))
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<Header />', () => {
     it('Should render the component correctly', () => {
         render(
@@ -85,6 +87,23 @@ describe('<Header />', () => {
         
         expect(links.length).toEqual(6);
     });
+    it('Should select language', () => {
+       const {getByTestId } = render(
+            <AuthContextProvider>
+                <Router>
+                    <Header />
+                </Router>
+            </AuthContextProvider>, { wrapper: SizeWrapper }
+        );
+        const handleSelectLang = jest.fn();
+        const select= getByTestId('select-language');
+
+        fireEvent.change(select, {target: {value: "en" || "fr" || "rw" || "sw"}})
+        handleSelectLang();
+
+        expect(handleSelectLang).toBeCalledTimes(1);
+        expect(select).toHaveValue("en" || "fr" || "rw" || "sw")
+    });
     
     it('Should navigate when clicked', () => {
         const SizeWrapper = (props) => {
@@ -95,7 +114,7 @@ describe('<Header />', () => {
             return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
         };
         
-        const {getByRole} = render(
+        const {getAllByRole} = render(
             <AuthContextProvider>
                 <Router>
                     <Header />
@@ -103,9 +122,11 @@ describe('<Header />', () => {
             </AuthContextProvider>, { wrapper: SizeWrapper }
         );
         
-        const iconButton = getByRole('button');
+        const iconButton = getAllByRole('button');
         
-        fireEvent.click(iconButton);
+        iconButton.forEach((btn) => {
+            fireEvent.click(btn);
+        })
         const links = document.getElementsByTagName('a');
         
         expect(links.length).toEqual(6);

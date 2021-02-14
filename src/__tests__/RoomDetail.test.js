@@ -6,7 +6,9 @@ import AuthContextProvider from "../contexts/AuthContext";
 import { RequestProvider } from "../contexts/RequestContext";
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 describe("<RoomDetail/>", () => {
   it("should render RoomDetail", () => {
     render(

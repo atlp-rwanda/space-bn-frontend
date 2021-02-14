@@ -4,8 +4,11 @@ import { render, cleanup, fireEvent, getAllByTestId } from "@testing-library/rea
 import Room from "../views/Rooms/Room";
 import AuthContextProvider from "../contexts/AuthContext";
 import {RequestProvider} from "../contexts/RequestContext";
-beforeEach(() => cleanup);
 
+beforeEach(() => cleanup);
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 describe("<Room/>", () => {
   
   it("should render image length", () => {

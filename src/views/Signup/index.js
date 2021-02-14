@@ -12,7 +12,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { createMuiTheme } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pattern from '../../shared/styles/Pattern';
-import socialAuthBtns from '../../helpers/socialAuthBtns';
+import SocialBtns from '../../helpers/socialAuthBtns';
 import {useStyles} from '../../shared/styles/SignupStyles';
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
@@ -21,6 +21,7 @@ import { SET_SIGNUP_ERROR, SET_SIGNUP_LOADING, SET_SIGNUP_RESPONSE } from '../..
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -29,10 +30,11 @@ const Signup = () => {
   const theme = createMuiTheme();
   const history = useHistory()
   const { dispatch } = useContext(SignupContext)
-
+  const { t } = useTranslation();
 
   const matches = useMediaQuery(theme.breakpoints.up('md'));
-  
+  const socialAuthBtns = SocialBtns()
+
   const [values, setValues] = useState({
     password: '',
     email: '',
@@ -55,23 +57,34 @@ const Signup = () => {
     e.preventDefault()
     const { name, email, password } = values;
     const nameArr = name.split(' ')
-
+    const currentLng = localStorage.getItem('i18nextLng');
+    const passwordRegex = /[^a-zA-Z\d\s:]/;
     dispatch({type: SET_SIGNUP_LOADING});
 
     if (name === '') {
-      toaster('Name is required!', 'warn')
+      toaster(t('Name is required'), 'warn')
       return false;
     } else if (nameArr[1] === undefined) {
-      toaster('Please provide fullname','warn')
+      toaster(t('Please provide fullname'),'warn')
       return false;
     } else if ( email === '') {
-      toaster('Email is required', 'warn')
+      toaster(t('Email is required'), 'warn')
       return false;
     } else if (password === '') {
-      toaster('Password is required', 'warn')
+      toaster(t('Password is required'), 'warn')
+      return false;
+    } else if (password.length < 8) {
+      toaster(t('Password must be at least 8 characters'), 'warn')
+      return false;
+    } else if (!password.match(passwordRegex)) {
+      toaster(t('Your password must be non-alphanumeric characters'), 'warn')
       return false;
     } else {
-      axios.post(`${REACT_APP_BACKEND_URL}/user/signup`, {firstname: nameArr[0], lastname:nameArr[1], email, password})
+      axios.post(`${REACT_APP_BACKEND_URL}/user/signup`, {firstname: nameArr[0], lastname:nameArr[1], email, password}, {
+        headers: {
+          "Accept-Language": currentLng
+        }
+      })
       .then((result) => {
         dispatch({type:SET_SIGNUP_RESPONSE, user: result.data.user_details, token: result.data.token})
         toaster(result.data.message, 'success')
@@ -82,7 +95,7 @@ const Signup = () => {
       })
       .catch((err) => {
         dispatch({type:SET_SIGNUP_ERROR, payload: err.response.data})
-        toaster(err.response.data.message || err.request.data.message, 'error')
+        toaster(err.response.data.message, 'error')
       })
     }
   }
@@ -100,9 +113,9 @@ const Signup = () => {
       <div className={classes.signupContainer}>
         {(matches && <Pattern />)}       
       <Card className={classes.pos}>
-        <h1 className={classes.h1}>Signup</h1>
+        <h1 className={classes.h1}>{t('Signup')}</h1>
         <FormControl fullWidth className={classes.root} variant="outlined">
-          <InputLabel htmlFor="outlined-name" data-testid="name-label">Name</InputLabel>
+          <InputLabel htmlFor="outlined-name" data-testid="name-label">{t('Name')}</InputLabel>
           <OutlinedInput
             id="outlined-name"
             type='text'
@@ -113,7 +126,7 @@ const Signup = () => {
           />
         </FormControl>
         <FormControl fullWidth className={classes.root} variant="outlined">
-          <InputLabel htmlFor="outlined-email" data-testid="email-label">Email</InputLabel>
+          <InputLabel htmlFor="outlined-email" data-testid="email-label">{t('Email')}</InputLabel>
           <OutlinedInput
             id="outlined-email"
             type='text'
@@ -125,7 +138,7 @@ const Signup = () => {
           />
         </FormControl>
         <FormControl  className={classes.root} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password" data-testid="password-label">Password</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-password" data-testid="password-label">{t('Password')}</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
             type={values.showPassword ? 'text' : 'password'}
@@ -147,7 +160,7 @@ const Signup = () => {
             }
             labelWidth={70}
           />
-           <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit">Signup</Button>
+           <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit">{t('Signup')}</Button>
           {
             socialAuthBtns.map(socialBtn => (
               <div key={socialBtn.alt}>
@@ -170,7 +183,7 @@ const Signup = () => {
  
 export const setAuthorization = (token) => {
   const _IdToken = token;
-  localStorage.setItem("_IdToken", _IdToken);
+  localStorage.setItem("userToken", _IdToken);
   axios.defaults.headers.common = { "Authorization": `Bearer ${_IdToken}` };
 }
 export default Signup;

@@ -22,7 +22,9 @@ jest.mock('react-router-dom', () => ({
         push: mockHistory,
     })
 }))
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<AuthHeader />', () => {
 
     it('should render the component correctly', () => {
@@ -146,7 +148,7 @@ describe('<AuthHeader />', () => {
             return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>;
         };
         
-        const {getByRole} = render(
+         render(
             <AuthContextProvider>
                 <Router>
                     <AuthHeader />

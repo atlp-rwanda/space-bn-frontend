@@ -5,7 +5,9 @@ import Accommadation from "../views/Accommadation";
 import AuthContextProvider from "../contexts/AuthContext";
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 describe("<Accommadation/>", () => {
   const filterHoter = jest.fn();
   const handleSearch = () => filterHoter();

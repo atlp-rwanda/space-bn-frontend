@@ -6,7 +6,9 @@ import AuthContextProvider from '../contexts/AuthContext';
 
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<FAQ />', () => {
     it('should render the component', ( )=> {
         render(

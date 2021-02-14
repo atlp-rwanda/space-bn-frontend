@@ -21,6 +21,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { SET_AUTHENTICATION, SET_ERROR,SET_LOADING } from '../../actions/types';
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
+import { useTranslation } from "react-i18next";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -28,7 +29,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
     const classes = styles();
     const history = useHistory();
     const { dispatch,auth} = useContext(AuthContext);
-
+    const { t } = useTranslation();
     const [values, setValues] = useState({
       password: '',
       email: '',
@@ -49,41 +50,43 @@ const { REACT_APP_BACKEND_URL } = process.env;
       const handleSubmit = async (e) => {
         e.preventDefault()
         const body = {email:values.email,password:values.password};
-
+        const currentLng = localStorage.getItem('i18nextLng');
 
         dispatch({type: SET_LOADING, payload: true })
         if (values.email === '') {
-          dispatch({type: SET_ERROR, payload: 'Email is required'})
+          dispatch({type: SET_ERROR, payload: t('Email is required')})
           toaster(auth.error, 'error')
           return false
         }
         else if (values.password === '') {
-          dispatch({type: SET_ERROR, payload: 'Password is required'})
+          dispatch({type: SET_ERROR, payload: t('Password is required')})
           toaster(auth.error, 'error')
           return false
         } 
         const response =  await fetch(`${REACT_APP_BACKEND_URL}/user/signin`,
           {
             method:'post',
-            headers:{"Content-Type":"Application/json"},
+            headers:{
+              "Content-Type":"Application/json",
+              "Accept-Language": currentLng
+            },
             body:JSON.stringify(body)
            });
            const jsonData = await response.json();
-
            if(jsonData.user !== undefined){
                localStorage.setItem("userId",jsonData.user.id);
                localStorage.setItem("userToken",jsonData.token);
                localStorage.setItem("userImageUrl",jsonData.user.user_image);
                dispatch({type: SET_LOADING, payload: false })      
                dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
-               toaster('You are now logged in . ', 'success')
+               toaster(t('Logged in successfully'), 'success')
                 setTimeout(() => {
                 history.push('/dashboard');
                }, 4000) 
            }else{
             dispatch({type: SET_LOADING, payload: false })
-            dispatch({type: SET_ERROR, payload: 'Please Enter correct email and password'})
-            toaster('Please Enter correct email and password', 'info')
+            dispatch({type: SET_ERROR, payload: jsonData.message})
+            toaster(jsonData.message, 'error')
                       
            }
            
@@ -105,12 +108,12 @@ const { REACT_APP_BACKEND_URL } = process.env;
       <CssBaseline />
       <div className={classes.container}>
         <Heading>
-          Login
+          {t('Login')}
         </Heading>
         <form className={classes.form} onSubmit={e =>handleSubmit(e)} >
 
         <InputText fullWidth variant="outlined">
-          <InputLabel htmlFor="outlined-email" data-testid="email-label">Email</InputLabel>
+          <InputLabel htmlFor="outlined-email" data-testid="email-label">{t('Email')}</InputLabel>
           <OutlinedInput
             id="outlined-email"
             type='text'
@@ -122,7 +125,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
           />
         </InputText>
         <InputText fullWidth variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password" data-testid="password-label">Password</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-password" data-testid="password-label">{t('Password')}</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
             type={values.showPassword ? 'text' : 'password'}
@@ -147,7 +150,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
 
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label={t("Remember me")}
           />
           <Button
             type="submit"
@@ -157,7 +160,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
             className={classes.submit}
             
           >
-            Sign In
+            {t('Sign In')}
           </Button>
 
           <SocialButton
@@ -167,7 +170,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
             color="primary"
           >
               <img src={Facebook} alt="Facebook" className={classes.socialIcons} />
-              <SocialText>Continue with facebook</SocialText>
+              <SocialText>{t('Continue with Facebook')}</SocialText>
           </SocialButton>
           <SocialButton
             type="submit"
@@ -176,7 +179,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
             color="primary"
           >
               <img src={Google} alt="Google" className={classes.socialIcons} />
-              <SocialText>Continue with Google</SocialText>
+              <SocialText>{t('Continue with Google')}</SocialText>
           </SocialButton>
 
         </form>

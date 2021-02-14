@@ -8,7 +8,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import {BrowserRouter} from 'react-router-dom'
 
 
-
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 beforeEach(() => cleanup);
 beforeEach(() => {
   const userInfo = {

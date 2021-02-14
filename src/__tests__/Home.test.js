@@ -4,6 +4,9 @@ import { render, screen } from '@testing-library/react';
 import Home from '../views/Home';
 import AuthContextProvider from '../contexts/AuthContext';
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 it('renders the correnct contents', () => {
     render(
         <AuthContextProvider>

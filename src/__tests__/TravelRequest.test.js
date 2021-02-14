@@ -12,7 +12,9 @@ jest.mock('react-router-dom', () => ({
         push: mockHistoryPush,
     })
 }));
-
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 beforeEach(() => cleanup);
 
 describe("<TravelRequest/>", () => {

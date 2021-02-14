@@ -3,7 +3,9 @@ import { render, cleanup, fireEvent } from '@testing-library/react';
 import SearchBar from '../components/SeachBar';
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<SearchBar />', () => {
     it('should render component correctly', () => {
         render(<SearchBar />)

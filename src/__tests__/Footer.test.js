@@ -3,6 +3,9 @@ import { render, screen } from '@testing-library/react';
 import Footer from '../components/Footer';
 import AuthContextProvider from '../contexts/AuthContext';
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<Footer />', () => {
     it('should render the footer content', () => {
         render(<AuthContextProvider><Footer /></AuthContextProvider>)

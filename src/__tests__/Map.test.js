@@ -4,7 +4,9 @@ import MapLocation from '../components/Map';
 import {hotelInfo} from '../helpers/hotelInfo';
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<MapLocation />', () => {
     it('should render component correctly', () => {
         render(<MapLocation searchValue={hotelInfo}/>)
