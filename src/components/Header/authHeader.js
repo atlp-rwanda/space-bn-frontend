@@ -203,7 +203,11 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
     const handleLogOut = () => {
        dispatch({type: SET_LOG_OUT})
        toaster('Logged out successfully', 'success')
-           history.push('/login')
+       setTimeout(()=>{
+        localStorage.removeItem("userToken")
+        history.push('/login')
+       }, 4000)
+           
     }
 
 
@@ -402,6 +406,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 className={classes.profile}
             >
                 <MenuItem color="inherit" onClick={()=> {history.push('/profile')}}><PersonIcon />Profile</MenuItem>
+                <MenuItem color="inherit" onClick={()=> {history.push('/profileview')}}><PersonIcon />Edit</MenuItem>
                 <MenuItem color="inherit" onClick={handleLogOut} ><LockIcon />Log out</MenuItem>
             </Menu>
             }  

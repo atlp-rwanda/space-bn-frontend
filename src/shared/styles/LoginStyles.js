@@ -95,6 +95,12 @@ export const styles = Material.makeStyles((theme) => ({
           flexDirection: 'column',
           alignItems: 'center',
       },
+
+      toastcontainer:{
+        top: '30px',
+        right: '20px',
+        left: 'auto'
+    },
   
     form: {
       width: '100%',
