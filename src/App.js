@@ -22,6 +22,8 @@ import { RequestProvider } from "./contexts/RequestContext";
 import FacilityContainer from "./views/facilities/dashBoardContainer";
 import SignupContextProvider from './contexts/SignupContext';
 
+import profileDetailsView from "./views/profileDetailsView";
+
 function App() {
   return (
     <SignupContextProvider>
@@ -36,6 +38,9 @@ function App() {
             <Route exact path="/faq" component={FAQ}/>
             <Route exact path="/about" component={About}/>
             <Route exact path="/contact" component={Contact}/>
+
+            <Route exact path="/profileview" component={profileDetailsView}/>
+
             <ProtectedRoute exact path="/profile" component={Profile} />
             <ProtectedRoute exact path="/booking" component={Accommadation} />
             <ProtectedRoute exact path="/:hotelId/rooms">
@@ -57,6 +62,9 @@ function App() {
             <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
+
+            
+
           </Switch>
         </div>
       </Router>
