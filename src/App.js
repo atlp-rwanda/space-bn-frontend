@@ -4,7 +4,13 @@ import Home from './views/Home';
 import Login from './views/Login/Login'; 
 import Signup from './views/Signup';
 import Hotel from './views/Hotel';
+<<<<<<< HEAD
 import FAQ from './views/FAQ';
+=======
+import FAQ from './views/FAQ/index';
+import MoreFAQ from './views/FAQ/moreFAQ';
+import About from './views/About';
+>>>>>>> ft(question): Implement more information on FAQ page & integrate to backend
 import Contact from './views/Contact';
 import About from './views/Aboutus/About';
 import './App.css';
@@ -73,3 +79,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Header from "../../components/Header/index";
 import Footer from "../../components/Footer/index";
 import {useStyles} from '../../shared/styles/FaqStyles';
@@ -32,6 +32,10 @@ const FAQ = () => {
     getQuestions();
   }, [setQuestions])
   
+  let history = useHistory();
+  const handleQuestionClick = (id) => {
+    history.push(`/faq/${id}/more`);
+  }
   const HandleSearch = () => {
   // do some implementations
 }
@@ -54,7 +58,12 @@ const FAQ = () => {
                     <Typography className={classes.body}>
                       {question.message.slice(0, 180) + '...'}
                     </Typography>
-                    <Link to="/faq/more" className={classes.links}>More</Link>
+                    <span
+                      onClick={() => handleQuestionClick(question.id)}
+                      className={classes.links}
+                    >
+                      More
+                    </span>
                   </div>
                 ))}
               </div>
@@ -68,7 +77,12 @@ const FAQ = () => {
                     <Typography variant="body1" className={classes.body}>
                       {question.message.slice(0, 180) + '...'}
                     </Typography>
-                    <Link to="/faq/more" className={classes.links}>More</Link>
+                    <span
+                      onClick={() => handleQuestionClick(question.id)}
+                      className={classes.links}
+                    >
+                      More
+                    </span>
                   </div>
                 ))}
               </div>

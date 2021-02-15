@@ -22,12 +22,12 @@ describe('<FAQ />', () => {
     expect(<FAQ />).not.toBeNull();
   });
 
-  test('Should render questions on page reload', () => {
+  // test('Should render questions on page reload', () => {
     // Render a React component to the DOM
-    const root = document.createElement('div');
-    ReactDOM.render(<FAQ />, root);
+    // const root = document.createElement('div');
+    // ReactDOM.render(<FAQ />, root);
 
     // Use DOM APIs (querySelector) to make assertions
     // expect(root.querySelector('li').not.toBeNull())
-  });
+  // });
 })
