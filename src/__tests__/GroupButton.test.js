@@ -9,6 +9,9 @@ import {
 import GroupButton from "../components/GroupButton";
 import { RequestProvider } from "../contexts/RequestContext";
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 describe("<Room/>", () => {
   it("should render group button", () => {
     render(

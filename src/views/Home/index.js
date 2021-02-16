@@ -11,8 +11,10 @@ import {
   ContainerFluid,BodyContainer, HighrightWrapper, HeadingWrapper,
   ButtonsWrapper, ImagesWrapper, SubImagesWrapper, MainContainer
 } from '../../shared/styles/HomeStyles';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
      return ( 
        <>
         <Header />
@@ -21,20 +23,20 @@ const Home = () => {
               <BodyContainer>
                   <HighrightWrapper>
                     <HeadingWrapper>
-                    <h1>TRAVEL BOOKINGS</h1>
-                    <h1>MADE EASY</h1>
+                    <h1>{t('TRAVEL BOOKINGS')}</h1>
+                    <h1>{t('MADE EASY')}</h1>
                       <ul>
-                        <li>Comfort</li>
-                        <li>Food</li>
-                        <li>Luxury</li>
+                        <li>{t('Comfort')}</li>
+                        <li>{t('Food')}</li>
+                        <li>{t('Luxury')}</li>
                       </ul>
                     </HeadingWrapper>
                     <ButtonsWrapper>
                     <Button variant="contained" color="primary" data-testid="viewHotels-btn">
-                      <Link to="/hotel" style={{color: 'white', textDecoration: 'none'}}>View Hotels</Link>
+                      <Link to="/hotel" style={{color: 'white', textDecoration: 'none'}}>{t('View Hotels')}</Link>
                     </Button>
                     <Button variant="contained" color="primary" data-testid="contactUs-btn">
-                      Contact Us
+                      {t('Contact Us')}
                     </Button>
                     </ButtonsWrapper>
                   </HighrightWrapper>

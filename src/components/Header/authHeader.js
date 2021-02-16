@@ -18,24 +18,27 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItem from '@material-ui/core/ListItem';
 import SearchIcon from '@material-ui/icons/Search';
+import { useTranslation } from "react-i18next";
+import Dropdown from "../../helpers/dropdown";
 
-
-const links = [
+const LinksFnc = () =>{
+  const { t } = useTranslation();
+  return [
     {
         url: '/about',
-        text: 'About Us',
+        text: t('About Us'),
     },
     {
         url: '/faq',
-        text: 'FAQ',
+        text: t('FAQ'),
     },
     {
         url: '/booking',
-        text: 'Booking',
+        text: t('Booking'),
     },
     {
         url: '/contact',
-        text: 'Contact Us',
+        text: t('Contact Us'),
     },
     {
         text:<Tooltip title="John Doe" aria-label="username" placement="bottom"> 
@@ -45,6 +48,7 @@ const links = [
             </Tooltip> 
     },
 ];
+}
 const useStyles = makeStyles((theme) => ({
    
     menuButton: {
@@ -179,14 +183,10 @@ const useStyles = makeStyles((theme) => ({
 const AuthHeader = ({onDashboard=false, handleOpen}) => { 
     const history = useHistory();
     const classes = useStyles();
-
- 
-
- 
-
-
     const [hideNav, setHideNow ] = useState(false)
     const { dispatch } = useContext(AuthContext);
+    const links = LinksFnc();
+
     const handleNavLinks = (e) => {
         setHideNow(!hideNav)
     }
@@ -209,8 +209,6 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
        }, 4000)
            
     }
-
-
     return (
         <> 
             <ToastContainer 
@@ -220,9 +218,6 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                 position={toast.POSITION.TOP_CENTER}
             />
             <AppBar  style={{height: '70px', boxShadow: '0 3px 6px rgba(0,0,0,0.1)', display:'flex', alignItems:'center'}} component="nav" className={classes.root}>        
-                
-             
-
                 <div className={classes.leftNavWrapper} style=
                 {{
                     width: '15%',
@@ -259,7 +254,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                     src={logo} alt="Barefoot Loog" />
                     
                 </div>
-
+                <Dropdown />
                 {(onDashboard)?(
                    <div style={{width: '30%', height: '40px'}} className={classes.search} data-testid="searchInput">
                    <div className={classes.searchIcon}>
@@ -366,9 +361,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
                         </IconButton>
                         <ListItemText sytle={{fontZize: '13px'}}>Notifications</ListItemText>
                     </ListItem>
-                    </List>
-                 
-                  
+                    </List>                 
                     </>
                      )
                      }   

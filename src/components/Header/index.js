@@ -9,39 +9,43 @@ import logo from "../../assets/images/logo.png";
 import AuthHeader from "./authHeader";
 import { AuthContext } from "../../contexts/AuthContext";
 import "../../App.css";
+import { useTranslation } from "react-i18next";
+import Dropdown from "../../helpers/dropdown";
 
-const links = [
+const LinksFnc = () => { 
+  const { t } = useTranslation();
+  return [
   {
     url: "/about",
-    text: "About Us",
+    text: t('About Us'),
     isActive: false,
   },
   {
     url: "/faq",
-    text: "FAQ",
+    text: t('FAQ'),
     isActive: false,
   },
   {
     url: "/booking",
-    text: "Booking",
+    text: t('Booking'),
     isActive: false,
   },
   {
     url: "/contact",
-    text: "Contact Us",
+    text: t('Contact Us'),
     isActive: false,
   },
   {
     url: "/signup",
-    text: "Signup",
+    text: t('Signup'),
     isActive: false,
   },
   {
     url: "/login",
-    text: "Login",
+    text: t('Login'),
     isActive: true,
   },
-];
+];}
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -101,7 +105,7 @@ const Header = () => {
   const [hideNav, setHideNav] = useState(false);
   const { auth } = useContext(AuthContext);
   const { isAuthenticated } = auth;
-
+  const links = LinksFnc();
   const handleNavLinks = (e) => {
     setHideNav(!hideNav);
   };
@@ -133,6 +137,7 @@ const Header = () => {
           alt="Barefoot Loog"
         />
       </div>
+      <Dropdown />
       <Hidden only={["sm", "xl", "xs"]}>
         <List className={classes.container}>
           {links.map((link, index) => (

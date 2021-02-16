@@ -4,7 +4,9 @@ import PaperCard from '../components/PaperCard';
 import {hotelInfo} from '../helpers/hotelInfo';
 
 beforeEach(() => cleanup);
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<PaperCard />', () => {
     it('should render component correctly', () => {
         render(<PaperCard searchValue={hotelInfo}/>)

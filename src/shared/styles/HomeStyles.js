@@ -125,7 +125,7 @@ export const HighrightWrapper = Styled.div `
 export const HeadingWrapper = Styled.section `
   width: 100%;
   h1{
-      font-size: 3.5em;
+      font-size: 2.8em;
       font-weight: lighter;
       width: 100%;
      span{

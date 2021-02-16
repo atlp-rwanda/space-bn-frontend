@@ -14,7 +14,9 @@ beforeEach(() => {
 }
 localStorage.setItem('user', JSON.stringify(userInfo))
 });
-
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: key => key})
+}));
 describe('<RequestThread />', () => {
     it('should render the component', ( )=> {
         render(

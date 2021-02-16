@@ -6,6 +6,9 @@ import SignupContextProvider from '../contexts/SignupContext';
 
 
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 beforeEach(cleanup);
 describe('<Signup />', () => {
     it('Should render the component', () => {

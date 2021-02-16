@@ -1,12 +1,13 @@
 import React from 'react';
-import { render, fireEvent, cleanup, getByRole } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import AuthContextProvider from "../contexts/AuthContext";
 import Contact from '../views/Contact';
-import { MemoryRouter, BrowserRouter as Router } from 'react-router-dom';
-import Pattern from '../shared/styles/Pattern';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 beforeEach(cleanup);
 describe('<Contact />', () => {
     it('Should render the component', () => {
@@ -48,7 +49,7 @@ describe('<Contact />', () => {
         expect(subjectValue).toHaveValue('subject');
     });
     it('Should submit when clicked', () => {
-        const { getByRole} = render(
+        const { getAllByRole} = render(
             <AuthContextProvider>
                 <Router>
                     <Contact />
@@ -56,10 +57,12 @@ describe('<Contact />', () => {
             </AuthContextProvider>
         );
         
-        const button = getByRole('button');
+        const button = getAllByRole('button');
         const mockedFnc = jest.fn();
 
-        fireEvent.click(button);
+        button.forEach((btn) => {
+            fireEvent.click(btn);
+        })
         mockedFnc();
         const span = document.getElementsByClassName('MuiButton-label');
 

@@ -4,7 +4,9 @@ import Hotel from '../views/Hotel';
 import AuthContextProvider from '../contexts/AuthContext';
 
 beforeEach(() => cleanup)
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 describe('<Hotel />', () => {
     it('should render component correctly', () => {
         const observe = jest.fn();

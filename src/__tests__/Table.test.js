@@ -5,7 +5,9 @@ import RequestWrapper from '../components/Request';
 import { TablePaginationActions } from '../components/Request/Table';
 
 
-
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({t: key => key})
+  }));
 beforeEach(() => cleanup)
 describe('<RequestWrapper />', () => {
     it('should render table appropriately', () => {
