@@ -6,6 +6,7 @@ import Table from '../views/facilities/table'
 import Container from '../views/facilities/dashBoardContainer'
 import TablePagination from '@material-ui/core/TablePagination';
 import {BrowserRouter} from 'react-router-dom'
+import NotificationProvider from '../contexts/NotificationContext';
 
 
 jest.mock('react-i18next', () => ({
@@ -27,9 +28,11 @@ describe('<Facility />', () => {
   it('should render the component Facility', ( )=> {
       render(
         <AuthContextProvider>
-          <BrowserRouter>
-          <Facility /> 
-          </BrowserRouter>
+          <NotificationProvider>
+            <BrowserRouter>
+            <Facility /> 
+            </BrowserRouter>
+          </NotificationProvider>
         </AuthContextProvider>
         )
       expect(<Facility />).toBeTruthy();
@@ -38,9 +41,11 @@ describe('<Facility />', () => {
   it('should Open and close add facility modal on click', ( )=> {
     const { getByTestId } = render(
       <AuthContextProvider>
-       <BrowserRouter>
-       <Facility /> 
-       </BrowserRouter>
+      <NotificationProvider>
+        <BrowserRouter>
+        <Facility /> 
+        </BrowserRouter>
+      </NotificationProvider>
     </AuthContextProvider>
     );
     fireEvent.click(getByTestId('openAddModalBtn'));
@@ -52,9 +57,11 @@ describe('<Facility />', () => {
   it('should Open add add element into the detail array and display in table', ( )=> {
     const { getByTestId } = render(
       <AuthContextProvider>
-      <BrowserRouter>
-      <Facility /> 
-      </BrowserRouter>
+      <NotificationProvider>
+        <BrowserRouter>
+        <Facility /> 
+        </BrowserRouter>
+      </NotificationProvider>
     </AuthContextProvider>
     );
     fireEvent.click(getByTestId('openAddModalBtn'));
@@ -67,9 +74,11 @@ describe('<Facility />', () => {
   it('should Open display name in table field', ( )=> {
     const { getByTestId } = render(
       <AuthContextProvider>
-      <BrowserRouter>  
-      <Facility /> 
-      </BrowserRouter>
+      <NotificationProvider>
+        <BrowserRouter>
+        <Facility /> 
+        </BrowserRouter>
+      </NotificationProvider>
     </AuthContextProvider>
     );
     fireEvent.click(getByTestId('openAddModalBtn'));
@@ -99,10 +108,12 @@ describe('<Facility />', () => {
   it('should render container', ( )=> {
     render(
       <AuthContextProvider>
+      <NotificationProvider>
         <BrowserRouter>
-        <Container />
-        </BrowserRouter> 
-      </AuthContextProvider>
+        <Facility /> 
+        </BrowserRouter>
+      </NotificationProvider>
+    </AuthContextProvider>
       )
     expect(<Container />).toBeTruthy();
   })
@@ -111,10 +122,12 @@ describe('<Facility />', () => {
     const mocked=jest.fn()
     render(
       <AuthContextProvider>
-        <BrowserRouter>
-        <Facility />
-        </BrowserRouter>
-        <TablePagination onChange={mocked}/>
+        <NotificationProvider>
+          <BrowserRouter>
+          <Facility />
+          </BrowserRouter>
+          <TablePagination onChange={mocked}/>
+        </NotificationProvider>
       </AuthContextProvider>
       )
     expect(<Facility />).toBeTruthy();

@@ -210,7 +210,7 @@ const RoomsDetail = () => {
                           </span>
                         </Typography>
                         <Link
-                          to='/request'
+                          to='/requests'
                           style={{ textDecoration: "none" }}
                         >
                           <Button

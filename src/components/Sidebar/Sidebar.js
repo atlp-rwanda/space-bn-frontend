@@ -13,11 +13,10 @@ import AddUserIcon from '../../assets/icons/AddUserIcon.png';
 import FacilitiesIcon from '../../assets/icons/FacilitiesIcon.png';
 import './Sidebar.css';
 import {userTypes} from '../../helpers/userTypes';
+import { useTranslation } from "react-i18next";
+
+
 const drawerWidth = '18%';
-
-
-
-
 const useStyles = makeStyles((theme) => ({
  
   appBar: {
@@ -26,11 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-   
-    
+    flexShrink: 0, 
   },
-  
   drawerPaper:  {
     width: drawerWidth,
     zIndex: 1,
@@ -70,6 +66,7 @@ export default function PermanentDrawerLeft(props) {
   const [userType,setUserType] = useState('')
   const [currentLocation,setLocation] = useState('');
   const loc = useLocation().pathname;
+  const { t } = useTranslation();
 
   useEffect(() => {
     setUserType(user.userType);
@@ -101,21 +98,21 @@ const history = useHistory();
                     onClick={() => {props.handleOpen(); history.push('/dashboard')}}                  
                     button key='Dashboard' style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                     <ListItemIcon><DashboardIcon/></ListItemIcon>
-                    <ListItemText data-testid="managerDasboardList">Dashboard</ListItemText>
+                    <ListItemText data-testid="managerDasboardList">{t('Dashboard')}</ListItemText>
                     </ListItem>
 
                     <ListItem button key='Roles' onClick={() => {props.handleOpen()}}
                      style={(currentLocation === '/roles') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                    <ListItemText>Roles</ListItemText>
+                    <ListItemText>{t('Roles')}</ListItemText>
                     </ListItem> 
 
                     <ListItem button key='AddUser' onClick={() =>{ props.handleOpen()}}
                      style={(currentLocation === '/addUser') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={AddUserIcon} alt="add user icon" /></ListItemIcon>
-                    <ListItemText>Add User</ListItemText>
+                    <ListItemText>{t('Add User')}</ListItemText>
                     </ListItem>
  
                     <ListItem 
@@ -124,14 +121,14 @@ const history = useHistory();
                     style={(currentLocation === '/facilities') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
-                    <ListItemText>Facilities</ListItemText>
+                    <ListItemText>{t('Facilities')}</ListItemText>
                     </ListItem>
 
                     <ListItem button key='Profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                    <ListItemText>Profile</ListItemText>
+                    <ListItemText>{t('Profile')}</ListItemText>
                     </ListItem> 
 
                     </>
@@ -142,7 +139,7 @@ const history = useHistory();
                         onClick={() => {props.handleOpen(); history.push('/dashboard')}}
                         button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
+                        <ListItemText>{t('Dashboard')}</ListItemText>
                         </ListItem> 
               
                   
@@ -152,14 +149,14 @@ const history = useHistory();
                         style={(currentLocation === '/facilities') ? (active) : (null)}
                         >
                         <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
-                        <ListItemText>Facilities</ListItemText>
+                        <ListItemText>{t('Facilities')}</ListItemText>
                         </ListItem>
 
                         <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                    <ListItemText>Profile</ListItemText>
+                    <ListItemText>{t('Profile')}</ListItemText>
                     </ListItem> 
   
   
@@ -171,7 +168,7 @@ const history = useHistory();
                          onClick={() =>{props.handleOpen(); history.push('/dashboard')}}
                         button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
                         <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
+                        <ListItemText>{t('Dashboard')}</ListItemText>
                         </ListItem> 
                 
                       
@@ -181,14 +178,14 @@ const history = useHistory();
                         style={(currentLocation === '/facilities') ? (active) : (null)}
                         >
                         <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
-                        <ListItemText>Facilities</ListItemText>
+                        <ListItemText>{t('Facilities')}</ListItemText>
                         </ListItem>
 
                         <ListItem button key='FacilitiesProfile' onClick={() => {props.handleOpen(); history.push('/profile')}}
                      style={(currentLocation === '/profile') ? (active) : (null)}
                     >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                    <ListItemText>Profile</ListItemText>
+                    <ListItemText>{t('Profile')}</ListItemText>
                     </ListItem> 
   
   
