@@ -49,7 +49,7 @@ const SignIn = () => {
 
       const resetpassword = async () => {
         toaster('Check your email to reset password', 'success')
-        const response = await fetch('http://localhost:5000/user/resetpassword',
+        const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`,
         {
           method:'POST',
           body:values.email,
