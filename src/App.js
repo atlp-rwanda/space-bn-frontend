@@ -22,6 +22,7 @@ import FacilityContainer from "./views/facilities/dashBoardContainer";
 import SignupContextProvider from './contexts/SignupContext';
 import profileDetailsView from "./views/profileDetailsView";
 import NotificationProvider from './contexts/NotificationContext';
+import PasswordReset from './views/PasswordReset';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route exact path="/about" component={About}/>
               <Route exact path="/contact" component={Contact}/>
               <Route exact path="/profileview" component={profileDetailsView}/>
+              <Route exact path="/passwordreset" component={PasswordReset}/>
               <ProtectedRoute exact path="/profile" component={Profile} />
               <ProtectedRoute exact path="/booking" component={Accommadation} />
               <ProtectedRoute exact path="/:hotelId/rooms">
