@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import FormControl from '@material-ui/core/FormControl';
@@ -24,6 +25,7 @@ const { REACT_APP_BACKEND_URL } = config;
 const Contact = () => {
     const classes = useStyles();
     const theme = createMuiTheme();
+    let history = useHistory();
     
     const matches = useMediaQuery(theme.breakpoints.up('md'));
     
@@ -64,7 +66,7 @@ const Contact = () => {
                 });
                 toaster('Question submitted successfully!', 'success')
             setTimeout(() => {
-                window.location = '/faq';
+                history.push(`/faq`);
             }, 3000);    
             }
         } catch (error) {
