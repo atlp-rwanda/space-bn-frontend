@@ -232,7 +232,6 @@ export default function EnhancedTable() {
                           direction={orderBy === headCell.id ? order : 'asc'}
                           onClick={createSortHandler(headCell.id)}
                           data-testid={headCell.label==='Location' ? 'sortDataBtn' : null}
-                           
                         >
                           {headCell.label}
                           {orderBy === headCell.id ? (

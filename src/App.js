@@ -20,6 +20,7 @@ import Rooms from "./views/Rooms";
 import RoomDetail from "./views/Room_detail";
 import TravelRequest from "./views/TravelRequest";
 import { RequestProvider } from "./contexts/RequestContext";
+import UserRole from "./views/UserRole";
 import FacilityContainer from "./views/facilities/dashBoardContainer";
 import SignupContextProvider from './contexts/SignupContext';
 import profileDetailsView from "./views/profileDetailsView";
@@ -45,6 +46,7 @@ function App() {
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/contact" component={Contact}/>
                 <Route exact path="/profileview" component={profileDetailsView}/>
+                <ProtectedRoute exact path="/userrole" component={UserRole} />
                 <ProtectedRoute exact path="/profile" component={Profile} />
                 <ProtectedRoute exact path="/booking" component={Accommadation} />
                 <ProtectedRoute exact path="/:hotelId/rooms">
