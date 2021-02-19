@@ -90,7 +90,6 @@ const PasswordReset = () => {
       return false;
     }
     else {
-      //const body= JSON.stringify({password, token:incomingToken})
       const result = await fetch(`${REACT_APP_BACKEND_URL}/user/resetnewpassword`, 
       {
         mode:'no-cors',
