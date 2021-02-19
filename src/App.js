@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './views/Home';
 import Login from './views/Login/Login'; 
 import Signup from './views/Signup';
-import Hotel from './views/Hotel';
+import Hotel from './views/Hotel/index';
 import FAQ from './views/FAQ/index';
 import MoreFAQ from './views/FAQ/moreFAQ';
 import DeleteFAQ from './views/FAQ/deleteFAQ';
@@ -24,10 +24,14 @@ import UserRole from "./views/UserRole";
 import FacilityContainer from "./views/facilities/dashBoardContainer";
 import SignupContextProvider from './contexts/SignupContext';
 import profileDetailsView from "./views/profileDetailsView";
+import AddProfilePicture from "./views/profileDetailsView/AddProfilePicture";
 import NotificationProvider from './contexts/NotificationContext';
 import { QuestionContextProvider } from './contexts/QuestionContext';
 import PasswordReset from './views/PasswordReset';
 import EmailConfirmation from './views/confirmEmail';
+import AdminHotels from './views/Hotel/AdminHotels';
+import AddHotel from './views/Hotel/AddHotel';
+import AddFacility from "./views/facilities/AddFacility";
 
 function App() {
   return (
@@ -70,8 +74,11 @@ function App() {
                 <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
-
                 <Route path="/confirm-email" component={EmailConfirmation}/>
+                <ProtectedRoute exact path="/hotels" component={AdminHotels} />
+                <ProtectedRoute exact path="/addhotel" component={AddHotel} />
+                <ProtectedRoute exact path="/addfacility" component={AddFacility} />
+                <Route exact path="/addprofilepicture" component={AddProfilePicture} />
               </Switch>
             </div>
           </Router>

@@ -16,7 +16,9 @@ import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import HomeTwoTone from '@material-ui/icons/HomeTwoTone';
 import CommentIcon from '@material-ui/icons/Comment';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { useTranslation } from "react-i18next";
 
 const drawerWidth = '18%';
@@ -109,6 +111,12 @@ return (
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
                   </ListItem> 
+                  <ListItem button key='Add Profile Pic' onClick={() => {props.handleOpen(); history.push('/addprofilepicture')}}
+                    style={(currentLocation === '/addprofilepicture') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Add Profile Pic</ListItemText>
+                  </ListItem> 
                   <ListItem button key='AddUser' onClick={() =>{ props.handleOpen()}}
                     style={(currentLocation === '/addUser') ? (active) : (null)}
                   >
@@ -121,11 +129,17 @@ return (
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Roles</ListItemText>
                   </ListItem> 
-                  <ListItem button key='Hotels' onClick={() => {props.handleOpen(); history.push('/hotel')}}
-                    style={(currentLocation === '/hotel') ? (active) : (null)}
+                  <ListItem button key='Hotels' onClick={() => {props.handleOpen(); history.push('/hotels')}}
+                    style={(currentLocation === '/hotels') ? (active) : (null)}
                   >
-                    <ListItemIcon><HomeWorkIcon /></ListItemIcon>
+                  <ListItemIcon><HomeTwoTone /></ListItemIcon>
                     <ListItemText>Hotels</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='Add Hotel' onClick={() => {props.handleOpen(); history.push('/addhotel')}}
+                    style={(currentLocation === '/addhotel') ? (active) : (null)}
+                    >
+                    <ListItemIcon><HomeWorkIcon /></ListItemIcon>
+                    <ListItemText>Add Hotel</ListItemText>
                   </ListItem> 
                   <ListItem button key='FAQ' onClick={() => {props.handleOpen(); history.push('/deletefaq')}}
                     style={(currentLocation === '/deletefaq') ? (active) : (null)}
@@ -157,6 +171,12 @@ return (
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
                   </ListItem> 
+                  <ListItem button key='Add Profile Pic' onClick={() => {props.handleOpen(); history.push('/addprofilepicture')}}
+                    style={(currentLocation === '/addprofilepicture') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Add Profile Pic</ListItemText>
+                  </ListItem>
                   <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
                     style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
                   >
@@ -198,6 +218,18 @@ return (
                   >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='Add Profile Pic' onClick={() => {props.handleOpen(); history.push('/addprofilepicture')}}
+                    style={(currentLocation === '/addprofilepicture') ? (active) : (null)}
+                  >
+                    <ListItemIcon><PersonAddIcon /></ListItemIcon>
+                    <ListItemText>Add Profile Pic</ListItemText>
+                  </ListItem>
+                  <ListItem button key='addfacility' onClick={() => {props.handleOpen(); history.push('/addfacility')}}
+                    style={(currentLocation === '/addfacility') ? (active) : (null)}
+                  >
+                    <ListItemIcon><HomeTwoTone/></ListItemIcon>
+                    <ListItemText>Add Facility</ListItemText>
                   </ListItem> 
                   <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
                     style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
@@ -241,6 +273,12 @@ return (
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
                   </ListItem> 
+                  <ListItem button key='Add Profile Pic' onClick={() => {props.handleOpen(); history.push('/addprofilepicture')}}
+                    style={(currentLocation === '/addprofilepicture') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Add Profile Pic</ListItemText>
+                  </ListItem>
                   <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
                     style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
                   >
@@ -282,6 +320,12 @@ return (
                   >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='Add Profile Pic' onClick={() => {props.handleOpen(); history.push('/addprofilepicture')}}
+                    style={(currentLocation === '/addprofilepicture') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Add Profile Pic</ListItemText>
                   </ListItem>
                   <ListItem button key='reqStats' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
                     style={(currentLocation === '/requests/thread') ? (active) : (null)}

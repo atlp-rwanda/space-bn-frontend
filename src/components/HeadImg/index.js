@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     zIndex: "-1",
     '@media (max-width:935px)': {
-     display:'none',
+    display:'none',
       
     },
   },
@@ -23,7 +23,7 @@ export default function HeadImg() {
             src={BackImg}
             alt="back imag"
             className={classes.root}
-           
+          
           />
         </div>
     )
