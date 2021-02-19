@@ -47,6 +47,19 @@ const SignIn = () => {
         event.preventDefault();
       };
 
+      const resetpassword = async () => {
+        toaster(t('Check your email to reset password'), 'success')
+        const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`,
+        {
+          method:'POST',
+          body:values.email,
+        })
+
+        if(response){
+          console.log(response)
+        }
+      }
+
       const handleSubmit = async (e) => {
         e.preventDefault()
         const body = {email:values.email,password:values.password};
@@ -181,7 +194,7 @@ const SignIn = () => {
               <img src={Google} alt="Google" className={classes.socialIcons} />
               <SocialText>{t('Continue with Google')}</SocialText>
           </SocialButton>
-
+          <h2 style={{fontSize:14,marginTop:40}}>{t('Forgot your password ?')} <span onClick={resetpassword} style={{fontSize:16,color:'blue',marginLeft:20,cursor:"pointer",marginTop:40}}> {t("Reset Password")}</span></h2>
         </form>
       </div>
         </Container>
