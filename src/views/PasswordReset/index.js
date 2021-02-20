@@ -21,8 +21,6 @@ import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
-
-
 const { REACT_APP_BACKEND_URL } = process.env;
 
 const PasswordReset = () => {
@@ -90,16 +88,14 @@ const PasswordReset = () => {
       return false;
     }
     else {
-      const result = await fetch(`${REACT_APP_BACKEND_URL}/user/resetnewpassword`, 
-      {
-        mode:'no-cors',
-        method:'POST',
-        headers:{"Content-Type":"Application/json"},
+      const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`, 
+      { 
+        method:'PATCH',
+        headers:{"Content-Type":"Application/json","Accept-Language": "*"},
         body:JSON.stringify({password, token:incomingToken})
       })
-      if(result){
-        console.log(result)
-        toaster(result.message, 'success')
+      if(response.status === 200){
+        toaster('Password is resetted', 'success')
         setTimeout(() => {
           history.push('/dashboard')
         }, 3500)
