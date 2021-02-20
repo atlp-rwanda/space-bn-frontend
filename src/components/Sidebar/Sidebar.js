@@ -12,8 +12,15 @@ import RolesIcon from '../../assets/icons/Roles-icon.png';
 import AddUserIcon from '../../assets/icons/AddUserIcon.png';
 import FacilitiesIcon from '../../assets/icons/FacilitiesIcon.png';
 import './Sidebar.css';
-import {userTypes} from '../../helpers/userTypes';
+import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import CommentIcon from '@material-ui/icons/Comment';
+import { useTranslation } from "react-i18next";
+
 const drawerWidth = '18%';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -34,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   mobileDrawerPaper: {
     left: '-18%'
   },
+  
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
@@ -42,126 +50,259 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
+
 const listsContainer = {
   marginTop: '3em'
 }
 const active = {
-     borderLeft: '5px solid #2196F3',
-     background: 'rgba(33, 150, 243, 0.08)'
+  borderLeft: '5px solid #2196F3',
+  background: 'rgba(33, 150, 243, 0.08)'
 }
+
 export default function PermanentDrawerLeft(props) {
-  const user = JSON.parse(localStorage.getItem('user'))
+  const userRole = JSON.parse(localStorage.getItem('userRoleId'));
+ 
   const classes = useStyles();
-  const [userType,setUserType] = useState('')
-  const [currentLocation,setLocation] = useState('');
+  const [currentLocation, setLocation] = useState('');
   const loc = useLocation().pathname;
+  const { t } = useTranslation();
+
   useEffect(() => {
-    setUserType(user.userType);
     setLocation(loc);
-},[loc,user.userType]);
+},[loc, userRole]);
+
 const history = useHistory();
-  return (
+
+return (
     <>
       <CssBaseline />
-       {
-         props.isOpen ? 
-         <Drawer
-         className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor="left" 
-        > 
-         <List style={listsContainer}>
-            {userType === userTypes.admin ? (
-                    <>
-                    <ListItem data-testid="Dashboard"
+        {
+          props.isOpen ? 
+          <Drawer
+            className={classes.drawer}
+              variant="permanent"
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              anchor="left" 
+          > 
+            <List style={listsContainer}>
+              {userRole === 1 ? (
+                <>
+                  <ListItem data-testid="Dashboard"
                     onClick={() => {props.handleOpen(); history.push('/dashboard')}}                  
-                    button key='Dashboard' style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
+                    button key='Dashboard' style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
                     <ListItemIcon><DashboardIcon/></ListItemIcon>
                     <ListItemText data-testid="managerDasboardList">Dashboard</ListItemText>
-                    </ListItem>
-                    <ListItem button key='Roles' onClick={() => {props.handleOpen(); history.push('/userrole')}}
-                     style={(currentLocation === '/userrole') ? (active) : (null)}
-                    >
+                  </ListItem>
+                  <ListItem button key='Facilities'
+                    onClick={() => {props.handleOpen(); history.push('/facilities')}}
+                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
+                    <ListItemText>{t('Facilities')}</ListItemText>
+                  </ListItem>
+                  <ListItem button key='Profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    style={(currentLocation === '/profile') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
-                    <ListItemText>Roles</ListItemText>
-                    </ListItem> 
-                    <ListItem button key='AddUser' onClick={() =>{ props.handleOpen()}}
-                     style={(currentLocation === '/addUser') ? (active) : (null)}
-                    >
+                    <ListItemText>Profile</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='AddUser' onClick={() =>{ props.handleOpen()}}
+                    style={(currentLocation === '/addUser') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={AddUserIcon} alt="add user icon" /></ListItemIcon>
                     <ListItemText>Add User</ListItemText>
-                    </ListItem>
-                    <ListItem 
-                    onClick={() => {props.handleOpen(); history.push('/facilities')}}
-                    button key='Facilities'
+                  </ListItem>
+                  <ListItem button key='Roles' onClick={() => {props.handleOpen()}}
                     style={(currentLocation === '/userrole') ? (active) : (null)}
-                    >
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Roles</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='Hotels' onClick={() => {props.handleOpen(); history.push('/hotel')}}
+                    style={(currentLocation === '/hotel') ? (active) : (null)}
+                  >
+                    <ListItemIcon><HomeWorkIcon /></ListItemIcon>
+                    <ListItemText>Hotels</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='FAQ' onClick={() => {props.handleOpen(); history.push('/deletefaq')}}
+                    style={(currentLocation === '/deletefaq') ? (active) : (null)}
+                  >
+                    <ListItemIcon><NotListedLocationIcon /></ListItemIcon>
+                    <ListItemText>FAQ</ListItemText>
+                  </ListItem> 
+                </>
+              ) : (userRole === 2) 
+              ? (
+                <>
+                  <ListItem button key='Dashboard'
+                  onClick={() => {props.handleOpen(); history.push('/dashboard')}}
+                  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}
+                >
+                  <ListItemIcon><DashboardIcon/></ListItemIcon>
+                  <ListItemText>Dashboard</ListItemText>
+                </ListItem> 
+                  <ListItem button key='Facilities'
+                    onClick={() => {props.handleOpen(); history.push('/facilities')}}
+                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
                     <ListItemText>Facilities</ListItemText>
-                    </ListItem>
-                    <ListItem button key='Profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
-                     style={(currentLocation === '/profile') ? (active) : (null)}
-                    >
+                  </ListItem>
+                  <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    style={(currentLocation === '/profile') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
-                    </ListItem> 
-                    </>
-                    ) : (userType === userTypes.manager) 
-                    ? (
-                      <>
-                        <ListItem 
-                        onClick={() => {props.handleOpen(); history.push('/dashboard')}}
-                        button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
-                        <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
-                        </ListItem> 
-                        <ListItem button key='Facilities'
-                        onClick={() => {props.handleOpen(); history.push('/facilities')}}
-                        style={(currentLocation === '/facilities') ? (active) : (null)}
-                        >
-                        <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
-                        <ListItemText>Facilities</ListItemText>
-                        </ListItem>
-                        <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
-                     style={(currentLocation === '/profile') ? (active) : (null)}
-                    >
+                  </ListItem> 
+                  <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><LiveHelpIcon /></ListItemIcon>
+                    <ListItemText>Requests</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='reqStats' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><EqualizerIcon /></ListItemIcon>
+                    <ListItemText>Req Statistics</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='comments' onClick={() => {props.handleOpen(); history.push('/comments')}}
+                    style={(currentLocation === '/comments') ? (active) : (null)}
+                  >
+                    <ListItemIcon><CommentIcon /></ListItemIcon>
+                    <ListItemText>Comments</ListItemText>
+                  </ListItem> 
+                </>
+              ) : (userRole === 3) 
+              ? (
+                <>
+                  <ListItem button key='Dashboard'
+                  onClick={() => {props.handleOpen(); history.push('/dashboard')}}
+                  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}
+                >
+                  <ListItemIcon><DashboardIcon/></ListItemIcon>
+                  <ListItemText>Dashboard</ListItemText>
+                </ListItem> 
+                  <ListItem button key='Facilities'
+                    onClick={() => {props.handleOpen(); history.push('/facilities')}}
+                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
+                    <ListItemText>Facilities</ListItemText>
+                  </ListItem>
+                  <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    style={(currentLocation === '/profile') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
-                    </ListItem> 
-                      </>
-                    ) : (userType === userTypes.requester)
-                    ? (
-                      <>
-                        <ListItem 
-                         onClick={() =>{props.handleOpen(); history.push('/dashboard')}}
-                        button key='Dashboard'  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}>
-                        <ListItemIcon><DashboardIcon/></ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
-                        </ListItem> 
-                        <ListItem button key='Facilities' 
-                        onClick={() =>{ props.handleOpen(); history.push('/facilities')}}
-                        style={(currentLocation === '/facilities') ? (active) : (null)}
-                        >
-                        <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
-                        <ListItemText>Facilities</ListItemText>
-                        </ListItem>
-                        <ListItem button key='FacilitiesProfile' onClick={() => {props.handleOpen(); history.push('/profile')}}
-                     style={(currentLocation === '/profile') ? (active) : (null)}
-                    >
+                  </ListItem> 
+                  <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><LiveHelpIcon /></ListItemIcon>
+                    <ListItemText>Requests</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='reqStats' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><EqualizerIcon /></ListItemIcon>
+                    <ListItemText>Req Statistics</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='comments' onClick={() => {props.handleOpen(); history.push('/comments')}}
+                    style={(currentLocation === '/comments') ? (active) : (null)}
+                  >
+                    <ListItemIcon><CommentIcon /></ListItemIcon>
+                    <ListItemText>Comments</ListItemText>
+                  </ListItem> 
+                </>
+              ) : (userRole === 4) 
+              ? (
+                <>
+                  <ListItem button key='Dashboard'
+                  onClick={() => {props.handleOpen(); history.push('/dashboard')}}
+                  style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}
+                >
+                  <ListItemIcon><DashboardIcon/></ListItemIcon>
+                  <ListItemText>Dashboard</ListItemText>
+                </ListItem> 
+                  <ListItem button key='Facilities'
+                    onClick={() => {props.handleOpen(); history.push('/facilities')}}
+                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
+                    <ListItemText>Facilities</ListItemText>
+                  </ListItem>
+                  <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    style={(currentLocation === '/profile') ? (active) : (null)}
+                  >
                     <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
                     <ListItemText>Profile</ListItemText>
-                    </ListItem> 
-                      </>
-                    ) : (null)
-                    }
-              </List>
-      </Drawer>
-      : 
-      (null)
-       }
-     </>
+                  </ListItem> 
+                  <ListItem button key='requests' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/profilerequests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><LiveHelpIcon /></ListItemIcon>
+                    <ListItemText>Requests</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='reqStats' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><EqualizerIcon /></ListItemIcon>
+                    <ListItemText>Req Statistics</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='comments' onClick={() => {props.handleOpen(); history.push('/comments')}}
+                    style={(currentLocation === '/comments') ? (active) : (null)}
+                  >
+                    <ListItemIcon><CommentIcon /></ListItemIcon>
+                    <ListItemText>Comments</ListItemText>
+                  </ListItem> 
+                </>
+              ) : (userRole === 5)
+              ? (
+                <>
+                  <ListItem button key='Dashboard'
+                    onClick={() =>{props.handleOpen(); history.push('/dashboard')}}
+                    style={(currentLocation === '/dashboard' || currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><DashboardIcon/></ListItemIcon>
+                    <ListItemText>Dashboard</ListItemText>
+                  </ListItem> 
+                  <ListItem button key='Facilities' 
+                    onClick={() =>{ props.handleOpen(); history.push('/facilities')}}
+                    style={(currentLocation === '/facilities') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={FacilitiesIcon} alt="facilities icon" /></ListItemIcon>
+                    <ListItemText>Facilities</ListItemText>
+                  </ListItem>
+                  <ListItem button key='profile' onClick={() => {props.handleOpen(); history.push('/profile')}}
+                    style={(currentLocation === '/profile') ? (active) : (null)}
+                  >
+                    <ListItemIcon><img src={RolesIcon} alt="roles icon" /></ListItemIcon>
+                    <ListItemText>Profile</ListItemText>
+                  </ListItem>
+                  <ListItem button key='reqStats' onClick={() => {props.handleOpen(); history.push('/requests/thread')}}
+                    style={(currentLocation === '/requests/thread') ? (active) : (null)}
+                  >
+                    <ListItemIcon><EqualizerIcon /></ListItemIcon>
+                    <ListItemText>Req Statistics</ListItemText>
+                  </ListItem>
+                  <ListItem button key='comments' onClick={() => {props.handleOpen(); history.push('/comments')}}
+                    style={(currentLocation === '/comments') ? (active) : (null)}
+                  >
+                    <ListItemIcon><CommentIcon /></ListItemIcon>
+                    <ListItemText>Comments</ListItemText>
+                  </ListItem> 
+                </>
+              ) : (null)
+              }
+            </List>
+          </Drawer>
+          : 
+          (null)
+        }
+    </>
   );
 }
