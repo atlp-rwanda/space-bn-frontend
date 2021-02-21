@@ -42,7 +42,7 @@ function App() {
                 <Route path="/sidebar" component={Sidebar} />
                 <Route exact path="/faq" component={FAQ}/>
                 <Route exact path="/faq/:id/more" component={MoreFAQ}/>
-                <Route exact path="/passwordreset" component={PasswordReset}/>
+                <Route exact path="/users/resetpassword" component={PasswordReset}/>
                 <ProtectedRoute exact path="/deletefaq" component={DeleteFAQ}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/contact" component={Contact}/>

@@ -20,6 +20,7 @@ import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -89,19 +90,18 @@ const PasswordReset = () => {
     }
     else {
       const currentLng = localStorage.getItem('i18nextLng');
-      const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`, 
+      const response = await axios.patch(`${REACT_APP_BACKEND_URL}/user/resetpassword?token=${incomingToken}`, 
+      {password},
       { 
-        method:'patch',
         headers:{
           "Content-Type":"Application/json",
           "Accept-Language": currentLng
-        },
-        body:JSON.stringify({password, token:incomingToken})
+        }  
       })
       if(response.status === 200){
-        toaster('Password is resetted', 'success')
+        toaster(response.data.message, 'success')
         setTimeout(() => {
-          history.push('/dashboard')
+          history.push('/login')
         }, 3500)
       }
 
@@ -177,13 +177,13 @@ const PasswordReset = () => {
              <div style={{display:'flex',flexDirection:'column',marginLeft:'40px'}}>
                  <h2 style={{marginTop:'30px',marginBottom:'10px', marginLeft:40}}>{t("Password strength")}</h2>
                  <ul style={{paddingBottom:15, fontSize:20, margin:'auto'}}>
-                     <li>t("Must be at least 8 characteres length")</li>
-                     <li>t("Must contain at least one digit")</li>
-                     <li>t("Must contain at least one capital letter")</li>
+                     <li>{t("Must be at least 8 characteres length")}</li>
+                     <li>{t("Must contain at least one digit")}</li>
+                     <li>{t("Must contain at least one capital letter")}</li>
                  </ul>
              </div>
         </div>
-           <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit" style={{marginTop:70}}>{t("Save new Password")}</Button>
+           <Button variant="contained" color="primary" className={classes.action} onClick={handleSubmit} data-testid="submit" style={{marginTop:70}}>{t("Save")}</Button>
 
         </FormControl>    
       </Card>

@@ -48,7 +48,10 @@ const SignIn = () => {
       };
 
       const resetpassword = async () => { 
-
+        if(values.email === ''){
+          toaster('Email must not be empty!','warn');
+          return false
+        }
         const currentLng = localStorage.getItem('i18nextLng');
         const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`,
         {
@@ -59,9 +62,13 @@ const SignIn = () => {
           },
           body:JSON.stringify({email:values.email})
         })
-        if(response){
-          console.log(response)
-          toaster(response.message, 'success')
+        const result = await response.json()
+
+        if(result){
+
+          console.log(result);
+
+          toaster(result.message, 'success')
         }
       }
 
