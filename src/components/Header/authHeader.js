@@ -97,7 +97,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
       .catch((err) => {
         dispatch({type: SET_NOTIFICATION_ERROR, payload: err.response.message})
       })
-    },[dispatch])
+    },[dispatch, allNotifications])
 
     const handleDialogPane = () => {
       setOpenNotification(true)
