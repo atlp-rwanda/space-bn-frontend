@@ -88,10 +88,14 @@ const PasswordReset = () => {
       return false;
     }
     else {
+      const currentLng = localStorage.getItem('i18nextLng');
       const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`, 
       { 
-        method:'PATCH',
-        headers:{"Content-Type":"Application/json","Accept-Language": "*"},
+        method:'patch',
+        headers:{
+          "Content-Type":"Application/json",
+          "Accept-Language": currentLng
+        },
         body:JSON.stringify({password, token:incomingToken})
       })
       if(response.status === 200){

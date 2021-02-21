@@ -47,16 +47,21 @@ const SignIn = () => {
         event.preventDefault();
       };
 
-      const resetpassword = async () => {
-        toaster(t('Check your email to reset password'), 'success')
+      const resetpassword = async () => { 
+
+        const currentLng = localStorage.getItem('i18nextLng');
         const response = await fetch(`${REACT_APP_BACKEND_URL}/user/resetpassword`,
         {
-          method:'POST',
-          body:values.email,
+          method:'post',
+          headers:{
+            "Content-Type":"Application/json",
+            "Accept-Language": currentLng
+          },
+          body:JSON.stringify({email:values.email})
         })
-
         if(response){
           console.log(response)
+          toaster(response.message, 'success')
         }
       }
 
