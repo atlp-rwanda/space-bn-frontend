@@ -3,6 +3,7 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import UserRole from '../views/UserRole';
 import { render, cleanup,fireEvent} from '@testing-library/react';
 import AuthContextProvider from '../contexts/AuthContext';
+import NotificationProvider from '../contexts/NotificationContext';
 
 beforeEach(() => {
   const userInfo = {
@@ -19,9 +20,11 @@ describe('<UserRole />', () => {
   it('should render page appropriately', () => {
       render(
       <AuthContextProvider>
-       <Router>
-          <UserRole />
-       </Router>   
+        <NotificationProvider>
+          <Router>
+            <UserRole />
+          </Router>   
+        </NotificationProvider>
       </AuthContextProvider>)
       expect(<UserRole />).toBeDefined();
   });
