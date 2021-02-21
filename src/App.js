@@ -26,6 +26,7 @@ import SignupContextProvider from './contexts/SignupContext';
 import profileDetailsView from "./views/profileDetailsView";
 import NotificationProvider from './contexts/NotificationContext';
 import { QuestionContextProvider } from './contexts/QuestionContext';
+import PasswordReset from './views/PasswordReset';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/sidebar" component={Sidebar} />
                 <Route exact path="/faq" component={FAQ}/>
                 <Route exact path="/faq/:id/more" component={MoreFAQ}/>
+                <Route exact path="/users/resetpassword" component={PasswordReset}/>
                 <ProtectedRoute exact path="/deletefaq" component={DeleteFAQ}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/contact" component={Contact}/>
