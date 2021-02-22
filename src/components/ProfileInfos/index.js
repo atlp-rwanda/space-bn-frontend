@@ -199,7 +199,7 @@ const useStyles = makeStyles(theme => ({
     },
     label:{
         fontSize:20,
-        marginLeft:'60px',
+        marginLeft:'80px',
         marginBottom:20,
         '@media(max-width: 850px)': {
             fontSize:15,
@@ -253,10 +253,16 @@ const ProfileInfos = () => {
     const getInfo = async ()=>{
 
         const userId = localStorage.getItem("userId");
+        let incomingUserToken = localStorage.getItem("userToken").substr(4);;
         try {
-            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`);
+            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`,
+            {
+                headers:{
+                    "Authorization":"Bearer "+ incomingUserToken,
+                }
+            });
 
-            const jsonData = await response.json();
+           const jsonData = await response.json();
                 
            setInputFname(jsonData.user.firstname);
            setInputLname(jsonData.user.lastname);
@@ -299,68 +305,76 @@ const ProfileInfos = () => {
                                 <Grid item xs>
                                     <form className={classes.form}>
                                         <div> 
-                                                                                    
+                                            <Checkbox color='primary' className={classes.checkboxField} />                                        
                                             <LabelWrapper> Firstname:</LabelWrapper>
-                                            <InputWrapper>
-                                                <label className={classes.label}>{inputFname}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} /> 
-                                            </InputWrapper>
-                                        </div>
-                                        <div>
                                             
-                                            <LabelWrapper>Lastname:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>{inputLname}</label>
+                                               
+                                                <label style={{marginLeft:140}} className={classes.label}>{inputFname}</label>
+                                                
+                                            
+                                        </div>
+                                        <div>
                                             <Checkbox color='primary' className={classes.checkboxField} />  
-                                            </InputWrapper>
+                                            <LabelWrapper>Lastname:</LabelWrapper>
+                                            
+                                            <label style={{marginLeft:140}} className={classes.label}>{inputLname}</label>
+                                            
+                                           
                                         </div>
                                         <div>
+                                            <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>Telephone:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>{telephone}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+                                           
+                                            <label style={{marginLeft:140}} className={classes.label}>{telephone}</label>
+                                                
+                                            
                                         </div>
                                         <div>
+                                           <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>Email:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>{email}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+                                        
+                                            <label style={{marginLeft:140}} className={classes.label}>{email}</label>
+                                                
+                                            
                                         </div>
                                         <div>
+                                            <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>Origin:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>{origin}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+                                           
+                                            <label style={{marginLeft:140}} className={classes.label}>{origin}</label>
+                                                
+                                            
                                         </div>
 
                                         <div>
+                                            <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>ID Type:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>{identification_type}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+                                           
+                                            <label style={{marginLeft:140}} className={classes.label}>{identification_type}</label>
+                                               
+                                          
                                         </div>
                                         <div>
+                                            <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>ID Number:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label}>1{identification_number}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+                                            
+                                            <label style={{marginLeft:140}} className={classes.label}>1{identification_number}</label>
+                                               
+                                            
                                         </div>
                                         <div>
+                                            <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>Image URL:</LabelWrapper>
-                                            <InputWrapper>
-                                            <label className={classes.label} style={{fontSize:13}}>{imageUrl}</label>
-                                                <Checkbox color='primary' className={classes.checkboxField} />
-                                            </InputWrapper>
+
+                                        <label style={{marginLeft:140,fontSize:13}} className={classes.label}>{imageUrl}</label>
+                                                
+                                            
                                         </div>
-                                        <div>
-                                        <LabelWrapper>Gender:</LabelWrapper>
-                                        <InputWrapper>
-                                            <select className={classes.optionField} value={gender}>
+                                        <div style={{display:'flex'}}>
+                                        <Checkbox color='primary' className={classes.checkboxField} />
+                                        <LabelWrapper style={{marginLeft:60}}>Gender:</LabelWrapper>
+                                        <InputWrapper >
+                                            <select  className={classes.optionField} value={gender}>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
@@ -373,7 +387,7 @@ const ProfileInfos = () => {
                                 className={classes.lastContainer}
                             >
                                 <Typography variant="subtitle1" className={classes.consent}>
-                                    By <span className={classes.span}>CHECHING</span> the checkbox above, you will allow application to use the corresponding Informaton on any travel request.
+                                    By <span className={classes.span}>CHECKING</span> the checkbox above, you will allow application to use the corresponding Informaton on any travel request.
                                 </Typography>
                                 
                             </Grid>
