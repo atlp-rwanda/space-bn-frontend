@@ -7,7 +7,6 @@ import { Button, makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 import toaster from '../../helpers/toasts';
-import axios from 'axios';
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -256,7 +255,8 @@ const ProfileInfos = () => {
                 "method":"put",
                 "Content-Type":"Application/json",
                 "Authorization":"Bearer "+ incomingUserToken,
-            }
+            },
+            body:JSON.stringify(body)
             
            });
            const result = await response.json();
