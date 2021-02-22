@@ -215,7 +215,6 @@ const ProfileInfos = () => {
     const[imageUrl, setImageUrl] = useState("")
      
     const userId = localStorage.getItem("userId");
-
     const getInfo = async ()=>{
         let incomingUserToken = localStorage.getItem("userToken").substr(4); 
         
