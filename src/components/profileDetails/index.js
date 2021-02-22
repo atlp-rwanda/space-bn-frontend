@@ -374,5 +374,4 @@ const ProfileInfos = () => {
         </div>
     )
 }
-
 export default ProfileInfos;
