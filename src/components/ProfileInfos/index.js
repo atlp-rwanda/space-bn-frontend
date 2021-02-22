@@ -1,3 +1,4 @@
+
 import {React,useState,useEffect} from 'react' ;
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -365,15 +366,16 @@ const ProfileInfos = () => {
                                         <div>
                                             <Checkbox color='primary' className={classes.checkboxField} />
                                             <LabelWrapper>Image URL:</LabelWrapper>
-                                            
-                                            <label style={{marginLeft:140}} className={classes.label} style={{fontSize:13}}>{imageUrl}</label>
+
+                                        <label style={{marginLeft:140,fontSize:13}} className={classes.label}>{imageUrl}</label>
                                                 
                                             
                                         </div>
-                                        <div>
-                                        <LabelWrapper>Gender:</LabelWrapper>
-                                        <InputWrapper>
-                                            <select className={classes.optionField} value={gender}>
+                                        <div style={{display:'flex'}}>
+                                        <Checkbox color='primary' className={classes.checkboxField} />
+                                        <LabelWrapper style={{marginLeft:60}}>Gender:</LabelWrapper>
+                                        <InputWrapper >
+                                            <select  className={classes.optionField} value={gender}>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
