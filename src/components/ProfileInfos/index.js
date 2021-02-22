@@ -253,10 +253,16 @@ const ProfileInfos = () => {
     const getInfo = async ()=>{
 
         const userId = localStorage.getItem("userId");
+        let incomingUserToken = localStorage.getItem("userToken").substr(4);;
         try {
-            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`);
+            const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`,
+            {
+                headers:{
+                    "Authorization":"Bearer "+ incomingUserToken,
+                }
+            });
 
-            const jsonData = await response.json();
+           const jsonData = await response.json();
                 
            setInputFname(jsonData.user.firstname);
            setInputLname(jsonData.user.lastname);
@@ -373,7 +379,7 @@ const ProfileInfos = () => {
                                 className={classes.lastContainer}
                             >
                                 <Typography variant="subtitle1" className={classes.consent}>
-                                    By <span className={classes.span}>CHECHING</span> the checkbox above, you will allow application to use the corresponding Informaton on any travel request.
+                                    By <span className={classes.span}>CHECKING</span> the checkbox above, you will allow application to use the corresponding Informaton on any travel request.
                                 </Typography>
                                 
                             </Grid>
