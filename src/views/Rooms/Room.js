@@ -65,10 +65,10 @@ const Room = (props) => {
                       <Typography
                         variant="body2"
                       >
-                        Lorem ipsum is simply text Lorem ipsum is simply text
+                       {props.description}
                       </Typography>
                       <Link
-                        to={`/${props.id}/rooms/${props.id}`}
+                        to={`/${props.hotelId}/rooms/${props.id}`}
                         variant="h6"
                         color="textSecondary"
                         data-testid="btn"
@@ -76,7 +76,10 @@ const Room = (props) => {
                         onClick= {() =>roomChangeData(
                           { name: props.name,
                             price: props.price,
-                            type: props.size
+                            type: props.size,
+                            images: props.images,
+                            description: props.description,
+                            hotelId: props.hotelId
                           }
                         )}
                       >
@@ -113,7 +116,7 @@ const Room = (props) => {
                       {props.size}
                     </span>
                   </Typography>
-                  <Link to={`/requests/${props.id}`} style={{ textDecoration: "none" }}>
+                  <Link to={`/room/${props.id}`} style={{ textDecoration: "none" }}>
                     <Button
                       size="small"
                       className={classes.bookBtn}
@@ -123,7 +126,10 @@ const Room = (props) => {
                       onClick={()=>roomChangeData(
                         { name: props.name,
                           price: props.price,
-                          type: props.size
+                          type: props.size,
+                          hotel: 'Gorillas Hotel',
+                          hotelId: props.hotelId
+
                         }
                       )}
                     >

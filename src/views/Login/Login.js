@@ -108,6 +108,7 @@ const SignIn = () => {
               localStorage.setItem("userRoleId",jsonData.user.roleId);
               localStorage.setItem("userToken",jsonData.token);
               localStorage.setItem("userImageUrl",jsonData.user.user_image);
+              localStorage.setItem("userData",JSON.stringify(jsonData.user));
               dispatch({type: SET_LOADING, payload: false })      
               dispatch({type: SET_AUTHENTICATION, user:jsonData.user, token:jsonData.token })
               toaster(t('Logged in successfully'), 'success')

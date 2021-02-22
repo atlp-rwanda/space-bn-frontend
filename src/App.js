@@ -19,10 +19,9 @@ import Accommadation from "./views/Accommadation";
 import Rooms from "./views/Rooms";
 import RoomDetail from "./views/Room_detail";
 import TravelRequest from "./views/TravelRequest";
-import { RequestProvider } from "./contexts/RequestContext";
 import UserRole from "./views/UserRole";
 import FacilityContainer from "./views/facilities/dashBoardContainer";
-import SignupContextProvider from './contexts/SignupContext';
+import SignupContextProvider from "./contexts/SignupContext";
 import profileDetailsView from "./views/profileDetailsView";
 import AddProfilePicture from "./views/profileDetailsView/AddProfilePicture";
 import NotificationProvider from './contexts/NotificationContext';
@@ -41,37 +40,58 @@ function App() {
           <Router>
             <div className="App">
               <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/hotel" component={Hotel}/>
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/signup" component={Signup}/>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/hotel" component={Hotel} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
                 <Route path="/sidebar" component={Sidebar} />
-                <Route exact path="/faq" component={FAQ}/>
-                <Route exact path="/faq/:id/more" component={MoreFAQ}/>
-                <Route exact path="/users/resetpassword" component={PasswordReset}/>
-                <ProtectedRoute exact path="/deletefaq" component={DeleteFAQ}/>
-                <Route exact path="/about" component={About}/>
-                <Route exact path="/contact" component={Contact}/>
-                <Route exact path="/profileview" component={profileDetailsView}/>
+                <Route exact path="/faq" component={FAQ} />
+                <Route exact path="/faq/:id/more" component={MoreFAQ} />
+                <Route
+                  exact
+                  path="/users/resetpassword"
+                  component={PasswordReset}
+                />
+                <ProtectedRoute exact path="/deletefaq" component={DeleteFAQ} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/contact" component={Contact} />
+                <Route
+                  exact
+                  path="/profileview"
+                  component={profileDetailsView}
+                />
                 <ProtectedRoute exact path="/userrole" component={UserRole} />
                 <ProtectedRoute exact path="/profile" component={Profile} />
-                <ProtectedRoute exact path="/booking" component={Accommadation} />
-                <ProtectedRoute exact path="/:hotelId/rooms">
-                  <RequestProvider>
-                    <Rooms />
-                  </RequestProvider>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/:hotelId/rooms/:roomId">
-                  <RequestProvider>
-                    <RoomDetail />
-                  </RequestProvider>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/requests/:reqId">
-                  <RequestProvider>
-                    <TravelRequest />
-                  </RequestProvider>
-                </ProtectedRoute>
-                <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
+                <ProtectedRoute
+                  exact
+                  path="/booking"
+                  component={Accommadation}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/:hotelId/rooms"
+                  component={Rooms}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/:hotelId/rooms/:roomId"
+                  component={RoomDetail}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/room/:reqId"
+                  component={TravelRequest}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/requests/:reqId"
+                  component={TravelRequest}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/facilities"
+                  component={FacilityContainer}
+                />
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
                 <Route path="/confirm-email" component={EmailConfirmation}/>
