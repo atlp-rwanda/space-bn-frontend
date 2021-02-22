@@ -7,6 +7,7 @@ import { Button, makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { InputWrapper, LabelWrapper } from '../../shared/styles/ProfileInfosStyles';
 import toaster from '../../helpers/toasts';
+import axios from 'axios';
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -246,19 +247,21 @@ const ProfileInfos = () => {
 
     const postInfo = async (e) => {
         e.preventDefault();
-        const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,email:email,origin:origin,setGender:gender,identification_type:identification_type,identification_number:identification_number}
+        const body = {firstname:inputFname,lastname:inputLname,telephone:telephone,origin:origin,setGender:gender,identification_type:identification_type,identification_number:identification_number}
         let incomingUserToken = localStorage.getItem("userToken").substr(4);
         const response = await fetch(`${REACT_APP_BACKEND_URL}/user/${userId}`,
         {
-            method:'put',
-            headers:{
+        
+           headers:{
+                "method":"put",
                 "Content-Type":"Application/json",
                 "Authorization":"Bearer "+ incomingUserToken,
-            },
-            body:JSON.stringify(body)
+            }
+            
            });
-           if(response){
-               toaster('Your Profile information saved.', 'success')
+           const result = await response.json();
+           if(result){
+               toaster('Information Saved ', 'success')
            }
     }
 
