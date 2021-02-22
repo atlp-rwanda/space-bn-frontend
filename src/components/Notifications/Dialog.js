@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Dialog from '@material-ui/core/Dialog';
 import Typography from '@material-ui/core/Typography';
-import { Card, CardContent, DialogContent, Tooltip } from '@material-ui/core';
+import { Button, Card, CardContent, DialogContent, Tooltip } from '@material-ui/core';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import { useStyles } from '../../shared/styles/DialogStyles';
 import Scroll from '../Scroll';
 import { NotificationContext } from '../../contexts/NotificationContext';
 import { formatTime } from '../../helpers/timeFormatter';
+import axios from 'axios';
+import toaster from '../../helpers/toasts';
+
+const { REACT_APP_BACKEND_URL } = process.env;
 
 function NotificationPane(props) {
   const classes = useStyles();
-  const { onClose, openNotification } = props;
+  const { onClose, openNotification, handleGetNotifications } = props;
   const [notifStatus, setNotifStatus] = useState('All');
   const [filteredNotif, setFilteredNotif] = useState([]);
   const [notifications, setNotifications] = useState([]);
@@ -40,6 +44,25 @@ function NotificationPane(props) {
   }
  },[notifStatus, notifications])
  
+ const currentLng = localStorage.getItem('i18nextLng');
+ const token = localStorage.getItem('userToken')
+
+ const markAsRead = () => {
+   axios.put(`${REACT_APP_BACKEND_URL}/notifications`, {}, {
+          headers: {
+            "Content-Type": "Application/json",
+            "authorization": token,
+            "Accept-Language": currentLng
+          }
+        })
+        .then((result) => {
+          toaster(result.data.message, 'success')
+          handleGetNotifications();
+        })
+        .catch((err) => {
+          toaster(err.response.data.message, 'error')
+        })
+ }
   return (
     <Dialog onClose={onClose} modal={false} aria-labelledby="simple-dialog-title" open={openNotification} classes={{ paper: classes.dialog }} role="dialog">
         <DialogContent className={classes.header}>
@@ -51,7 +74,9 @@ function NotificationPane(props) {
                     <option>Read</option>
                 </select>
                 <Tooltip title='Mark all as read' aria-label='notification status' placement='top-center' className={classes.tooltip}>
-                <DoneAllIcon className={classes.btn}/>
+                  <Button onClick={markAsRead}>
+                    <DoneAllIcon className={classes.btn} />
+                </Button>
                 </Tooltip>
             </div>
         </DialogContent>
@@ -80,7 +105,7 @@ NotificationPane.propTypes = {
 };
 
 export default function NotificationDialog(props) {
-  const { openNotification, setOpenNotification } = props;
+  const { openNotification, setOpenNotification, handleGetNotifications } = props;
  
   const handleClose = () => {
     setOpenNotification(false);
@@ -88,7 +113,7 @@ export default function NotificationDialog(props) {
 
   return (
     <Paper>
-      <NotificationPane  openNotification={openNotification} onClose={handleClose}/>
+      <NotificationPane  openNotification={openNotification} onClose={handleClose} handleGetNotifications={handleGetNotifications}/>
     </Paper>
   );
 }

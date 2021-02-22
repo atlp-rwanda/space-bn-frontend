@@ -61,7 +61,7 @@ const ConfirmEmail = () => {
         <div style={container}>
             <div style={subContainer}>
             <h1>You are almost in</h1>
-            <p style={{marginTop: '3em'}}>The confimation link was sent to <a style={{color:'#0394fc'}}  href={"mailto:"+userEmail}>{userEmail}</a>, Please check your email to confirm</p>
+            <p style={{marginTop: '3em'}}>The confimation email was sent to <a style={{color:'#0394fc'}}  href={"mailto:"+userEmail}>{userEmail}</a>, Please check your email to confirm!</p>
             <Button variant="contained" color="primary" data-testid="viewHotels-btn" style={{marginTop:'2em'}}>
                       <Link to="/login" style={{color: 'white', textDecoration: 'none'}}>Login</Link>
             </Button>

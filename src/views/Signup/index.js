@@ -17,7 +17,7 @@ import {useStyles} from '../../shared/styles/SignupStyles';
 import Footer from '../../components/Footer/index';
 import Header from '../../components/Header/index';
 import { SignupContext } from '../../contexts/SignupContext';
-import { SET_SIGNUP_ERROR, SET_SIGNUP_LOADING, SET_SIGNUP_RESPONSE } from '../../actions/types';
+import { SET_SIGNUP_ERROR, SET_SIGNUP_LOADING } from '../../actions/types';
 import toaster from '../../helpers/toasts';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
@@ -86,11 +86,8 @@ const Signup = () => {
         }
       })
       .then((result) => {
-        // dispatch({type:SET_SIGNUP_RESPONSE, user: result.data.user_details, token: result.data.token});
-        
         sessionStorage.setItem('signedEmail', result.data.user_details.email);
         toaster(result.data.message, 'success')
-        // setAuthorization(result.data.token)
         setTimeout(() => {
           history.push('/confirm-email')
         }, 3500)
