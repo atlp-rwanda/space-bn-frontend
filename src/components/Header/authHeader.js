@@ -65,7 +65,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
     const socketRef = useRef();
     const allNotifications = _notifications.savedNotifications
     useEffect(() => {
-      socketRef.current = io.connect(`${REACT_APP_BACKEND_URL}`)
+      socketRef.current = io.connect('/')
       const userId = localStorage.getItem('userId');
       socketRef.current.emit('join notification', {id: `notification_${userId}`});
       socketRef.current.on('pending', notification => {
@@ -78,7 +78,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
         toaster(notification.message, 'success')
       })
     }, [allNotifications]);
-    useEffect(() => {
+    const handleGetNotifications = () => {
       dispatch({type: SET_NOTIFICATION_LOADING})
       const token = localStorage.getItem('userToken')
       const currentLng = localStorage.getItem('i18nextLng');
@@ -95,8 +95,12 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
         setNotifNmbr((filteredNotif).length)
       })
       .catch((err) => {
-        dispatch({type: SET_NOTIFICATION_ERROR, payload: err.response.message})
+        dispatch({type: SET_NOTIFICATION_ERROR, payload: err.response.data})
       })
+    }
+    useEffect(() => {
+      handleGetNotifications()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch, allNotifications])
 
     const handleDialogPane = () => {
@@ -291,7 +295,7 @@ const AuthHeader = ({onDashboard=false, handleOpen}) => {
         </Menu>
         }
         {
-          openNotification && < NotificationDialog openNotification={openNotification} setOpenNotification={setOpenNotification} />
+          openNotification && < NotificationDialog openNotification={openNotification} setOpenNotification={setOpenNotification} handleGetNotifications={handleGetNotifications}/>
         }  
      </>
     );
