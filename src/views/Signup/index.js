@@ -86,11 +86,13 @@ const Signup = () => {
         }
       })
       .then((result) => {
-        dispatch({type:SET_SIGNUP_RESPONSE, user: result.data.user_details, token: result.data.token})
+        // dispatch({type:SET_SIGNUP_RESPONSE, user: result.data.user_details, token: result.data.token});
+        
+        sessionStorage.setItem('signedEmail', result.data.user_details.email);
         toaster(result.data.message, 'success')
-        setAuthorization(result.data.token)
+        // setAuthorization(result.data.token)
         setTimeout(() => {
-          history.push('/dashboard')
+          history.push('/confirm-email')
         }, 3500)
       })
       .catch((err) => {

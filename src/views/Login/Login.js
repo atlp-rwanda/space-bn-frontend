@@ -98,7 +98,12 @@ const SignIn = () => {
             body:JSON.stringify(body)
           });
           const jsonData = await response.json();
-          if(jsonData.user !== undefined){
+          if(jsonData.user !== undefined && jsonData.user.isVerified !== true){
+              sessionStorage.setItem('signedEmail',jsonData.user.email);
+              history.push('/confirm-email');
+          }
+          else if(jsonData.user !== undefined && jsonData.user.isVerified === true)
+          {
               localStorage.setItem("userId",jsonData.user.id);
               localStorage.setItem("userRoleId",jsonData.user.roleId);
               localStorage.setItem("userToken",jsonData.token);
