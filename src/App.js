@@ -27,6 +27,7 @@ import profileDetailsView from "./views/profileDetailsView";
 import NotificationProvider from './contexts/NotificationContext';
 import { QuestionContextProvider } from './contexts/QuestionContext';
 import PasswordReset from './views/PasswordReset';
+import EmailConfirmation from './views/confirmEmail';
 
 function App() {
   return (
@@ -69,6 +70,8 @@ function App() {
                 <ProtectedRoute exact path="/facilities" component={FacilityContainer} /> 
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/requests/thread" exact component={RequestThread} />
+
+                <Route path="/confirm-email" component={EmailConfirmation}/>
               </Switch>
             </div>
           </Router>
