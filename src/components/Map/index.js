@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import locationIcon from '../../assets/icons/location.svg';
-import hotelIcon from '../../assets/icons/hotel.svg';
 import { useStyles } from '../../shared/styles/CardStyles';
 import config from '../../config/config';
 import { Button, Typography, Grid} from '@material-ui/core';
+import LocalParkingIcon from '@material-ui/icons/LocalParking';
+import WifiIcon from '@material-ui/icons/Wifi';
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import PoolIcon from '@material-ui/icons/Pool';
 
 const {
     REACT_APP_SPACE_BN_TOKEN, 
@@ -24,102 +27,119 @@ const Skater = new Icon({
 });
 
 export const SubMap = () => {
-  
+
         const posSerena= [-1.9553824506281774, 30.0646717204476];
 
     return(
         <MapContainer center={posSerena} zoom={zoom} style={{height:'100%', width:'100%'}}>
-             <TileLayer
+            <TileLayer
                 attribution='&copy; 2020 <a href="/">space-bn</a> contributors'
                 url={url}
             />
             <Marker position={posSerena} icon={Skater}/>
-             
+            
         </MapContainer>
     )
 }
 
 const MapLocation = ({searchValue, activePopup, hotelPosition, activeHotel}) => {
-    const classes = useStyles();
-
-  
-
     
+    const classes = useStyles();
     return (
         <MapContainer center={position} zoom={zoom} scrollWheelZoom={false} className={classes.map}>
             <TileLayer
                 attribution='&copy; 2020 <a href="/">space-bn</a> contributors'
                 url={url}
             />
-            {searchValue.map((hotelCoordinate, index) => (
-                <Marker position={hotelCoordinate.coordinates} icon={Skater} key={index}>
+            {searchValue && searchValue.map((value, index) => (
+                <Marker
+                    position={value.coordinates}
+                    key={index}
+                    icon={Skater}
+                >
                 <Popup>
                     <div className={classes.popup}>
                         <div className={classes.contentLeft}>
-                            <h5>{hotelCoordinate.name}</h5>
+                            <h5>{value.hotelname}</h5>
                             <div className={classes.rank} style={{margin: 0}}>
-                                {hotelCoordinate.starNmbr}<span>
-                                    {hotelCoordinate.rating.map((star,i) => (
-                                        <p style={{display: 'inline-block'}} key={i}>{star}</p>   
-                                    ))}
+                                {value.ranking}
+                                <span>
+                                    <p style={{display: 'inline-block'}}
+                                    >
+                                    {value.ranking}
+                                    </p>   
                                 </span>
                             </div>
                             <Typography variant="h6" style={{fontSize: '0.7rem', marginTop: -15, marginBottom: 5}}>
-                                    {hotelCoordinate.stars}
+                                    {value.ranking}
                             </Typography>
                             <Grid item sm={12} container >
                                     <Grid item xs>
                                         <div>
-                                          <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -5}}><span className={classes.spanIcon}>{hotelCoordinate.pool.icon}</span>{hotelCoordinate.pool.label}</p>
+                                            <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -5}}><span className={classes.spanIcon}>
+                                            <PoolIcon style={{width:20,height: 13,}}/>
+                                            </span>{value.swimmingpool}</p>
                                         </div>
                                     </Grid>                
                                     <Grid item xs>
                                         <div>
-                                        <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -5}}><span className={classes.spanIcon}>{hotelCoordinate.parking.icon}</span>{hotelCoordinate.parking.label}</p>
+                                        <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -5}}><span className={classes.spanIcon}>
+                                        <LocalParkingIcon style={{width:20,height: 13,}}/>
+                                        </span>{value.parking.label}</p>
                                         </div>
                                     </Grid>                
                             </Grid>
                             <Grid item sm={12} container>
                                     <Grid item xs>
                                         <div>
-                                            <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -20}}><span className={classes.spanIcon}>{hotelCoordinate.wifi.icon}</span>{hotelCoordinate.wifi.label}</p>
+                                            <p className={classes.spanText} 
+                                                style={{fontSize: '0.5rem', marginTop: -20}}
+                                            >
+                                                <span className={classes.spanIcon}>
+                                                    <WifiIcon style={{width:20,height: 13,}}/>
+                                                    
+                                                </span>
+                                                    {value.wifi}
+                                            </p>
                                         </div>
                                     </Grid>                
                                     <Grid item xs>
                                         <div>
-                                        <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -20}}><span className={classes.spanIcon}>{hotelCoordinate.breakFast.icon}</span>{hotelCoordinate.breakFast.label}</p>
+                                        <p className={classes.spanText} style={{fontSize: '0.5rem', marginTop: -20}}><span className={classes.spanIcon}>
+                                        <FreeBreakfastIcon style={{width:20,height: 13,}}/>
+                                        </span>{value.breakfast}</p>
                                         </div>
                                     </Grid>
                             </Grid>
-                            <Link to="hotel/more" style={{textDecoration: 'none'}} > 
+                            <Link to="/booking" style={{textDecoration: 'none'}} > 
                             <Button variant="outlined" color="primary" style={{width:150, fontSize: '0.7rem', textDecoration: 'none'}}>
-                                <img src={hotelIcon} alt="hotel icon" className={classes.hotelIcon}/>
+                                <img src={value.image} alt="hotel icon" className={classes.hotelIcon}/>
                                 <span className={classes.span} >Check avilability</span>
                             </Button>
                             </Link> 
                         </div>
-                        <p className={classes.popupPrice}>{hotelCoordinate.price}</p>
-                        <img src={hotelCoordinate.imag} alt={hotelCoordinate.name} className={classes.popupImg}/>
+                        <p className={classes.popupPrice}>{value.pricerange}</p>
+                        <img src={value.image} alt={value.hotelname} className={classes.popupImg}/>
                     </div>
                 </Popup>
                 <Tooltip>
-                    <h3>{hotelCoordinate.name}</h3>
-                    <img src={hotelCoordinate.imag} alt={hotelCoordinate.name} className={classes.toolTipImg}/>
-                    <p className={classes.toolTip}>{hotelCoordinate.price}</p>
+                    <h3>{value.hotelname}</h3>
+                    <img src={value.image} alt={value.hotelname} className={classes.toolTipImg}/>
+                    <p className={classes.toolTip}>{value.pricerange}</p>
                 </Tooltip>
             </Marker>
             ))}
             {activePopup && (
             <Marker position={hotelPosition}>
                 <Popup>
-                    <h3>{activeHotel.name}</h3>
-                    <img src={activeHotel.imag} alt={activeHotel.name} className={classes.toolTipImg}/>
-                    <p className={classes.toolTip}>{activeHotel.price}</p>
+                    <h3>{activeHotel.hotelname}</h3>
+                    <img src={activeHotel.image} alt={activeHotel.hotelname} className={classes.toolTipImg}/>
+                    <p className={classes.toolTip}>{activeHotel.pricerange}</p>
                 </Popup>
             </Marker>
             )}
         </MapContainer>
-     );
+    );
 }
- 
+
 export default MapLocation;

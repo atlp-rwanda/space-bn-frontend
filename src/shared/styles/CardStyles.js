@@ -6,30 +6,38 @@ export const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(0, 1),
     },
+    paper: {
+        maxWidth: '100%',
+        height: 'auto',
+        borderBottom:'1px solid #E2E2E2',
+        padding: theme.spacing(1.4),
+        marginTop: 1
+    },
     main: {
         [theme.breakpoints.down('sm')]: {
             display: 'flex', 
             flexDirection: 'column-reverse'
         } 
     },
-    paper: {
-       maxWidth: '100%',
-        height: 'auto',
-        borderBottom:'1px solid #E2E2E2',
-        padding: theme.spacing(1.4),
-        marginTop: 1
+    hotelDetails: {
+        margin: '10px 0 10px 10px',
     },
     img: {
-        height: 204,
-        width: 152,
-        padding: theme.spacing(1),
+        width: 200,
         [theme.breakpoints.down('sm')]: {
             width: '100%',
             height: 302
         } 
     },
     rank: {
-        color:"#FFA500",
+        margin: 0
+    },
+    nberStars: {
+        color: primary,
+        fontSize: '16px',
+    },
+    stars: {
+        color: primary
     },
     spanIcon: {
         color: theme.palette.common.grey,

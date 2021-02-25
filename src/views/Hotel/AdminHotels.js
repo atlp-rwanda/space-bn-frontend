@@ -5,13 +5,14 @@ import PaperCard from "../../components/PaperCard";
 import SearchBar from "../../components/SeachBar";
 import Scroll from "../../components/Scroll";
 import MapLocation from "../../components/Map";
-import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import toaster from "../../helpers/toasts";
 import Axios from "axios";
 import config from '../../config/config';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import { useTranslation } from "react-i18next";
+import AuthHeader from "../../components/Header/authHeader";
+import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
 
 const { REACT_APP_BACKEND_URL } = config;
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: '-70px',
     marginBottom: "1vh",
     "@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)": {
       height: "100vh",
@@ -107,16 +109,21 @@ const Hotel = () => {
   };
 
   return (
-    <>
+    <DashboardLayout>
     <ToastContainer 
         draggable={true}
         transition={Zoom}
         autoClose={3000}
         position={toast.POSITION.TOP_CENTER}
     />
-      <Header />
-      <div className={classes.container}>
-        <div className={classes.root}>
+    {/* <div>Hello</div> */}
+      <div
+        className={classes.container}
+        // style={{ marginTop: '10px' }}
+      >
+        <div
+          className={classes.root}
+        >
           <div className={classes.drawerHeader} />
           <SearchBar
             HandleSearch={HandleSearch}
@@ -141,9 +148,8 @@ const Hotel = () => {
         />
       </div>
       <div style={{ marginTop: "3vh" }}>
-        <Footer />
       </div>
-    </>
+    </DashboardLayout>
   );
 };
 
