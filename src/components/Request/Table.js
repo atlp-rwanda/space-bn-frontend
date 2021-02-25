@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import 
@@ -27,10 +28,11 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { useTheme, withStyles } from '@material-ui/core/styles'
 import { useStyles, useStyles1 } from '../../shared/styles/TableStyles';
-import { id, ids, createData } from '../../helpers/tableData';
-import SideForwardIcon from '../../assets/icons/slideForwardIcon.png'
+import { createData } from '../../helpers/tableData';
+import SideForwardIcon from '../../assets/icons/slideForwardIcon.png';
+import { formatTime } from "../../helpers/timeFormatter";
 
-
+const { REACT_APP_BACKEND_URL } = process.env;
 //pagination actions
 export const TablePaginationActions = (props) => {
     const classes = useStyles1();
@@ -145,7 +147,7 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
                   <TableRow>
                       <TableCell align="center" className={classes.tableHead}>RequestId</TableCell>
                       <TableCell align="center" className={classes.tableHead}>Requester Name</TableCell>
-                      <TableCell align="center" className={classes.tableHead}>Travel Reason</TableCell>
+                      <TableCell align="center" className={classes.tableHead}>Check In</TableCell>
                       <TableCell align="center" className={classes.tableHead}>Destination</TableCell>
                       <TableCell align="center" className={classes.tableHead}>Accommodation</TableCell>
                       <TableCell align="center" className={classes.tableHead}>Status</TableCell>
@@ -171,7 +173,7 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
                           <TableCell component="th" scope="row" >
                           <div style={{display: 'flex', flexDirection: 'row'}}>
                               <Checkbox checked={isItemSelected}/>
-                              <span style={{marginTop: '12px'}} className={classes.cell}>{id}</span>
+                              <span style={{marginTop: '12px'}} className={classes.cell}>{index+1}</span>
                           </div>
                           </TableCell>
                           <TableCell align="center" className={classes.cell}>{row.requester}</TableCell>
@@ -216,29 +218,45 @@ export const RequestTable = ({classes, page, setPage,selected,setSelected,rowsPe
  
 
 const RequestWrapper = () => {
+  const [selected, setSelected] = React.useState([]);
+  const buttons = (status) => (
+
+   <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}  disabled={status !== "PENDING"}/></Fab>
+                    <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
+                    <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
+                  </div>
+  )
+  const initialRows = []
   const history = useHistory();
   const classes2 = useStyles()
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [selected, setSelected] = React.useState([]);
+  const [rows, setRows] = React.useState(initialRows)
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
+  useEffect(() => {
+    const fetchRows = async () => {
+      const token = localStorage.getItem("userToken");
+      const currentLng = localStorage.getItem("i18nextLng");
+      const res = await axios.get(`${REACT_APP_BACKEND_URL}/requests`, {  
+        headers: {
+          authorization: token,
+          "Accept-Language": currentLng,
+        },
+      });
+      console.log(res.data);
+      const fetchedRows = res.data.existingRequests.map(request => createData(request.id, request.requesterName, formatTime(request.dateStart), request.location, request.hotelName, request.requestStatus, buttons(request.requestStatus)))
+      setRows(fetchedRows);
+    }
+    fetchRows();
+  });
+  const handleClick = () => {
+    setTimeout(() => {
+      history.push(`/booking`);
+    });
+  }
 
-  const buttons = <div style={{display: 'flex', flexDirection: 'row'}}>
-                  <Fab  color="primary" aria-label="edit" style={{width: 35,height: 30, marginRight: 10,}} disabled={selected.length > 1}><EditIcon style={{width: 20, height: 20,}}/></Fab>
-                  <IconButton   color="secondary" aria-label="delete" style={{width: 35,height: 35,}} disabled={selected.length > 1}><DeleteIcon style={{width: 25, height: 25,}}/></IconButton>                 
-                  <img src={SideForwardIcon} alt="slidebackIcon" onClick={() => history.push('/requests/thread')} style={{width: 35, height: 35, cursor: 'pointer', marginLeft:'7%'}} />
-                </div>;
-
-const rows = [
-  createData(ids[0], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[1], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[2], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[3], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[4], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[5], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[6], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-  createData(ids[7], 'Software Engineer', 'Integrated Sytems Training', 'Rwanda, Kigali', 'Mariot Hotel', 'Pending',buttons,),
-]
 
   const StyledTableRow = withStyles((theme) => ({
     root: {
@@ -252,7 +270,7 @@ const rows = [
     <div className={classes2.root}>
       <div className={classes2.wrapper}>
           <Typography variant="h5" className={classes2.title}>Requests</Typography>
-          <Fab color="primary" aria-label="add" className={classes2.addBtn}>
+          <Fab color="primary" aria-label="add" className={classes2.addBtn} onClick={handleClick}>
               <AddIcon />
           </Fab>
       </div>

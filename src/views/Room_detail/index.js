@@ -9,10 +9,6 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../../shared/styles/Room_detailStyles";
-import roomImg1 from "../../assets/images/room-img-1.jpeg";
-import roomImg2 from "../../assets/images/room-img-2.jpeg";
-import roomImg3 from "../../assets/images/room-img-3.jpeg";
-import roomImg4 from "../../assets/images/room-img-4.jpeg";
 import { SubMap } from "../../components/Map";
 import { RequestContext } from "../../contexts/RequestContext";
 
@@ -24,7 +20,7 @@ import {
   Star,
 } from "@material-ui/icons";
 
-const RoomsDetail = () => {
+const RoomsDetail = (props) => {
   const classes = useStyles();
   const {
     checkin,
@@ -34,11 +30,24 @@ const RoomsDetail = () => {
     guest,
     roomType,
     roomChangeData,
+    images,
+    description,
+    
   } = useContext(RequestContext);
+  const [image, setImage] = useState(images[0] || '');
+  const [room] = useState({
+        roomType,
+        description,
+        roomName,
+        roomPrice,
+        images,
+        guest,
+        
+  })
 
-  const [image, setImage] = useState(roomImg4);
 
-  const imageArray = [roomImg4, roomImg1, roomImg2, roomImg3];
+
+  const imageArray = images;
   const handleImageChange = (e) => {
     setImage(e.target.src);
   };
@@ -92,7 +101,7 @@ const RoomsDetail = () => {
                                 textAlign: "center",
                               }}
                             >
-                              {roomName}
+                              {room.roomName}
                             </Typography>
 
                             <Typography
@@ -106,9 +115,7 @@ const RoomsDetail = () => {
                               Description
                             </Typography>
                             <Typography variant="body2">
-                              Lorem ipsum is simply text Lorem ipsum is simply
-                              text Lorem ipsum is simply text Lorem ipsum is
-                              simply text
+                              {room.description}
                             </Typography>
                           </Grid>
                           <Grid item xs={12}>
@@ -183,7 +190,7 @@ const RoomsDetail = () => {
                             variant="subtitle1"
                             style={{ color: "#FFA500", fontSize: "1.2rem" }}
                           >
-                            ${roomPrice * guest}
+                            ${room.roomPrice}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -206,13 +213,11 @@ const RoomsDetail = () => {
                                 color: "#ff0000",
                               }}
                             />{" "}
-                            {roomType}
+                            {room.roomType}
                           </span>
                         </Typography>
-                        <Link
-                          to='/requests'
-                          style={{ textDecoration: "none" }}
-                        >
+                        <Link to={`/requests/${props.match.params.roomId}`} style={{ textDecoration: "none" }}>
+                        
                           <Button
                             size="small"
                             className={classes.bookBtn}
@@ -226,6 +231,7 @@ const RoomsDetail = () => {
                                 price: roomPrice,
                                 checkin: checkin,
                                 checkout: checkout,
+                                hotel: 'Gorillas Hotel'
                               })
                             }
                           >

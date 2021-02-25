@@ -19,11 +19,23 @@ beforeEach(() => cleanup);
 
 describe("<TravelRequest/>", () => {
     it("should render TravelRequest", async() => {
+      localStorage.setItem('userData', JSON.stringify({
+        firstname: 'John',
+        lastname: 'Doe'
+      }))
+      const props ={
+        match: {
+          params: {
+            reqId:1,
+            hotelId: 1
+          }
+        }
+      }
         const {getByTestId} =render(
           <AuthContextProvider>
           <Router>
           <RequestProvider>
-            <TravelRequest />
+            <TravelRequest {...props} />
           </RequestProvider>
           </Router>
           </AuthContextProvider>
