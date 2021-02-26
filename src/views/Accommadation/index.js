@@ -34,7 +34,7 @@ const Accommadation = () => {
           name: hotel.hotelname,
           price: hotel.pricerange,
           rate: hotel.ranking,
-          image: hotel.images,
+          image: hotel.image,
           location: hotel.location
         }
       })
